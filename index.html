@@ -314,49 +314,70 @@
       color: #334155;
     }
 
-    /* Game Mode Arcade Buttons (2x2 Grid in Sidebar) */
+    /* Game Mode Arcade Buttons (2x4 Grid in Sidebar) */
     .arcade-modes {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+      gap: 6px;
     }
 
     .mode-card-btn {
       border: 2px solid #FFF;
-      border-radius: 16px;
-      padding: 8px 6px;
+      border-radius: 14px;
+      padding: 6px 8px;
       font-family: inherit;
       font-weight: 800;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       cursor: pointer;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      gap: 2px;
+      justify-content: flex-start;
+      gap: 6px;
       color: #FFF;
+      text-align: left;
+      line-height: 1.1;
     }
 
     .mode-card-btn .m-icon {
-      font-size: 22px;
-      line-height: 1.1;
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
     }
 
     .mode-card-btn.m-magic {
       background: #FF2A6D;
-      box-shadow: 0 4px 0 #B3003B;
+      box-shadow: 0 3px 0 #B3003B;
     }
     .mode-card-btn.m-balloon {
       background: #0096C7;
-      box-shadow: 0 4px 0 #023E8A;
+      box-shadow: 0 3px 0 #023E8A;
     }
     .mode-card-btn.m-train {
       background: #06D6A0;
       color: #003D33;
-      box-shadow: 0 4px 0 #007F6B;
+      box-shadow: 0 3px 0 #007F6B;
+    }
+    .mode-card-btn.m-whack {
+      background: #F77F00;
+      box-shadow: 0 3px 0 #9E4F00;
+    }
+    .mode-card-btn.m-monster {
+      background: #EC4899;
+      box-shadow: 0 3px 0 #9D174D;
+    }
+    .mode-card-btn.m-memory {
+      background: #3B82F6;
+      box-shadow: 0 3px 0 #1D4ED8;
+    }
+    .mode-card-btn.m-stage {
+      background: #EAB308;
+      color: #422006;
+      box-shadow: 0 3px 0 #A16207;
     }
     .mode-card-btn.m-dress {
       background: #8338EC;
-      box-shadow: 0 4px 0 #480CA8;
+      box-shadow: 0 3px 0 #480CA8;
     }
 
     .mode-card-btn.active {
@@ -752,7 +773,267 @@
     }
 
     /* =====================================================
-       MODE 4: DRESS-UP & TEACHER'S BOUQUET SHOP
+       MODE 4: WHACK-A-MOLE (ĐẬP CHUỘT CHŨI SIÊU TỐC)
+       ===================================================== */
+    #modeWhack {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .mole-lawn {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      width: 100%;
+      max-width: 720px;
+      flex: 1;
+      padding: 12px;
+      background: linear-gradient(180deg, #B7E4C7 0%, #74C69D 100%);
+      border-radius: 24px;
+      border: 4px solid #40916C;
+      align-items: end;
+    }
+
+    .mole-hole {
+      background: #3B2F2F;
+      height: 115px;
+      border-radius: 50% 50% 28% 28%;
+      border-bottom: 6px solid #251D1D;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .mole-critter {
+      width: 94%;
+      height: 100px;
+      background: #FFF9DB;
+      border: 3px solid #F77F00;
+      border-radius: 22px 22px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px;
+      transform: translate3d(0, 110px, 0);
+      transition: transform 0.16s ease-out;
+      will-change: transform;
+    }
+
+    .mole-critter.up {
+      transform: translate3d(0, 4px, 0);
+    }
+
+    .mole-critter .critter-face {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .mole-critter .critter-sign {
+      font-size: 0.88rem;
+      font-weight: 900;
+      color: #1E293B;
+      line-height: 1.1;
+      margin-top: 2px;
+    }
+
+    /* =====================================================
+       MODE 5: FEED THE HUNGRY DINO (ĐÚT BÁNH KHỦNG LONG)
+       ===================================================== */
+    #modeMonster {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      gap: 10px;
+    }
+
+    .dino-stage-box {
+      background: linear-gradient(180deg, #FFF0F6 0%, #FFDEEB 100%);
+      border: 4px solid #FF85AD;
+      border-radius: 26px;
+      padding: 14px 20px;
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .dino-avatar {
+      font-size: 76px;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .dino-avatar.munching {
+      transform: scale(1.28) rotate(8deg);
+    }
+
+    .cake-choices-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .cake-card {
+      background: #FFFFFF;
+      border: 3px solid #FFD166;
+      box-shadow: 0 6px 0 #F4A261;
+      border-radius: 22px;
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      gap: 6px;
+      transition: transform 0.12s ease;
+    }
+
+    .cake-card:active {
+      transform: translateY(4px);
+    }
+
+    /* =====================================================
+       MODE 6: MEMORY CARD MATCH (LẬT THẺ BÍ MẬT)
+       ===================================================== */
+    #modeMemory {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .mem-card {
+      background: linear-gradient(135deg, #4CC9F0, #4361EE);
+      border: 3px solid #FFF;
+      box-shadow: 0 5px 0 #3A0CA3;
+      border-radius: 20px;
+      min-height: 105px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      color: #FFF;
+      font-weight: 900;
+      transition: transform 0.15s ease;
+    }
+
+    .mem-card.flipped {
+      background: #FFF9DB;
+      color: #1E293B;
+      border-color: #FFD166;
+      box-shadow: 0 5px 0 #F77F00;
+    }
+
+    .mem-card.matched {
+      background: #D8F3DC;
+      color: #1B4332;
+      border-color: #06D6A0;
+      box-shadow: 0 5px 0 #04966F;
+    }
+
+    /* =====================================================
+       MODE 7: SUPERSTAR STAGE (SÂN KHẤU SIÊU SAO THUỘC LÒNG)
+       ===================================================== */
+    #modeStage {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .stage-theater {
+      background: radial-gradient(circle at 50% 25%, #3B0764 0%, #1E1B4B 100%);
+      border: 4px solid #FDE047;
+      border-radius: 26px;
+      padding: 16px 20px;
+      width: 100%;
+      max-width: 720px;
+      color: #FFF;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .stage-level-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stage-lvl-btn {
+      background: rgba(255,255,255,0.15);
+      color: #FFF;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 18px;
+      padding: 5px 14px;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .stage-lvl-btn.active {
+      background: #FDE047;
+      color: #422006;
+      border-color: #FFF;
+    }
+
+    .mystery-word-box {
+      display: inline-block;
+      background: #F59E0B;
+      color: #FFF;
+      padding: 4px 14px;
+      border-radius: 12px;
+      margin: 3px;
+      cursor: pointer;
+      font-weight: 900;
+      border: 2px solid #FEF08A;
+    }
+
+    /* =====================================================
+       MODE 8: DRESS-UP & TEACHER'S BOUQUET SHOP
        ===================================================== */
     #modeShop {
       flex: 1;
@@ -1010,23 +1291,39 @@
           <!-- Populated by JS -->
         </div>
 
-        <!-- 4 Mini-Game Mode Buttons -->
+        <!-- 8 Mini-Game Mode Buttons -->
         <div class="arcade-modes">
           <button class="mode-card-btn m-magic active" data-mode="magic">
-            <span class="m-icon">🪄🌸</span>
-            <span>Đũa Thần Nở Hoa</span>
+            <span class="m-icon">🪄</span>
+            <span>1. Nở Hoa</span>
           </button>
           <button class="mode-card-btn m-balloon" data-mode="balloon">
-            <span class="m-icon">🎈💥</span>
-            <span>Đập Bóng Bay</span>
+            <span class="m-icon">🎈</span>
+            <span>2. Đập Bóng</span>
           </button>
           <button class="mode-card-btn m-train" data-mode="train">
-            <span class="m-icon">🚂🍬</span>
-            <span>Tàu Hỏa Kẹo Ngọt</span>
+            <span class="m-icon">🚂</span>
+            <span>3. Tàu Kẹo</span>
+          </button>
+          <button class="mode-card-btn m-whack" data-mode="whack">
+            <span class="m-icon">🔨</span>
+            <span>4. Đập Chuột</span>
+          </button>
+          <button class="mode-card-btn m-monster" data-mode="monster">
+            <span class="m-icon">🦖</span>
+            <span>5. Đút Bánh</span>
+          </button>
+          <button class="mode-card-btn m-memory" data-mode="memory">
+            <span class="m-icon">🃏</span>
+            <span>6. Lật Thẻ</span>
+          </button>
+          <button class="mode-card-btn m-stage" data-mode="stage">
+            <span class="m-icon">🎤</span>
+            <span>7. Sân Khấu</span>
           </button>
           <button class="mode-card-btn m-dress" data-mode="shop">
-            <span class="m-icon">👑🐶</span>
-            <span>Tiệm Quà Của Trâm</span>
+            <span class="m-icon">👑</span>
+            <span>8. Tiệm Quà</span>
           </button>
         </div>
       </div>
@@ -1144,7 +1441,87 @@
       </div>
 
       <!-- =========================================
-           GAME 4: DRESS-UP & GIFT SHOP
+           GAME 4: WHACK-A-MOLE (ĐẬP CHUỘT CHŨI SIÊU TỐC)
+           ========================================= -->
+      <div id="modeWhack" style="display:none;">
+        <div class="balloon-target-banner" id="whackPromptBanner" style="margin-top:0; width:100%; max-width:720px;">
+          <div style="font-size:0.82rem; color:#F77F00; font-weight:900;">🔨 ĐẬP NHANH CHÚ CHUỘT CẦM BẢNG CHỮ NÀY NHÉ (Bấm để nghe):</div>
+          <div style="font-size:1.4rem; font-weight:900; color:#1E293B;" id="whackTargetText">Hello everyone,</div>
+          <div style="font-size:0.9rem; font-weight:800; color:#6B21A8;" id="whackTargetPhonics">🗣️ He-lô é-v-ri-oăn</div>
+        </div>
+
+        <div class="mole-lawn" id="moleLawn">
+          <!-- 6 Mole Holes -->
+          <div class="mole-hole"><div class="mole-critter" data-hole="0"></div></div>
+          <div class="mole-hole"><div class="mole-critter" data-hole="1"></div></div>
+          <div class="mole-hole"><div class="mole-critter" data-hole="2"></div></div>
+          <div class="mole-hole"><div class="mole-critter" data-hole="3"></div></div>
+          <div class="mole-hole"><div class="mole-critter" data-hole="4"></div></div>
+          <div class="mole-hole"><div class="mole-critter" data-hole="5"></div></div>
+        </div>
+      </div>
+
+      <!-- =========================================
+           GAME 5: FEED THE HUNGRY DINO (ĐÚT BÁNH KHỦNG LONG)
+           ========================================= -->
+      <div id="modeMonster" style="display:none;">
+        <div class="dino-stage-box" id="dinoStageBox">
+          <div class="dino-avatar" id="dinoAvatar" title="Chạm vào Khủng Long để nghe lại!">🦖</div>
+          <div style="text-align:left; flex:1; min-width:220px;">
+            <div style="font-size:0.9rem; font-weight:900; color:#D90452;">🧁 KHỦNG LONG CON ĐANG ĐÓI BỤNG:</div>
+            <div style="font-size:1.35rem; font-weight:900; color:#1E293B;" id="dinoOrderText">"Cho tớ ăn bánh: Hello everyone!"</div>
+            <div style="font-size:0.95rem; font-weight:800; color:#6B21A8;" id="dinoOrderPhonics">🗣️ Đọc là: He-lô é-v-ri-oăn</div>
+            <div style="font-size:0.88rem; font-weight:800; color:#0077B6;" id="dinoOrderViet">✨ Nghĩa: Xin chào tất cả mọi người!</div>
+          </div>
+          <button class="jelly-btn pink" id="btnDinoHear" style="padding:8px 14px; font-size:0.95rem;">🔊 Nghe Lại</button>
+        </div>
+
+        <div style="font-weight:900; color:#475569; font-size:0.95rem;">👇 Chạm vào chiếc bánh đúng để đút cho Khủng Long nhé:</div>
+        <div class="cake-choices-row" id="cakeChoicesRow">
+          <!-- 3 Cake Cards populated by JS -->
+        </div>
+      </div>
+
+      <!-- =========================================
+           GAME 6: MEMORY CARD MATCH (LẬT THẺ BÍ MẬT)
+           ========================================= -->
+      <div id="modeMemory" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; width:100%; max-width:720px;">
+          <span style="font-weight:900; color:#1D4ED8; font-size:1rem;">🃏 Lật tìm 2 thẻ giống nhau (Câu Tiếng Anh & Hình Nghĩa Tiếng Việt):</span>
+          <button class="btn-speed-pill" id="btnResetMemory">🔄 Trộn Thẻ Mới</button>
+        </div>
+        <div class="memory-grid" id="memoryGrid">
+          <!-- 6 Cards populated by JS -->
+        </div>
+      </div>
+
+      <!-- =========================================
+           GAME 7: SUPERSTAR STAGE (SÂN KHẤU SIÊU SAO THUỘC LÒNG)
+           ========================================= -->
+      <div id="modeStage" style="display:none;">
+        <div class="stage-theater">
+          <div class="stage-level-pills">
+            <button class="stage-lvl-btn active" data-stglvl="1">🌟 Cấp 1: Tập Diễn</button>
+            <button class="stage-lvl-btn" data-stglvl="2">🎁 Cấp 2: Mở Hộp Chữ Ẩn</button>
+            <button class="stage-lvl-btn" data-stglvl="3">👑 Cấp 3: Thuộc Lòng 100%</button>
+          </div>
+
+          <div style="font-size:52px; line-height:1.05;" id="stageBigEmoji">👋😄</div>
+          <div style="font-size:0.95rem; font-weight:800; color:#FDE047;" id="stageGestureGuide">🙌 Động tác: Vẫy hai tay thật cao và cười thật tươi!</div>
+
+          <div id="stageScriptBox" style="background:rgba(255,255,255,0.12); border:2px dashed rgba(255,255,255,0.4); border-radius:20px; padding:12px 18px; width:100%; font-size:1.5rem; font-weight:900;">
+            <!-- Populated by JS based on stage level -->
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+            <button class="jelly-btn pink" id="btnStageListen" style="padding:8px 18px; font-size:1rem;">🔊 Nghe Nhắc Bài</button>
+            <button class="jelly-btn green" id="btnStagePass" style="padding:8px 20px; font-size:1.05rem;">👏 Bé Đã Thuộc Câu Này! (+10 ⭐)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================
+           GAME 8: DRESS-UP & GIFT SHOP
            ========================================= -->
       <div id="modeShop" style="display:none; flex-direction:column; gap:14px;">
         <div style="text-align:center; font-size:1.15rem; font-weight:900; color:#7209B7;">
@@ -2008,7 +2385,326 @@
     }
 
     /* =====================================================================
-       9. MODE 4: DRESS-UP & GIFT SHOP FOR CHIBI BÉ TRÂM
+       8B. MODE 4: WHACK-A-MOLE (ĐẬP CHUỘT CHŨI SIÊU TỐC)
+       ===================================================================== */
+    let whackTimer = null;
+    let whackHits = 0;
+
+    function stopWhackGame() {
+      if (whackTimer) {
+        clearInterval(whackTimer);
+        whackTimer = null;
+      }
+      document.querySelectorAll('.mole-critter').forEach(el => {
+        el.classList.remove('up');
+      });
+    }
+
+    function startWhackGame() {
+      stopWhackGame();
+      whackHits = 0;
+      const chunk = getCurChunk();
+      document.getElementById('whackTargetText').textContent = chunk.eng;
+      document.getElementById('whackTargetPhonics').textContent = `🗣️ ${chunk.phonics}`;
+      speakPhrase(chunk.eng);
+
+      const allChunks = ISLANDS.flatMap(isl => isl.chunks);
+      const critters = Array.from(document.querySelectorAll('.mole-critter'));
+      const moleFaces = ['🐹', '🐰', '🦊', '🐻', '🐼', '🐨'];
+
+      // Wire click listeners once using onclick
+      critters.forEach((critter, idx) => {
+        critter.onclick = (e) => {
+          if (!critter.classList.contains('up')) return;
+          critter.classList.remove('up');
+          const isTarget = critter.dataset.isTarget === 'true';
+          if (isTarget) {
+            whackHits++;
+            sfxBalloonPop();
+            spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 18, true);
+            speakPhrase(chunk.eng);
+            addStarsAndFlowers(5, 1, `Đập trúng rồi (${whackHits}/2)! Giỏi quá Trâm ơi! 🔨🌟`);
+            if (whackHits >= 2) {
+              stopWhackGame();
+              setTimeout(() => {
+                if (curMode === 'whack') goNextChunk();
+              }, 850);
+            }
+          } else {
+            playNote(220, 'sawtooth', 0.12);
+            document.getElementById('chibiSpeech').textContent = `Úi! Nhầm bạn chuột rồi, tìm câu "${chunk.eng}" nhé! 🐹`;
+          }
+        };
+      });
+
+      function popRandomMoles() {
+        critters.forEach(c => c.classList.remove('up'));
+        // Pick 2 or 3 holes to pop up
+        const holeIndices = [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5).slice(0, 3);
+        const targetHolePos = holeIndices[Math.floor(Math.random() * holeIndices.length)];
+
+        holeIndices.forEach(hIdx => {
+          const critter = critters[hIdx];
+          const isTarget = (hIdx === targetHolePos);
+          const item = isTarget
+            ? chunk
+            : allChunks.filter(c => c.eng !== chunk.eng)[Math.floor(Math.random() * (allChunks.length - 1))];
+
+          critter.dataset.isTarget = isTarget ? 'true' : 'false';
+          const face = moleFaces[hIdx % moleFaces.length];
+          critter.innerHTML = `
+            <div class="mole-sign" style="border-color:${isTarget ? '#F77F00' : '#64748B'};">
+              ${item.eng}
+              <span class="mole-phonics">🗣️ ${item.phonics}</span>
+            </div>
+            <div class="mole-avatar">${face}</div>
+          `;
+          requestAnimationFrame(() => critter.classList.add('up'));
+        });
+      }
+
+      popRandomMoles();
+      whackTimer = setInterval(popRandomMoles, 2100);
+    }
+
+    /* =====================================================================
+       8C. MODE 5: FEED THE HUNGRY DINO (ĐÚT BÁNH KHỦNG LONG)
+       ===================================================================== */
+    function renderMonsterMode() {
+      const chunk = getCurChunk();
+      const dino = document.getElementById('dinoAvatar');
+      dino.classList.remove('munching');
+      dino.textContent = '🦖';
+
+      document.getElementById('dinoOrderText').textContent = `"Cho tớ ăn bánh: ${chunk.eng}"`;
+      document.getElementById('dinoOrderPhonics').textContent = `🗣️ Đọc là: ${chunk.phonics}`;
+      document.getElementById('dinoOrderViet').textContent = `✨ Nghĩa: ${chunk.viet}`;
+
+      const allChunks = ISLANDS.flatMap(isl => isl.chunks);
+      const others = allChunks.filter(c => c.eng !== chunk.eng).sort(() => Math.random() - 0.5).slice(0, 2);
+      const choices = [chunk, ...others].sort(() => Math.random() - 0.5);
+      const cakeIcons = ['🧁', '🍰', '🍩', '🎂', '🍪', '🍮'];
+
+      const row = document.getElementById('cakeChoicesRow');
+      row.innerHTML = '';
+
+      choices.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'cake-card';
+        const cakeEmoji = cakeIcons[(curChunkIdx + i) % cakeIcons.length];
+        card.innerHTML = `
+          <div class="cake-emoji">${cakeEmoji} ${item.emoji}</div>
+          <div class="cake-eng">${item.eng}</div>
+          <div class="cake-phonics">🗣️ ${item.phonics}</div>
+        `;
+        card.addEventListener('click', (e) => {
+          if (item.eng === chunk.eng) {
+            sfxVictoryFanfare();
+            dino.textContent = '😋';
+            dino.classList.add('munching');
+            spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 22, true);
+            speakPhrase(chunk.eng);
+            addStarsAndFlowers(8, 1, 'Nhom nhom! Khủng Long cảm ơn chiếc bánh ngon của Trâm! 🦖🧁');
+            setTimeout(() => {
+              if (curMode === 'monster') goNextChunk();
+            }, 1050);
+          } else {
+            playNote(210, 'sawtooth', 0.15);
+            dino.textContent = '🥺';
+            speakPhrase(item.eng);
+            document.getElementById('chibiSpeech').textContent = `Bánh đó là "${item.eng}", Khủng Long đang thèm "${chunk.eng}" cơ! 🧁`;
+          }
+        });
+        row.appendChild(card);
+      });
+    }
+
+    /* =====================================================================
+       8D. MODE 6: MEMORY CARD MATCH (LẬT THẺ BÍ MẬT)
+       ===================================================================== */
+    let memoryFirstCard = null;
+    let memoryLock = false;
+    let memoryMatchedCount = 0;
+
+    function renderMemoryMode() {
+      memoryFirstCard = null;
+      memoryLock = false;
+      memoryMatchedCount = 0;
+
+      const island = getCurIsland();
+      let poolChunks = [...island.chunks];
+      if (poolChunks.length < 3) {
+        const extra = ISLANDS.flatMap(isl => isl.chunks).filter(c => !poolChunks.includes(c));
+        poolChunks.push(...extra.slice(0, 3 - poolChunks.length));
+      }
+      // Make sure current chunk is always included in the 3 pairs
+      const cur = getCurChunk();
+      const others = poolChunks.filter(c => c.eng !== cur.eng).slice(0, 2);
+      const selected3 = [cur, ...others];
+
+      const deck = [];
+      selected3.forEach((c, idx) => {
+        deck.push({
+          pairId: idx,
+          eng: c.eng,
+          type: 'eng',
+          topIcon: '🇬🇧',
+          mainText: c.eng,
+          subText: `🗣️ ${c.phonics}`
+        });
+        deck.push({
+          pairId: idx,
+          eng: c.eng,
+          type: 'meaning',
+          topIcon: c.emoji,
+          mainText: c.viet,
+          subText: `✨ Hình & Nghĩa`
+        });
+      });
+
+      deck.sort(() => Math.random() - 0.5);
+
+      const grid = document.getElementById('memoryGrid');
+      grid.innerHTML = '';
+
+      deck.forEach(cardData => {
+        const card = document.createElement('div');
+        card.className = 'mem-card';
+        card.innerHTML = `
+          <div class="mem-cover">❓</div>
+          <div class="mem-content">
+            <div style="font-size:1.55rem;">${cardData.topIcon}</div>
+            <div style="font-size:1rem; font-weight:900; color:#1E293B; line-height:1.15;">${cardData.mainText}</div>
+            <div style="font-size:0.78rem; font-weight:800; color:#7209B7; margin-top:2px;">${cardData.subText}</div>
+          </div>
+        `;
+        card.addEventListener('click', (e) => {
+          if (memoryLock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+          sfxBoing();
+          card.classList.add('flipped');
+          speakPhrase(cardData.eng);
+
+          if (!memoryFirstCard) {
+            memoryFirstCard = { el: card, data: cardData };
+          } else {
+            memoryLock = true;
+            const prev = memoryFirstCard;
+            memoryFirstCard = null;
+
+            if (prev.data.pairId === cardData.pairId) {
+              setTimeout(() => {
+                prev.el.classList.add('matched');
+                card.classList.add('matched');
+                sfxMagicWand();
+                spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 16, true);
+                memoryMatchedCount++;
+                memoryLock = false;
+
+                if (memoryMatchedCount >= 3) {
+                  sfxVictoryFanfare();
+                  addStarsAndFlowers(15, 2, 'Trí nhớ siêu đẳng! Trâm đã lật đúng cả 3 cặp thẻ! 🃏🌟');
+                  setTimeout(() => {
+                    if (curMode === 'memory') goNextChunk();
+                  }, 1000);
+                }
+              }, 320);
+            } else {
+              setTimeout(() => {
+                prev.el.classList.remove('flipped');
+                card.classList.remove('flipped');
+                memoryLock = false;
+              }, 850);
+            }
+          }
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    /* =====================================================================
+       8E. MODE 7: SUPERSTAR STAGE (SÂN KHẤU SIÊU SAO THUỘC LÒNG)
+       ===================================================================== */
+    let stageLevel = 1;
+
+    function renderStageMode() {
+      const chunk = getCurChunk();
+      document.getElementById('stageBigEmoji').textContent = chunk.emoji;
+      document.getElementById('stageGestureGuide').textContent = chunk.gesture;
+
+      const box = document.getElementById('stageScriptBox');
+      box.innerHTML = '';
+
+      if (stageLevel === 1) {
+        box.innerHTML = `
+          <div style="color:#FFF; font-size:1.6rem;">${chunk.eng}</div>
+          <div style="color:#FDE047; font-size:1.05rem; margin-top:4px;">🗣️ Đọc mẹo: ${chunk.phonics}</div>
+          <div style="color:#BAE6FD; font-size:0.92rem; margin-top:2px;">✨ Nghĩa: ${chunk.viet}</div>
+        `;
+      } else if (stageLevel === 2) {
+        const words = chunk.eng.split(' ');
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.flexWrap = 'wrap';
+        row.style.gap = '8px';
+        row.style.justifyContent = 'center';
+        row.style.alignItems = 'center';
+
+        words.forEach((w, idx) => {
+          const span = document.createElement('span');
+          const hideIt = (idx % 2 === 1) || (words.length === 1);
+          if (hideIt) {
+            span.className = 'mystery-word-box';
+            span.textContent = '🎁 ?';
+            span.title = 'Chạm để mở hộp chữ!';
+            span.addEventListener('click', () => {
+              sfxMagicWand();
+              span.textContent = w;
+              span.style.background = '#2EC4B6';
+              span.style.color = '#FFF';
+              speakPhrase(w.replace(/[^a-zA-Z']/g, '') || w);
+            });
+          } else {
+            span.textContent = w;
+            span.style.padding = '4px 8px';
+          }
+          row.appendChild(span);
+        });
+        box.appendChild(row);
+        const hint = document.createElement('div');
+        hint.style.fontSize = '0.88rem';
+        hint.style.color = '#FDE047';
+        hint.style.marginTop = '8px';
+        hint.textContent = `💡 Trâm tự đọc từ trong hộp quà 🎁 rồi chạm vào hộp để kiểm tra nhé! (${chunk.viet})`;
+        box.appendChild(hint);
+      } else {
+        box.innerHTML = `
+          <div id="stageCurtainWrap">
+            <div style="font-size:1.05rem; color:#FDE047; margin-bottom:8px;">
+              🎭 Nhìn hình <b>${chunk.emoji}</b> (${chunk.viet}) và tự thuyết trình câu này thật to nào!
+            </div>
+            <button class="jelly-btn orange" id="btnRevealCurtain" style="padding:8px 18px; font-size:0.98rem;">
+              👀 Bấm Mở Rèm Kiểm Tra Đáp Án
+            </button>
+          </div>
+        `;
+        setTimeout(() => {
+          const btnRev = document.getElementById('btnRevealCurtain');
+          if (btnRev) {
+            btnRev.onclick = () => {
+              sfxMagicWand();
+              speakPhrase(chunk.eng);
+              document.getElementById('stageCurtainWrap').innerHTML = `
+                <div style="color:#4ADE80; font-size:1.65rem;">${chunk.eng}</div>
+                <div style="color:#FDE047; font-size:1rem;">🗣️ ${chunk.phonics}</div>
+              `;
+            };
+          }
+        }, 0);
+      }
+    }
+
+    /* =====================================================================
+       9. MODE 8: DRESS-UP & GIFT SHOP FOR CHIBI BÉ TRÂM
        ===================================================================== */
     function renderShopMode() {
       const grid = document.getElementById('shopGrid');
@@ -2072,16 +2768,24 @@
     function renderAll() {
       renderIslandsTrack();
       renderChunkPills();
+      stopBalloonGame();
+      stopWhackGame();
+
       if (curMode === 'magic') {
-        stopBalloonGame();
         renderMagicMode();
       } else if (curMode === 'balloon') {
         startBalloonGame();
       } else if (curMode === 'train') {
-        stopBalloonGame();
         renderTrainMode();
+      } else if (curMode === 'whack') {
+        startWhackGame();
+      } else if (curMode === 'monster') {
+        renderMonsterMode();
+      } else if (curMode === 'memory') {
+        renderMemoryMode();
+      } else if (curMode === 'stage') {
+        renderStageMode();
       } else if (curMode === 'shop') {
-        stopBalloonGame();
         renderShopMode();
       }
     }
@@ -2145,9 +2849,38 @@
         document.getElementById('modeMagic').style.display = curMode === 'magic' ? 'flex' : 'none';
         document.getElementById('modeBalloon').style.display = curMode === 'balloon' ? 'flex' : 'none';
         document.getElementById('modeTrain').style.display = curMode === 'train' ? 'flex' : 'none';
+        document.getElementById('modeWhack').style.display = curMode === 'whack' ? 'flex' : 'none';
+        document.getElementById('modeMonster').style.display = curMode === 'monster' ? 'flex' : 'none';
+        document.getElementById('modeMemory').style.display = curMode === 'memory' ? 'flex' : 'none';
+        document.getElementById('modeStage').style.display = curMode === 'stage' ? 'flex' : 'none';
         document.getElementById('modeShop').style.display = curMode === 'shop' ? 'flex' : 'none';
         renderAll();
       });
+    });
+
+    // Wire up listeners for the 4 new mini-games
+    document.getElementById('whackPromptBanner').addEventListener('click', () => speakPhrase(getCurChunk().eng));
+    document.getElementById('btnDinoHear').addEventListener('click', () => speakPhrase(getCurChunk().eng));
+    document.getElementById('dinoAvatar').addEventListener('click', () => speakPhrase(getCurChunk().eng));
+    document.getElementById('btnResetMemory').addEventListener('click', () => {
+      sfxBoing();
+      renderMemoryMode();
+    });
+    document.querySelectorAll('.stage-lvl-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sfxBoing();
+        document.querySelectorAll('.stage-lvl-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        stageLevel = parseInt(btn.dataset.stglvl, 10);
+        renderStageMode();
+      });
+    });
+    document.getElementById('btnStageListen').addEventListener('click', () => speakPhrase(getCurChunk().eng));
+    document.getElementById('btnStagePass').addEventListener('click', (e) => {
+      sfxVictoryFanfare();
+      spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 25, true);
+      addStarsAndFlowers(10, 1, 'Siêu sao thuyết trình Minh Trâm thuộc bài giỏi quá! 🎤👑');
+      goNextChunk();
     });
 
     document.getElementById('btnQuickDress').addEventListener('click', (e) => {
