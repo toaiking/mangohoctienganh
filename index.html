@@ -1187,9 +1187,250 @@
         padding: 5px 10px;
       }
     }
+
+    /* =====================================================
+       COMMERCIAL EDTECH STUDIO GRAPHICS UPGRADE (3D TOY UI)
+       ===================================================== */
+    body {
+      background: linear-gradient(180deg, #38BDF8 0%, #BAE6FD 48%, #FEF08A 78%, #86EFAC 100%);
+    }
+
+    .scenic-bg-svg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hud-bar {
+      position: relative;
+      z-index: 100;
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFFBEB 100%);
+      border-bottom: 4px solid #F59E0B;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+    }
+
+    .chibi-box {
+      background: radial-gradient(circle at 50% 25%, #FFFFFF 0%, #FFE4E6 65%, #FECDD3 100%);
+      border: 4px solid #FFFFFF;
+      box-shadow: 0 8px 0 #F43F5E, 0 12px 24px rgba(244, 63, 94, 0.22);
+    }
+
+    .island-panel {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%);
+      border: 4px solid #FFFFFF;
+      box-shadow: 0 8px 0 #0284C7, 0 12px 24px rgba(2, 132, 199, 0.18);
+    }
+
+    .playground-box {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF7 100%);
+      border: 5px solid #FBBF24;
+      box-shadow: 0 10px 0 #D97706, 0 16px 34px rgba(15, 23, 42, 0.16);
+    }
+
+    /* Lip-sync & Blinking Chibi Animations */
+    @keyframes eyeBlink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      96% { transform: scaleY(0.1); }
+    }
+    .chibi-eyes-group {
+      transform-origin: 70px 54px;
+      animation: eyeBlink 4s infinite;
+    }
+    @keyframes mouthTalk {
+      0%, 100% { transform: scaleY(0.35); }
+      50% { transform: scaleY(1.15); }
+    }
+    .chibi-character-wrap.speaking #svgMouthOpen {
+      display: block !important;
+      transform-origin: 70px 69px;
+      animation: mouthTalk 0.22s infinite ease-in-out;
+    }
+    .chibi-character-wrap.speaking #svgMouthSmile {
+      display: none !important;
+    }
+
+    /* Studio Stage Card with Real Slide Picture Frame */
+    .chunk-visual-card {
+      background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 55%, #FCE7F3 100%);
+      border: 4px solid #F59E0B;
+      box-shadow: inset 0 3px 0 #FFFFFF, 0 6px 0 #D97706;
+      border-radius: 24px;
+      padding: 12px 16px;
+      display: grid;
+      grid-template-columns: 165px 1fr;
+      gap: 14px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .slide-pic-frame {
+      position: relative;
+      width: 165px;
+      height: 128px;
+      border-radius: 18px;
+      border: 4px solid #FFFFFF;
+      box-shadow: 0 5px 0 #F59E0B, 0 8px 16px rgba(0,0,0,0.15);
+      overflow: hidden;
+      background: #1E293B;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .slide-pic-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-pic-badge {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: rgba(255, 42, 109, 0.92);
+      color: #FFF;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1.5px solid #FFF;
+    }
+
+    /* 3D Word Flashcards with Individual Phonetic Subtitles */
+    .big-english-words {
+      justify-content: flex-start;
+      gap: 10px;
+      margin: 4px 0 8px 0;
+    }
+
+    .word-token {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 100%);
+      border: 3px solid #38BDF8;
+      box-shadow: inset 0 2px 0 #FFFFFF, 0 6px 0 #0284C7;
+      border-radius: 18px;
+      padding: 6px 14px 5px 14px;
+      cursor: pointer;
+      position: relative;
+      min-width: 72px;
+      transition: transform 0.12s ease, background 0.12s ease;
+    }
+
+    .word-token .wt-eng {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #0F172A;
+      line-height: 1.1;
+    }
+
+    .word-token .wt-phonics {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #7E22CE;
+      background: #F3E8FF;
+      padding: 1px 8px;
+      border-radius: 10px;
+      margin-top: 3px;
+      line-height: 1.15;
+    }
+
+    .word-token.active-word {
+      background: linear-gradient(180deg, #FEF08A 0%, #FACC15 100%);
+      border-color: #EA580C;
+      box-shadow: inset 0 2px 0 #FFFFFF, 0 6px 0 #C2410C, 0 0 18px rgba(250, 204, 21, 0.8);
+      transform: translateY(-6px) scale(1.08);
+    }
+
+    .word-token.active-word .wt-eng {
+      color: #7C2D12;
+    }
+
+    .word-token.active-word .wt-phonics {
+      background: #7C2D12;
+      color: #FEF08A;
+    }
+
+    /* Clickable Phonics & Meaning Pills */
+    .phonics-badge, .viet-meaning-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 4px 12px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 0.96rem;
+      transition: transform 0.1s ease;
+    }
+    .phonics-badge:active, .viet-meaning-pill:active {
+      transform: scale(0.97);
+    }
+    .viet-meaning-pill {
+      background: #E0F2FE;
+      border: 2px solid #38BDF8;
+      color: #0369A1;
+      margin-left: 6px;
+    }
+
+    /* Karaoke Practice Station */
+    .voice-power-station {
+      background: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%);
+      border: 3px solid #93C5FD;
+      box-shadow: 0 5px 0 #3B82F6;
+      border-radius: 22px;
+      padding: 10px 16px;
+      justify-content: space-between;
+    }
+
+    .practice-stars-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FEF3C7;
+      border: 2px solid #F59E0B;
+      color: #92400E;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-weight: 900;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 720px) {
+      .chunk-visual-card {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+      .big-english-words {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Scenic Commercial Vector World Backdrop -->
+  <svg class="scenic-bg-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- Sun & Glow -->
+    <circle cx="1280" cy="110" r="65" fill="#FDE047" opacity="0.85"/>
+    <circle cx="1280" cy="110" r="92" fill="#FEF08A" opacity="0.35"/>
+    <!-- Soft Clouds -->
+    <g fill="#FFFFFF" opacity="0.82">
+      <path d="M120 130 Q140 95 180 105 Q210 75 250 100 Q285 95 295 130 Z"/>
+      <path d="M620 85 Q640 55 675 65 Q705 40 740 65 Q770 60 780 85 Z"/>
+      <path d="M1020 155 Q1040 125 1075 135 Q1100 115 1130 135 Q1155 130 1165 155 Z"/>
+    </g>
+    <!-- Distant Pastel Mountains & Rolling Green Hills -->
+    <path d="M0 760 Q320 620 680 730 T1440 700 L1440 900 L0 900 Z" fill="#4ADE80" opacity="0.55"/>
+    <path d="M0 810 Q420 710 880 790 T1440 770 L1440 900 L0 900 Z" fill="#22C55E" opacity="0.65"/>
+  </svg>
 
   <!-- Interactive Sparkle & Confetti Canvas -->
   <canvas id="fxCanvas"></canvas>
@@ -1206,7 +1447,7 @@
 
     <div class="hud-stats">
       <button class="btn-speed-pill" id="btnFullscreen" title="Mở toàn màn hình trên Laptop / Máy tính bảng">⛶ Toàn Màn Hình</button>
-      <button class="btn-speed-pill" id="btnSpeedToggle">🐰 Tốc Độ: Chuẩn (1.05x)</button>
+      <button class="btn-speed-pill" id="btnSpeedToggle">🐢 Tốc Độ: Rõ Từng Từ (Chuẩn 6 Tuổi)</button>
       <div class="stat-pill flowers" title="Hoa tặng cô giáo 20/11">
         💐 <span id="flowerCount">0</span>
       </div>
@@ -1222,52 +1463,79 @@
     <!-- CHARACTER + ISLAND MAP -->
     <div class="character-stage-row">
       <!-- Animated Chibi Bé Trâm -->
-      <div class="chibi-box" id="chibiBox" title="Chạm vào Bé Trâm để nghe cổ vũ!">
+      <div class="chibi-box" id="chibiBox" title="Chạm vào Bé Trâm để nghe đọc mẫu!">
         <div class="chibi-speech-bubble" id="chibiSpeech">
-          Chào bạn! Cùng Trâm hái hoa tặng cô nhé! 🌸
+          Chào bạn! Bấm vào từng chữ hoặc hình để nghe Trâm đọc nhé! 🌸
         </div>
 
         <div class="chibi-character-wrap" id="chibiCharacter">
-          <!-- Custom Cute SVG Chibi Girl (Can wear Soldier Hat, Crown, Fairy Wings!) -->
+          <!-- Studio Vector Chibi Minh Trâm with Lip-Sync & Blinking Eyes -->
           <svg width="140" height="150" viewBox="0 0 140 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skinGrad" x1="70" y1="24" x2="70" y2="90" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FFF0E6"/>
+                <stop offset="100%" stop-color="#FFD6BA"/>
+              </linearGradient>
+              <linearGradient id="hairGrad" x1="70" y1="18" x2="70" y2="85" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#334155"/>
+                <stop offset="100%" stop-color="#0F172A"/>
+              </linearGradient>
+            </defs>
+            <!-- Podium Shadow -->
+            <ellipse cx="70" cy="142" rx="44" ry="6" fill="rgba(15,23,42,0.18)"/>
             <!-- Optional Fairy Wings -->
             <g id="svgWings" style="display:none;">
-              <ellipse cx="28" cy="85" rx="24" ry="16" transform="rotate(-20 28 85)" fill="#FFAFCC" stroke="#FF007F" stroke-width="2"/>
-              <ellipse cx="112" cy="85" rx="24" ry="16" transform="rotate(20 112 85)" fill="#FFAFCC" stroke="#FF007F" stroke-width="2"/>
+              <ellipse cx="26" cy="85" rx="25" ry="16" transform="rotate(-20 26 85)" fill="#FFAFCC" stroke="#FF007F" stroke-width="2.5"/>
+              <ellipse cx="114" cy="85" rx="25" ry="16" transform="rotate(20 114 85)" fill="#FFAFCC" stroke="#FF007F" stroke-width="2.5"/>
             </g>
+            <!-- Back Twin Pigtails -->
+            <circle cx="34" cy="62" r="12" fill="url(#hairGrad)"/>
+            <circle cx="106" cy="62" r="12" fill="url(#hairGrad)"/>
+            <circle cx="38" cy="54" r="4" fill="#FF3E80"/>
+            <circle cx="102" cy="54" r="4" fill="#FF3E80"/>
             <!-- Body / Outfit -->
-            <path id="svgDress" d="M45 85 L95 85 L108 135 C108 138 32 138 32 135 Z" fill="#588157" stroke="#3A5A40" stroke-width="3"/>
+            <path id="svgDress" d="M44 84 L96 84 L109 136 C109 140 31 140 31 136 Z" fill="#4F772D" stroke="#2D4A1E" stroke-width="3"/>
+            <!-- White Collar -->
+            <path d="M55 84 L70 95 L85 84 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
             <!-- Soldier Red Star Badge on Outfit -->
-            <circle cx="82" cy="103" r="6" fill="#D90429"/>
-            <text x="79" y="106" font-size="8" fill="#FFD600">★</text>
+            <rect x="77" y="98" width="14" height="10" rx="2" fill="#D90429"/>
+            <text x="80.5" y="106" font-size="8" fill="#FFD600">★</text>
             <!-- Cute Head -->
-            <circle cx="70" cy="56" r="32" fill="#FFE5D9" stroke="#F4A261" stroke-width="3"/>
-            <!-- Cute Blush -->
-            <ellipse cx="49" cy="63" rx="6" ry="3.5" fill="#FF85AD" opacity="0.65"/>
-            <ellipse cx="91" cy="63" rx="6" ry="3.5" fill="#FF85AD" opacity="0.65"/>
-            <!-- Big Sparkly Eyes -->
-            <circle cx="56" cy="54" r="5.5" fill="#2B2D42"/>
-            <circle cx="54" cy="52" r="2" fill="#FFFFFF"/>
-            <circle cx="84" cy="54" r="5.5" fill="#2B2D42"/>
-            <circle cx="82" cy="52" r="2" fill="#FFFFFF"/>
-            <!-- Big Happy Smile -->
-            <path d="M60 66 Q70 76 80 66" stroke="#D90429" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-            <!-- Cute Hair Bangs -->
-            <path d="M38 52 C38 28 102 28 102 52 C95 36 85 42 70 38 C55 42 45 36 38 52 Z" fill="#2B2D42"/>
+            <circle cx="70" cy="56" r="32" fill="url(#skinGrad)" stroke="#E09F67" stroke-width="2.5"/>
+            <!-- Rosy Cheeks -->
+            <ellipse cx="48" cy="63" rx="6.5" ry="3.8" fill="#FF5C8A" opacity="0.65"/>
+            <ellipse cx="92" cy="63" rx="6.5" ry="3.8" fill="#FF5C8A" opacity="0.65"/>
+            <!-- Blinking Anime Eyes -->
+            <g class="chibi-eyes-group">
+              <circle cx="56" cy="54" r="6" fill="#1E293B"/>
+              <circle cx="54" cy="51.5" r="2.3" fill="#FFFFFF"/>
+              <circle cx="58" cy="56" r="1" fill="#FFFFFF"/>
+              <circle cx="84" cy="54" r="6" fill="#1E293B"/>
+              <circle cx="82" cy="51.5" r="2.3" fill="#FFFFFF"/>
+              <circle cx="86" cy="56" r="1" fill="#FFFFFF"/>
+            </g>
+            <!-- Idle Happy Smile -->
+            <path id="svgMouthSmile" d="M60 66 Q70 76 80 66" stroke="#D90429" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <!-- Active Lip-Sync Speaking Mouth -->
+            <ellipse id="svgMouthOpen" cx="70" cy="69" rx="7.5" ry="6" fill="#D90429" stroke="#7F1D1D" stroke-width="1.5" style="display:none;"/>
+            <!-- Glossy Hair Bangs -->
+            <path d="M37 52 C37 25 103 25 103 52 C95 36 84 42 70 37 C56 42 45 36 37 52 Z" fill="url(#hairGrad)"/>
             <!-- Headgear 1: Cute Green Soldier Hat (From Slide 1 Photo!) -->
             <g id="svgSoldierHat">
-              <path d="M40 36 L70 12 L100 36 Z" fill="#4F772D" stroke="#31572C" stroke-width="3"/>
-              <text x="64" y="31" font-size="14" fill="#FFD600">★</text>
+              <path d="M39 36 L70 11 L101 36 Z" fill="#4F772D" stroke="#2D4A1E" stroke-width="3"/>
+              <circle cx="70" cy="26" r="6" fill="#D90429"/>
+              <text x="66.5" y="29.5" font-size="10" fill="#FFD600">★</text>
             </g>
             <!-- Headgear 2: Princess Crown -->
             <g id="svgCrown" style="display:none;">
-              <path d="M46 34 L52 14 L64 26 L70 10 L76 26 L88 14 L94 34 Z" fill="#FFD600" stroke="#F77F00" stroke-width="2.5"/>
+              <path d="M46 34 L52 13 L64 25 L70 9 L76 25 L88 13 L94 34 Z" fill="#FFD600" stroke="#D97706" stroke-width="2.5"/>
+              <circle cx="70" cy="24" r="3" fill="#FF0055"/>
             </g>
-            <!-- Hand holding VN Flag / Flower -->
+            <!-- Hand holding VN Flag -->
             <g id="svgHandProp">
-              <line x1="26" y1="75" x2="26" y2="115" stroke="#8D5524" stroke-width="3"/>
-              <rect x="6" y="72" width="22" height="15" rx="2" fill="#D90429"/>
-              <text x="13" y="83" font-size="10" fill="#FFD600">★</text>
+              <line x1="25" y1="73" x2="25" y2="118" stroke="#8D5524" stroke-width="3.2" stroke-linecap="round"/>
+              <rect x="4" y="70" width="23" height="16" rx="2.5" fill="#D90429" stroke="#FFFFFF" stroke-width="1"/>
+              <text x="11.5" y="82" font-size="11" fill="#FFD600">★</text>
             </g>
           </svg>
           <!-- Animated Pet Companion -->
@@ -1277,10 +1545,10 @@
         <button class="btn-dressup-mini" id="btnQuickDress">👗 Thay Đồ & Thú Cưng</button>
       </div>
 
-      <!-- Right: 7 Islands Map + 4 Game Modes -->
+      <!-- Right: 7 Islands Map + 8 Game Modes -->
       <div class="island-panel">
         <div class="map-title-row">
-          <div class="map-title">🗺️ Bản Đồ 7 Đảo Hoa Tặng Cô (Bấm chọn đảo):</div>
+          <div class="map-title">🗺️ 7 Trang Slide Thuyết Trình:</div>
           <button class="btn-speed-pill" id="btnAutoPlayAll" style="background:#FFF0F6; border-color:#FF3E80; color:#D90452;">
             ▶️ Nghe Cả Bài
           </button>
@@ -1295,7 +1563,7 @@
         <div class="arcade-modes">
           <button class="mode-card-btn m-magic active" data-mode="magic">
             <span class="m-icon">🪄</span>
-            <span>1. Nở Hoa</span>
+            <span>1. Luyện Đọc</span>
           </button>
           <button class="mode-card-btn m-balloon" data-mode="balloon">
             <span class="m-icon">🎈</span>
@@ -1338,62 +1606,82 @@
       </div>
 
       <!-- =========================================
-           GAME 1: MAGIC WAND & VOICE FLOWER GARDEN
+           GAME 1: STUDIO KARAOKE READING & FLOWER GARDEN
            ========================================= -->
       <div id="modeMagic" class="magic-stage">
         <div class="chunk-visual-card" id="chunkCard">
-          <div class="big-chunk-emoji" id="chunkEmoji" title="Chạm vào hình để nghe đọc!">👋😄</div>
-          <div class="big-english-words" id="chunkWordsContainer">
-            <!-- Big tappable words -->
+          <!-- Left: Real Slide Picture Frame (Click to hear whole chunk) -->
+          <div class="slide-pic-frame" id="slidePicFrame" title="Bấm vào ảnh Slide để nghe đọc mẫu!">
+            <img id="slidePreviewImg" src="assets/slide1.jpg" alt="Slide minh họa của Bé Minh Trâm">
+            <div class="slide-pic-badge">🔊 Bấm Nghe</div>
           </div>
-          <div class="phonics-badge" id="chunkPhonics">🗣️ Đọc là: He-lô é-v-ri-oăn!</div>
-          <div class="viet-meaning" id="chunkViet">✨ Nghĩa là: Xin chào tất cả mọi người!</div>
+
+          <!-- Right: 3D Interactive Word Tiles + Clickable Phonics & Meaning -->
+          <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+              <span style="font-size:0.82rem; font-weight:900; color:#B45309;">👇 CHẠM VÀO TỪNG THẺ CHỮ ĐỂ NGHE ĐỌC RIÊNG TỪ ĐÓ:</span>
+              <span class="big-chunk-emoji" id="chunkEmoji" style="font-size:28px;" title="Chạm để nghe cả câu!">👋😄</span>
+            </div>
+
+            <div class="big-english-words" id="chunkWordsContainer">
+              <!-- Populated with 3D Word + Phonetic Tiles -->
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:2px;">
+              <div class="phonics-badge" id="chunkPhonics" title="Bấm vào đây để nghe đọc cả câu!">🗣️ Đọc mẹo: He-lô é-v-ri-oăn</div>
+              <div class="viet-meaning-pill" id="chunkViet" title="Bấm vào đây để nghe đọc cả câu!">✨ Nghĩa: Xin chào tất cả mọi người!</div>
+            </div>
+          </div>
         </div>
 
-        <div class="gesture-banner">
-          <span style="font-size:34px;" id="chunkGestureIcon">🙌</span>
-          <div>
-            <div style="font-size:0.82rem; text-transform:uppercase; color:#2D6A4F;">Động tác siêu đáng yêu cho Bé Trâm:</div>
-            <div id="chunkGestureText" style="font-size:1.05rem;">Vẫy hai tay thật cao và cười thật tươi!</div>
+        <div class="gesture-banner" id="gestureBannerBox" style="cursor:pointer;" title="Bấm để nghe lại câu này!">
+          <span style="font-size:32px;" id="chunkGestureIcon">🙌</span>
+          <div style="flex:1;">
+            <div style="font-size:0.78rem; text-transform:uppercase; color:#15803D;">Động tác biểu diễn trên lớp của Bé Trâm:</div>
+            <div id="chunkGestureText" style="font-size:0.98rem;">Vẫy hai tay thật cao và cười thật tươi!</div>
           </div>
+          <div class="practice-stars-badge" id="practiceCountBadge">⭐ Đã tập đọc: 0/3 lần</div>
         </div>
 
-        <!-- Interactive Voice / Magic Flower Power Station -->
+        <!-- 3-Step Guided Voice & Karaoke Practice Station -->
         <div class="voice-power-station">
           <div class="growing-flower-wrap">
             <div class="growing-flower" id="magicFlowerIcon">🌱</div>
             <div class="power-meter-bar">
               <div class="power-meter-fill" id="voicePowerFill"></div>
             </div>
-            <div style="font-size:0.78rem; font-weight:800; color:#64748B; margin-top:3px;" id="flowerStatusText">Hét to để hoa nở!</div>
+            <div style="font-size:0.78rem; font-weight:900; color:#1E40AF; margin-top:3px;" id="flowerStatusText">Bấm bước 1, 2, 3 để luyện đọc nhé!</div>
           </div>
 
-          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-            <button class="jelly-btn pink" id="btnHearSample">
-              🔊 1. Nghe Cô Đọc
+          <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; align-items:center;">
+            <button class="jelly-btn pink" id="btnHearSample" title="Nghe đọc mẫu cả câu rõ ràng">
+              🔊 1. Nghe Cả Câu
             </button>
-            <button class="jelly-btn green" id="btnMagicSpeak">
-              🎙️ 2. Bé Nói Nở Hoa!
+            <button class="jelly-btn yellow" id="btnSlowWordByWord" title="Đọc chậm từng chữ một để bé đọc nhẩm theo">
+              🐢 2. Đọc Từng Chữ
             </button>
-            <button class="jelly-btn yellow" id="btnInstantBloom" title="Bấm khi bé đã nói to thành công!">
-              🪄 Nở Hoa Ngay (+5 ⭐)
+            <button class="jelly-btn green" id="btnMagicSpeak" title="Bật Karaoke đếm nhịp từ từ cho bé đọc theo">
+              🎙️ 3. Bé Tập Đọc
             </button>
-            <button class="jelly-btn pink" id="btnPlayMyVoice" style="display:none; background:linear-gradient(135deg,#9B5DE5,#7209B7); box-shadow:0 7px 0 #480CA8;">
+            <button class="jelly-btn yellow" id="btnInstantBloom" style="padding:8px 12px; font-size:0.92rem;" title="Thưởng hoa khi bé đã đọc xong">
+              🌸 Thưởng Hoa (+5⭐)
+            </button>
+            <button class="jelly-btn pink" id="btnPlayMyVoice" style="display:none; background:linear-gradient(135deg,#9B5DE5,#7209B7); box-shadow:0 6px 0 #480CA8;">
               ▶️ Nghe Giọng Trâm
             </button>
           </div>
         </div>
 
         <!-- Visual Teacher's Flower Basket -->
-        <div style="background:#FFF0F6; border:3px solid #FF85AD; border-radius:22px; padding:10px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px; width:100%; max-width:720px; flex-wrap:wrap;">
+        <div style="background:#FFF0F6; border:3px solid #FF85AD; border-radius:20px; padding:8px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; flex-wrap:wrap;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:32px;">🧺</span>
+            <span style="font-size:28px;">🧺</span>
             <div>
-              <div style="font-weight:900; color:#D90452; font-size:0.95rem;">Giỏ Hoa Tặng Cô Giáo (Đủ 5 bông nhận siêu quà!):</div>
-              <div id="basketFlowersRow" style="font-size:26px; min-height:34px; letter-spacing:4px;">🌱</div>
+              <div style="font-weight:900; color:#D90452; font-size:0.88rem;">Giỏ Hoa 20/11 Tặng Cô Giáo (Đủ 5 bông nhận siêu quà!):</div>
+              <div id="basketFlowersRow" style="font-size:22px; min-height:28px; letter-spacing:4px;">🌱</div>
             </div>
           </div>
-          <button class="jelly-btn yellow" id="btnGiftTeacher" style="display:none; padding:8px 18px; font-size:1rem;">
+          <button class="jelly-btn yellow" id="btnGiftTeacher" style="display:none; padding:6px 16px; font-size:0.95rem;">
             🎁 Tặng Hoa Cho Cô (+25 ⭐)
           </button>
         </div>
@@ -1557,49 +1845,58 @@
   <script>
     /* =====================================================================
        1. PRESENTATION BROKEN INTO SHORT, RHYTHMIC, BITE-SIZED CHUNKS (2-5 WORDS)
-       Easy for a 6-year-old to repeat, remember, and play without getting overwhelmed!
+       Backed by Pre-Generated Studio MP3 Audio + Real Slide Illustrations!
        ===================================================================== */
     const ISLANDS = [
       {
         id: 1,
         name: "Đảo Chào Hỏi",
         icon: "👋🇻🇳",
+        slideImg: "assets/slide1.jpg",
         chunks: [
           {
+            id: "c1_1",
             eng: "Hello everyone,",
             phonics: "He-lô é-v-ri-oăn",
             viet: "Xin chào tất cả mọi người!",
             emoji: "👋😄",
             gestureIcon: "👋",
             gesture: "Vẫy hai tay thật cao và cười thật tươi!",
-            words: ["Hello", "everyone,"]
+            words: ["Hello", "everyone,"],
+            wordPhonics: ["He-lô", "é-v-ri-oăn"]
           },
           {
+            id: "c1_2",
             eng: "My name is Trâm.",
             phonics: "Mai nem i-s Trâm",
             viet: "Con tên là Minh Trâm ạ!",
             emoji: "👧💖",
             gestureIcon: "🫶",
             gesture: "Đặt hai bàn tay xinh lên ngực giới thiệu tên mình!",
-            words: ["My", "name", "is", "Trâm."]
+            words: ["My", "name", "is", "Trâm."],
+            wordPhonics: ["Mai", "nem", "i-s", "Trâm"]
           },
           {
+            id: "c1_3",
             eng: "I am in Grade One",
             phonics: "Ai am in Grết Oăn",
             viet: "Con đang học Lớp Một",
             emoji: "☝️🎒",
             gestureIcon: "☝️",
             gesture: "Giơ 1 ngón tay trỏ lên thật tự hào (Grade One)!",
-            words: ["I", "am", "in", "Grade", "One"]
+            words: ["I", "am", "in", "Grade", "One"],
+            wordPhonics: ["Ai", "am", "in", "Grết", "Oăn"]
           },
           {
-            eng: "at Tran Quoc School.",
-            phonics: "át Chần Cuốc Sờ-cun",
-            viet: "ở trường Trần Quốc Toản!",
+            id: "c1_4",
+            eng: "at Tran Quoc Toan School.",
+            phonics: "át Trần Quốc Toản Sờ-cun",
+            viet: "ở trường Tiểu học Trần Quốc Toản!",
             emoji: "🏫⭐",
             gestureIcon: "🏫",
             gesture: "Hai tay mở rộng chỉ về ngôi trường thân yêu!",
-            words: ["at", "Tran", "Quoc", "School."]
+            words: ["at", "Tran", "Quoc", "Toan", "School."],
+            wordPhonics: ["át", "Trần", "Quốc", "Toản", "Sờ-cun"]
           }
         ]
       },
@@ -1607,24 +1904,29 @@
         id: 2,
         name: "Đảo Trường Em",
         icon: "🏫✨",
+        slideImg: "assets/slide2.jpg",
         chunks: [
           {
+            id: "c2_1",
             eng: "Today, I want to talk",
             phonics: "Tơ-đây, ai oăn tu thót",
             viet: "Hôm nay, con muốn kể",
             emoji: "🗣️🎤",
             gestureIcon: "🎤",
             gesture: "Một tay đưa ra phía trước tự tin như MC nhí!",
-            words: ["Today,", "I", "want", "to", "talk"]
+            words: ["Today,", "I", "want", "to", "talk"],
+            wordPhonics: ["Tơ-đây", "ai", "oăn", "tu", "thót"]
           },
           {
+            id: "c2_2",
             eng: "about my teachers and my school.",
             phonics: "ơ-bao mai thít-chơ-s èn mai sờ-cun",
             viet: "về thầy cô và mái trường của con!",
             emoji: "👩‍🏫🏫",
             gestureIcon: "👐",
             gesture: "Mở rộng vòng tay ấm áp và nhìn các cô giáo!",
-            words: ["about", "my", "teachers", "and", "my", "school."]
+            words: ["about", "my", "teachers", "and", "my", "school."],
+            wordPhonics: ["ơ-bao", "mai", "thít-chơ-s", "èn", "mai", "sờ-cun"]
           }
         ]
       },
@@ -1632,42 +1934,51 @@
         id: 3,
         name: "Đảo Yêu Cô",
         icon: "👩‍🏫💖",
+        slideImg: "assets/slide3.jpg",
         chunks: [
           {
+            id: "c3_1",
             eng: "Thank you, teachers!",
             phonics: "Thanh kiu, thít-chơ-s!",
             viet: "Con cảm ơn các thầy cô!",
             emoji: "💐🙇‍♀️",
             gestureIcon: "🙇‍♀️",
             gesture: "Khoanh tay trước ngực và cúi đầu nhẹ thật lễ phép!",
-            words: ["Thank", "you,", "teachers!"]
+            words: ["Thank", "you,", "teachers!"],
+            wordPhonics: ["Thanh", "kiu", "thít-chơ-s"]
           },
           {
+            id: "c3_2",
             eng: "You teach me and love me",
             phonics: "Du thít mi èn lóp mi",
             viet: "Cô dạy con và yêu thương con",
             emoji: "🥰📚",
             gestureIcon: "🤗",
             gesture: "Hai tay đan trước ngực và nghiêng đầu đáng yêu!",
-            words: ["You", "teach", "me", "and", "love", "me"]
+            words: ["You", "teach", "me", "and", "love", "me"],
+            wordPhonics: ["Du", "thít", "mi", "èn", "lóp", "mi"]
           },
           {
+            id: "c3_3",
             eng: "like my second mom.",
             phonics: "laik mai sé-kần mom",
             viet: "như người mẹ thứ hai của con!",
             emoji: "🤱❤️",
             gestureIcon: "💓",
             gesture: "Hai bàn tay áp lên trái tim ấm áp!",
-            words: ["like", "my", "second", "mom."]
+            words: ["like", "my", "second", "mom."],
+            wordPhonics: ["laik", "mai", "sé-kần", "mom"]
           },
           {
+            id: "c3_4",
             eng: "You help me learn every day.",
             phonics: "Du hép mi lơn é-v-ri đây",
             viet: "Cô giúp con học điều hay mỗi ngày!",
             emoji: "📖🌟",
             gestureIcon: "🤲",
             gesture: "Hai bàn tay mở ra như đang lật mở trang sách!",
-            words: ["You", "help", "me", "learn", "every", "day."]
+            words: ["You", "help", "me", "learn", "every", "day."],
+            wordPhonics: ["Du", "hép", "mi", "lơn", "é-v-ri", "đây"]
           }
         ]
       },
@@ -1675,33 +1986,40 @@
         id: 4,
         name: "Đảo Bé Ngoan",
         icon: "🌟🤝",
+        slideImg: "assets/slide4.jpg",
         chunks: [
           {
+            id: "c4_1",
             eng: "I will to be a good student,",
             phonics: "Ai guil tu bi ơ gút sờ-tiu-đần",
             viet: "Con hứa sẽ là học trò ngoan,",
             emoji: "👧🏆",
             gestureIcon: "🫡",
             gesture: "Đứng thẳng lưng, tay giơ lên hứa quyết tâm!",
-            words: ["I", "will", "to", "be", "a", "good", "student,"]
+            words: ["I", "will", "to", "be", "a", "good", "student,"],
+            wordPhonics: ["Ai", "guil", "tu", "bi", "ơ", "gút", "sờ-tiu-đần"]
           },
           {
+            id: "c4_2",
             eng: "listen to you,",
             phonics: "lít-xừn tu du",
             viet: "vâng lời thầy cô,",
             emoji: "👂✨",
             gestureIcon: "👂",
             gesture: "Đặt nhẹ bàn tay lên tai làm động tác lắng nghe cô!",
-            words: ["listen", "to", "you,"]
+            words: ["listen", "to", "you,"],
+            wordPhonics: ["lít-xừn", "tu", "du"]
           },
           {
+            id: "c4_3",
             eng: "and nice to my friends.",
             phonics: "èn nai tu mai fren-s",
             viet: "và yêu thương bạn bè!",
             emoji: "👫💞",
             gestureIcon: "🤝",
             gesture: "Vẫy tay nhìn các bạn dưới lớp và cười tươi!",
-            words: ["and", "nice", "to", "my", "friends."]
+            words: ["and", "nice", "to", "my", "friends."],
+            wordPhonics: ["èn", "nai", "tu", "mai", "fren-s"]
           }
         ]
       },
@@ -1709,42 +2027,51 @@
         id: 5,
         name: "Đảo Siêu Anh Hùng",
         icon: "🍊🦸‍♂️",
+        slideImg: "assets/slide5.jpg",
         chunks: [
           {
+            id: "c5_1",
             eng: "I love my school's name: Tran Quoc Toan.",
             phonics: "Ai lóp mai sờ-cun nem: Trần Quốc Toản",
             viet: "Con yêu tên trường con: Trần Quốc Toản!",
             emoji: "🍊🏫",
             gestureIcon: "🍊",
             gesture: "Một tay nắm quả cam tưởng tượng trước ngực đầy tự hào!",
-            words: ["I", "love", "my", "school's", "name:", "Tran", "Quoc", "Toan."]
+            words: ["I", "love", "my", "school's", "name:", "Tran", "Quoc", "Toan."],
+            wordPhonics: ["Ai", "lóp", "mai", "sờ-cun", "nem", "Trần", "Quốc", "Toản"]
           },
           {
+            id: "c5_2",
             eng: "He is a super hero!",
             phonics: "Hi i-s ơ su-pơ hi-râu!",
             viet: "Người là một Siêu Anh Hùng!",
             emoji: "🦸‍♂️⚡",
             gestureIcon: "✊",
             gesture: "Giơ nắm đấm dũng mãnh lên cao như Siêu Anh Hùng!",
-            words: ["He", "is", "a", "super", "hero!"]
+            words: ["He", "is", "a", "super", "hero!"],
+            wordPhonics: ["Hi", "i-s", "ơ", "su-pơ", "hi-râu"]
           },
           {
+            id: "c5_3",
             eng: "He loves Vietnam,",
             phonics: "Hi lóp Vi-ét-nam",
             viet: "Người rất yêu nước Việt Nam,",
             emoji: "🇻🇳❤️",
             gestureIcon: "🇻🇳",
             gesture: "Đặt bàn tay phải lên ngực trái nơi có lá cờ đỏ sao vàng!",
-            words: ["He", "loves", "Vietnam,"]
+            words: ["He", "loves", "Vietnam,"],
+            wordPhonics: ["Hi", "lóp", "Vi-ét-nam"]
           },
           {
+            id: "c5_4",
             eng: "and I want to be like him!",
             phonics: "èn ai oăn tu bi laik him!",
             viet: "và con muốn được giỏi giang như Người!",
             emoji: "🌟💪",
             gestureIcon: "💪",
             gesture: "Gồng cơ tay khỏe khoắn, mắt sáng ngời!",
-            words: ["and", "I", "want", "to", "be", "like", "him!"]
+            words: ["and", "I", "want", "to", "be", "like", "him!"],
+            wordPhonics: ["èn", "ai", "oăn", "tu", "bi", "laik", "him"]
           }
         ]
       },
@@ -1752,24 +2079,29 @@
         id: 6,
         name: "Đảo Hoa 20/11",
         icon: "💐🎉",
+        slideImg: "assets/slide6.jpg",
         chunks: [
           {
+            id: "c6_1",
             eng: "Happy Vietnamese Teachers' Day!",
             phonics: "Háp-pi Vi-ét-na-mít Thít-chơ-s Đây!",
             viet: "Chúc mừng Ngày Nhà Giáo Việt Nam 20/11!",
             emoji: "💐🎊",
             gestureIcon: "🎉",
             gesture: "Hai tay tung cao như đang tung hoa chúc mừng các cô!",
-            words: ["Happy", "Vietnamese", "Teachers'", "Day!"]
+            words: ["Happy", "Vietnamese", "Teachers'", "Day!"],
+            wordPhonics: ["Háp-pi", "Vi-ét-na-mít", "Thít-chơ-s", "Đây"]
           },
           {
+            id: "c6_2",
             eng: "I love my teachers, my school, and Vietnam!",
             phonics: "Ai lóp mai thít-chơ-s, mai sờ-cun, èn Vi-ét-nam!",
             viet: "Con yêu thầy cô, yêu trường và yêu Việt Nam!",
             emoji: "💖🇻🇳",
             gestureIcon: "🙆‍♀️",
             gesture: "Hai cánh tay vòng lên trên đầu tạo hình trái tim khổng lồ!",
-            words: ["I", "love", "my", "teachers,", "my", "school,", "and", "Vietnam!"]
+            words: ["I", "love", "my", "teachers,", "my", "school,", "and", "Vietnam!"],
+            wordPhonics: ["Ai", "lóp", "mai", "thít-chơ-s", "mai", "sờ-cun", "èn", "Vi-ét-nam"]
           }
         ]
       },
@@ -1777,24 +2109,29 @@
         id: 7,
         name: "Đảo Tỏa Sáng",
         icon: "👑👋",
+        slideImg: "assets/slide1.jpg",
         chunks: [
           {
+            id: "c7_1",
             eng: "Thank you for listening!",
             phonics: "Thanh kiu fo lít-xừn-ninh!",
             viet: "Con cảm ơn mọi người đã lắng nghe!",
             emoji: "🙇‍♀️🌷",
             gestureIcon: "🙇‍♀️",
             gesture: "Khoanh tay cúi chào 90 độ thật ngoan!",
-            words: ["Thank", "you", "for", "listening!"]
+            words: ["Thank", "you", "for", "listening!"],
+            wordPhonics: ["Thanh", "kiu", "fo", "lít-xừn-ninh"]
           },
           {
+            id: "c7_2",
             eng: "Goodbye!",
             phonics: "Gút-bai!",
             viet: "Chào tạm biệt mọi người ạ!",
             emoji: "👋💖",
             gestureIcon: "👋",
             gesture: "Ngẩng lên cười thật tươi và vẫy cả hai tay chào Goodbye!",
-            words: ["Goodbye!"]
+            words: ["Goodbye!"],
+            wordPhonics: ["Gút-bai!"]
           }
         ]
       }
@@ -1819,11 +2156,13 @@
     let curMode = 'magic';
     let stars = 20;
     let flowers = 0;
-    let speechRate = 1.05; // Lively, energetic natural speed!
+    let speechRate = 0.85; // Default kid-friendly clear pace for 6-year-old beginners!
+    let useSlowMp3 = false;
     let completedIslands = new Set();
+    let chunkPracticeCounts = {}; // Tracks how many times Bé practiced each chunk
 
     /* =====================================================================
-       2. SOUND EFFECTS SYNTHESIZER (CUTE CARTOON SOUNDS - ZERO EXTERNAL FILES)
+       2. SOUND EFFECTS SYNTHESIZER (CUTE CARTOON SOUNDS)
        ===================================================================== */
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -1858,6 +2197,7 @@
       playNote(800, 'triangle', 0.06, 0, 0.25);
       playNote(1200, 'sine', 0.12, 0.04, 0.2);
     }
+    const sfxBalloonPop = sfxPopBalloon;
 
     function sfxVictoryFanfare() {
       const melody = [523, 659, 784, 1046, 784, 1046];
@@ -1888,7 +2228,7 @@
     resizeFx();
 
     function spawnParticles(x, y, count = 14, isBig = false) {
-      if (particles.length > 40) return; // Cap max particles for 120fps smoothness
+      if (particles.length > 40) return;
       const actualCount = Math.min(count, 18);
       const colors = ['#FF3E80', '#FFD600', '#00BBF9', '#06D6A0', '#9B5DE5', '#FF7B00'];
       for (let i = 0; i < actualCount; i++) {
@@ -1933,10 +2273,18 @@
     }
 
     /* =====================================================================
-       4. SPEECH SYNTHESIS (ENGLISH VOICE FOR KIDS)
+       4. 100% RELIABLE DUAL-ENGINE STUDIO AUDIO (PRE-GENERATED MP3 + WEB SPEECH)
+       Eliminates Chrome/Safari speechSynthesis cancel() drop bug & lip-syncs Chibi!
        ===================================================================== */
+    const studioAudio = new Audio();
+    studioAudio.preload = 'auto';
     let selectedVoice = null;
+    let fallbackWordTimer = null;
+    let slowSequenceTimer = null;
+    let speechDebounceTimer = null;
+
     function initVoices() {
+      if (!('speechSynthesis' in window)) return;
       const voices = window.speechSynthesis.getVoices();
       selectedVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Zira') || v.name.includes('Google US')))
                    || voices.find(v => v.lang.startsWith('en')) || null;
@@ -1946,67 +2294,210 @@
       initVoices();
     }
 
-    let fallbackWordTimer = null;
+    function setChibiLipSync(active) {
+      const chibi = document.getElementById('chibiCharacter');
+      if (!chibi) return;
+      if (active) chibi.classList.add('speaking');
+      else chibi.classList.remove('speaking');
+    }
+
+    function stopAllSpeech() {
+      if (fallbackWordTimer) { clearInterval(fallbackWordTimer); fallbackWordTimer = null; }
+      if (slowSequenceTimer) { clearTimeout(slowSequenceTimer); slowSequenceTimer = null; }
+      if (speechDebounceTimer) { clearTimeout(speechDebounceTimer); speechDebounceTimer = null; }
+      try {
+        studioAudio.pause();
+        studioAudio.currentTime = 0;
+      } catch(e) {}
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch(e) {}
+      }
+      setChibiLipSync(false);
+    }
+
+    // Lookup chunk object by its English text
+    function findChunkByEng(text) {
+      for (const isl of ISLANDS) {
+        for (const ch of isl.chunks) {
+          if (ch.eng.toLowerCase() === text.trim().toLowerCase()) return ch;
+        }
+      }
+      return null;
+    }
+
+    // Convert raw word (e.g. "Trâm.", "school's", "teachers!") to MP3 filename key
+    function cleanWordKey(rawWord) {
+      return rawWord.toLowerCase()
+        .replace(/trâm/g, 'tram')
+        .replace(/school's/g, 'schools')
+        .replace(/teachers'/g, 'teachers')
+        .replace(/[^a-z]/g, '');
+    }
+
+    // Play a single English word reliably using Studio MP3 + WebSpeech fallback
+    function speakSingleWord(rawWord, onDone) {
+      stopAllSpeech();
+      const key = cleanWordKey(rawWord);
+      if (!key) {
+        if (onDone) onDone();
+        return;
+      }
+      const mp3Path = `audio/w_${key}.mp3`;
+      setChibiLipSync(true);
+
+      studioAudio.onended = () => {
+        setChibiLipSync(false);
+        if (onDone) onDone();
+      };
+      studioAudio.onerror = () => {
+        speakViaWebSpeechFallback(key, null, onDone);
+      };
+      studioAudio.src = mp3Path;
+      studioAudio.playbackRate = speechRate < 0.8 ? 0.85 : 1.0;
+      studioAudio.play().catch(() => {
+        speakViaWebSpeechFallback(key, null, onDone);
+      });
+    }
+
+    // Play full phrase or chunk using Studio MP3 + synchronized word highlighting
     function speakPhrase(text, onWordIdx, onDone) {
+      stopAllSpeech();
+      if (!text) {
+        if (onDone) onDone();
+        return;
+      }
+
+      const matchedChunk = findChunkByEng(text);
+      const words = matchedChunk ? matchedChunk.words : text.trim().split(/\s+/);
+
+      // If it's a single word, use single-word MP3
+      if (!matchedChunk && words.length === 1) {
+        if (onWordIdx) onWordIdx(0);
+        speakSingleWord(words[0], onDone);
+        return;
+      }
+
+      if (matchedChunk) {
+        const suffix = useSlowMp3 ? '_slow' : '';
+        const mp3Path = `audio/${matchedChunk.id}${suffix}.mp3`;
+        setChibiLipSync(true);
+
+        studioAudio.onloadedmetadata = () => {
+          const totalDurMs = Math.max(900, (studioAudio.duration * 1000) / studioAudio.playbackRate);
+          if (onWordIdx) {
+            onWordIdx(0);
+            let idx = 0;
+            const stepMs = Math.max(260, Math.floor((totalDurMs * 0.88) / words.length));
+            if (fallbackWordTimer) clearInterval(fallbackWordTimer);
+            fallbackWordTimer = setInterval(() => {
+              idx++;
+              if (idx < words.length) {
+                onWordIdx(idx);
+              } else {
+                clearInterval(fallbackWordTimer);
+              }
+            }, stepMs);
+          }
+        };
+
+        studioAudio.onended = () => {
+          if (fallbackWordTimer) clearInterval(fallbackWordTimer);
+          setChibiLipSync(false);
+          if (onDone) onDone();
+        };
+
+        studioAudio.onerror = () => {
+          if (fallbackWordTimer) clearInterval(fallbackWordTimer);
+          speakViaWebSpeechFallback(text, onWordIdx, onDone);
+        };
+
+        studioAudio.src = mp3Path;
+        studioAudio.playbackRate = useSlowMp3 ? 0.95 : (speechRate > 1.0 ? 1.08 : 0.92);
+        studioAudio.play().catch(() => {
+          speakViaWebSpeechFallback(text, onWordIdx, onDone);
+        });
+      } else {
+        speakViaWebSpeechFallback(text, onWordIdx, onDone);
+      }
+    }
+
+    // Chrome/Safari bug-proof Web Speech fallback (65ms delay after cancel)
+    function speakViaWebSpeechFallback(text, onWordIdx, onDone) {
       if (!('speechSynthesis' in window)) {
+        setChibiLipSync(false);
         if (onDone) setTimeout(onDone, 600);
         return;
       }
-      if (fallbackWordTimer) clearInterval(fallbackWordTimer);
-      window.speechSynthesis.cancel();
-      if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+      speechDebounceTimer = setTimeout(() => {
+        try {
+          if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+          const cleanText = text.replace(/Trâm/g, 'Tram');
+          const u = new SpeechSynthesisUtterance(cleanText);
+          if (!selectedVoice) initVoices();
+          if (selectedVoice) u.voice = selectedVoice;
+          u.lang = 'en-US';
+          u.rate = speechRate;
+          u.pitch = 1.1;
 
-      const u = new SpeechSynthesisUtterance(text);
-      if (!selectedVoice) initVoices();
-      if (selectedVoice) u.voice = selectedVoice;
-      u.lang = 'en-US';
-      u.rate = speechRate;
-      u.pitch = 1.15;
+          const words = text.split(' ');
+          setChibiLipSync(true);
 
-      const words = text.split(' ');
-      let boundaryFired = false;
-
-      if (onWordIdx) {
-        onWordIdx(0);
-        let fallbackIdx = 0;
-        const stepMs = Math.max(220, Math.floor(340 / speechRate));
-        fallbackWordTimer = setInterval(() => {
-          if (boundaryFired) {
-            clearInterval(fallbackWordTimer);
-            return;
+          if (onWordIdx) {
+            onWordIdx(0);
+            let idx = 0;
+            const stepMs = Math.max(320, Math.floor(420 / speechRate));
+            fallbackWordTimer = setInterval(() => {
+              idx++;
+              if (idx < words.length) onWordIdx(idx);
+              else clearInterval(fallbackWordTimer);
+            }, stepMs);
           }
-          fallbackIdx++;
-          if (fallbackIdx < words.length) {
-            onWordIdx(fallbackIdx);
-          } else {
-            clearInterval(fallbackWordTimer);
-          }
-        }, stepMs);
-      }
 
-      u.onboundary = (e) => {
-        if (e.name === 'word' && onWordIdx) {
-          boundaryFired = true;
-          let acc = 0;
-          for (let i = 0; i < words.length; i++) {
-            const len = words[i].length + 1;
-            if (e.charIndex >= acc && e.charIndex < acc + len) {
-              onWordIdx(i);
-              break;
-            }
-            acc += len;
-          }
+          u.onend = () => {
+            if (fallbackWordTimer) clearInterval(fallbackWordTimer);
+            setChibiLipSync(false);
+            if (onDone) onDone();
+          };
+          u.onerror = () => {
+            if (fallbackWordTimer) clearInterval(fallbackWordTimer);
+            setChibiLipSync(false);
+            if (onDone) onDone();
+          };
+          window.speechSynthesis.speak(u);
+        } catch (err) {
+          setChibiLipSync(false);
+          if (onDone) onDone();
         }
-      };
-      u.onend = () => {
-        if (fallbackWordTimer) clearInterval(fallbackWordTimer);
-        if (onDone) onDone();
-      };
-      u.onerror = () => {
-        if (fallbackWordTimer) clearInterval(fallbackWordTimer);
-        if (onDone) onDone();
-      };
-      window.speechSynthesis.speak(u);
+      }, 65);
+    }
+
+    // Step-by-step Slow Word-by-Word Coach (Reads each word with a 750ms pause for Bé to repeat!)
+    function playSlowWordByWord() {
+      stopAllSpeech();
+      const chunk = getCurChunk();
+      const tokens = chunk.words.map((_, i) => document.getElementById(`magic-word-${i}`));
+      tokens.forEach(t => t && t.classList.remove('active-word'));
+      const statusEl = document.getElementById('flowerStatusText');
+
+      let wIdx = 0;
+      function nextWordStep() {
+        if (wIdx >= chunk.words.length) {
+          tokens.forEach(t => t && t.classList.remove('active-word'));
+          if (statusEl) statusEl.textContent = '🌟 Tuyệt lắm! Giờ Bé bấm "3. Bé Tập Đọc" nhé!';
+          return;
+        }
+        tokens.forEach(t => t && t.classList.remove('active-word'));
+        if (tokens[wIdx]) tokens[wIdx].classList.add('active-word');
+        const wText = chunk.words[wIdx];
+        const wPhon = (chunk.wordPhonics && chunk.wordPhonics[wIdx]) ? chunk.wordPhonics[wIdx] : '';
+        if (statusEl) statusEl.textContent = `🐢 Đọc theo từng chữ: "${wText}" (${wPhon})`;
+
+        speakSingleWord(wText, () => {
+          wIdx++;
+          slowSequenceTimer = setTimeout(nextWordStep, 750);
+        });
+      }
+      nextWordStep();
     }
 
     /* =====================================================================
@@ -2025,7 +2516,6 @@
       document.getElementById('starCount').textContent = stars;
       document.getElementById('flowerCount').textContent = flowers;
 
-      // Make Chibi Trâm jump with joy!
       const chibi = document.getElementById('chibiCharacter');
       chibi.classList.remove('jumping');
       void chibi.offsetWidth;
@@ -2034,7 +2524,7 @@
       if (cheerMsg) {
         document.getElementById('chibiSpeech').textContent = cheerMsg;
       }
-      spawnParticles(window.innerWidth / 2, window.innerHeight / 2, 35, true);
+      spawnParticles(window.innerWidth / 2, window.innerHeight / 2, 24, true);
     }
 
     function renderIslandsTrack() {
@@ -2045,14 +2535,13 @@
         node.className = `island-node ${idx === curIslandIdx ? 'active' : ''} ${completedIslands.has(idx) ? 'done' : ''}`;
         node.innerHTML = `
           <div class="island-icon">${isl.icon}</div>
-          <div class="island-num">Đảo ${idx + 1}</div>
+          <div class="island-num">Trang ${idx + 1}</div>
         `;
         node.addEventListener('click', () => {
           sfxBoing();
           curIslandIdx = idx;
           curChunkIdx = 0;
-          renderAll();
-          speakCurrentChunk();
+          renderAll(true);
         });
         track.appendChild(node);
       });
@@ -2063,53 +2552,77 @@
       const bar = document.getElementById('chunkStepsBar');
       bar.innerHTML = '';
       island.chunks.forEach((ch, idx) => {
+        const pracCount = chunkPracticeCounts[ch.id] || 0;
+        const starTag = pracCount > 0 ? ` ⭐${pracCount}` : '';
         const pill = document.createElement('div');
         pill.className = `chunk-pill ${idx === curChunkIdx ? 'active' : ''}`;
-        pill.innerHTML = `<span>${ch.emoji}</span> <span>Nhịp ${idx + 1}</span>`;
+        pill.innerHTML = `<span>${ch.emoji}</span> <span>Câu ${idx + 1}${starTag}</span>`;
         pill.addEventListener('click', () => {
           sfxBoing();
           curChunkIdx = idx;
-          renderAll();
-          speakCurrentChunk();
+          renderAll(true);
         });
         bar.appendChild(pill);
       });
 
       document.getElementById('footerProgressLabel').textContent =
-        `${island.name} (Đảo ${curIslandIdx + 1}/7) • Nhịp ${curChunkIdx + 1}/${island.chunks.length}`;
+        `${island.name} (Trang ${curIslandIdx + 1}/7) • Câu ${curChunkIdx + 1}/${island.chunks.length}`;
     }
 
     /* =====================================================================
-       6. MODE 1: MAGIC WAND & FLOWER GARDEN
+       6. MODE 1: STUDIO KARAOKE READING & FLOWER GARDEN
        ===================================================================== */
     function renderMagicMode() {
+      const island = getCurIsland();
       const chunk = getCurChunk();
+
+      // Update Real Slide Picture Frame
+      const previewImg = document.getElementById('slidePreviewImg');
+      if (previewImg && island.slideImg) {
+        previewImg.src = island.slideImg;
+      }
+
       document.getElementById('chunkEmoji').textContent = chunk.emoji;
-      document.getElementById('chunkPhonics').textContent = `🗣️ Đọc mẹo: "${chunk.phonics}"`;
-      document.getElementById('chunkViet').textContent = `✨ Nghĩa là: ${chunk.viet}`;
+      document.getElementById('chunkPhonics').textContent = `🗣️ Đọc cả câu: "${chunk.phonics}"`;
+      document.getElementById('chunkViet').textContent = `✨ Nghĩa: ${chunk.viet}`;
       document.getElementById('chunkGestureIcon').textContent = chunk.gestureIcon;
       document.getElementById('chunkGestureText').textContent = chunk.gesture;
 
+      const pCount = chunkPracticeCounts[chunk.id] || 0;
+      const badgeEl = document.getElementById('practiceCountBadge');
+      if (badgeEl) {
+        badgeEl.textContent = pCount >= 3
+          ? `🏆 Đã thuộc lòng (${pCount} lần)!`
+          : `⭐ Đã tập đọc: ${pCount}/3 lần`;
+      }
+
       // Reset flower bud
-      document.getElementById('magicFlowerIcon').textContent = '🌱';
+      document.getElementById('magicFlowerIcon').textContent = pCount > 0 ? '🌷' : '🌱';
       document.getElementById('magicFlowerIcon').style.transform = 'scale(1)';
       document.getElementById('voicePowerFill').style.width = '0%';
-      document.getElementById('flowerStatusText').textContent = 'Nói to để hoa nở nhé!';
+      document.getElementById('flowerStatusText').textContent = 'Bấm "1. Nghe Cả Câu" hoặc "2. Đọc Từng Chữ" để tập đọc nhé!';
 
-      // Render large clickable words
+      // Render 3D Word Flashcards with individual phonetic guide underneath each word
       const container = document.getElementById('chunkWordsContainer');
       container.innerHTML = '';
       chunk.words.forEach((w, idx) => {
+        const wPhon = (chunk.wordPhonics && chunk.wordPhonics[idx]) ? chunk.wordPhonics[idx] : '';
         const token = document.createElement('div');
         token.className = 'word-token';
         token.id = `magic-word-${idx}`;
-        token.textContent = w;
+        token.innerHTML = `
+          <span class="wt-eng">${w}</span>
+          <span class="wt-phonics">🔊 ${wPhon}</span>
+        `;
         token.addEventListener('click', (e) => {
+          e.stopPropagation();
           sfxBoing();
           spawnParticles(e.clientX, e.clientY, 10, false);
+          container.querySelectorAll('.word-token').forEach(el => el.classList.remove('active-word'));
           token.classList.add('active-word');
-          speakPhrase(w.replace(/[^a-zA-Z']/g, ''), null, () => {
-            setTimeout(() => token.classList.remove('active-word'), 300);
+          document.getElementById('flowerStatusText').textContent = `🔊 Đang đọc chữ: "${w}" (${wPhon})`;
+          speakSingleWord(w, () => {
+            setTimeout(() => token.classList.remove('active-word'), 350);
           });
         });
         container.appendChild(token);
@@ -2129,30 +2642,43 @@
       });
     }
 
-    /* Real-time Microphone Voice Power Meter + Voice Recording */
+    /* Guided Karaoke Paced Microphone Coach + Voice Recording (Never rushes the child!) */
     let micStream = null;
     let micAnimId = null;
+    let karaokeTimer = null;
     let voiceRecorder = null;
     let voiceChunks = [];
     let lastVoiceUrl = null;
     let basketList = [];
 
+    function stopKaraokeSession() {
+      if (micAnimId) { cancelAnimationFrame(micAnimId); micAnimId = null; }
+      if (karaokeTimer) { clearInterval(karaokeTimer); karaokeTimer = null; }
+      if (voiceRecorder && voiceRecorder.state === 'recording') {
+        try { voiceRecorder.stop(); } catch(e) {}
+      }
+    }
+
     async function startMagicVoiceGame() {
       sfxBoing();
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      stopAllSpeech();
+      stopKaraokeSession();
+
+      const chunk = getCurChunk();
       const flowerEl = document.getElementById('magicFlowerIcon');
       const fillEl = document.getElementById('voicePowerFill');
       const statusEl = document.getElementById('flowerStatusText');
+      const tokens = chunk.words.map((_, i) => document.getElementById(`magic-word-${i}`));
+      tokens.forEach(t => t && t.classList.remove('active-word'));
 
+      // Try to open microphone for recording & voice energy meter
       try {
-        if (!micStream) {
+        if (!micStream && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
           micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
         }
-
-        // Start recording Bé's voice immediately (Support both iPad audio/mp4 & Chrome audio/webm)
-        try {
+        if (micStream && typeof MediaRecorder !== 'undefined') {
           voiceChunks = [];
-          const recMime = (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/webm'))
+          const recMime = (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/webm'))
             ? 'audio/webm'
             : (MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '');
           voiceRecorder = recMime ? new MediaRecorder(micStream, { mimeType: recMime }) : new MediaRecorder(micStream);
@@ -2164,72 +2690,84 @@
             document.getElementById('btnPlayMyVoice').style.display = 'inline-flex';
           };
           voiceRecorder.start();
-        } catch(recErr) {}
-
-        const micCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const source = micCtx.createMediaStreamSource(micStream);
-        const analyser = micCtx.createAnalyser();
-        analyser.fftSize = 256;
-        source.connect(analyser);
-        const dataArr = new Uint8Array(analyser.frequencyBinCount);
-
-        let power = 0;
-        statusEl.textContent = '🎤 NÓI NGAY NÀO BÉ TRÂM ƠI!';
-
-        function checkVolume() {
-          analyser.getByteFrequencyData(dataArr);
-          let sum = 0;
-          for (let i = 0; i < dataArr.length; i++) sum += dataArr[i];
-          const avg = sum / dataArr.length;
-
-          // Ultra responsive voice boost!
-          if (avg > 8) {
-            power += (avg / 4.2);
-            if (power > 100) power = 100;
-          }
-
-          fillEl.style.width = `${power}%`;
-          if (power < 35) {
-            flowerEl.textContent = '🌱';
-            flowerEl.style.transform = `scale(${1 + power/100})`;
-          } else if (power < 85) {
-            flowerEl.textContent = '🌷';
-            flowerEl.style.transform = `scale(${1.1 + power/90})`;
-          } else {
-            flowerEl.textContent = '🌺';
-            flowerEl.style.transform = 'scale(1.45)';
-          }
-
-          if (power >= 100) {
-            cancelAnimationFrame(micAnimId);
-            if (voiceRecorder && voiceRecorder.state === 'recording') {
-              setTimeout(() => { try { voiceRecorder.stop(); } catch(e){} }, 250);
-            }
-            micCtx.close();
-            bloomFlowerSuccess();
-            return;
-          }
-          micAnimId = requestAnimationFrame(checkVolume);
         }
-        checkVolume();
       } catch (err) {
-        bloomFlowerSuccess();
+        // Even if mic permission is declined, guided karaoke still runs smoothly!
       }
+
+      // Guided word-by-word Karaoke pacing: ~1.25 seconds per word so a 6-year-old can read aloud comfortably!
+      const totalWords = chunk.words.length;
+      const msPerWord = 1250;
+      const totalDurationMs = Math.max(3600, totalWords * msPerWord);
+      const startTime = performance.now();
+
+      function updateKaraokeFrame(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(100, (elapsed / totalDurationMs) * 100);
+        fillEl.style.width = `${progress.toFixed(1)}%`;
+
+        const curWordIdx = Math.min(totalWords - 1, Math.floor((elapsed / totalDurationMs) * totalWords));
+        tokens.forEach((t, i) => {
+          if (!t) return;
+          if (i === curWordIdx) t.classList.add('active-word');
+          else t.classList.remove('active-word');
+        });
+
+        const curW = chunk.words[curWordIdx];
+        const curP = (chunk.wordPhonics && chunk.wordPhonics[curWordIdx]) ? chunk.wordPhonics[curWordIdx] : '';
+        statusEl.textContent = `🎙️ Bé đọc to chữ đang sáng nhé: "${curW}" (${curP})`;
+
+        if (progress < 35) {
+          flowerEl.textContent = '🌱';
+          flowerEl.style.transform = `scale(${1 + progress / 120})`;
+        } else if (progress < 75) {
+          flowerEl.textContent = '🌿';
+          flowerEl.style.transform = `scale(${1.1 + progress / 100})`;
+        } else {
+          flowerEl.textContent = '🌷';
+          flowerEl.style.transform = 'scale(1.35)';
+        }
+
+        if (progress >= 100) {
+          tokens.forEach(t => t && t.classList.remove('active-word'));
+          stopKaraokeSession();
+          bloomFlowerSuccess();
+          return;
+        }
+        micAnimId = requestAnimationFrame(updateKaraokeFrame);
+      }
+
+      micAnimId = requestAnimationFrame(updateKaraokeFrame);
     }
 
     function bloomFlowerSuccess() {
+      stopKaraokeSession();
+      const chunk = getCurChunk();
       const flowerEl = document.getElementById('magicFlowerIcon');
       const fillEl = document.getElementById('voicePowerFill');
       const statusEl = document.getElementById('flowerStatusText');
+
+      chunkPracticeCounts[chunk.id] = (chunkPracticeCounts[chunk.id] || 0) + 1;
+      const count = chunkPracticeCounts[chunk.id];
 
       fillEl.style.width = '100%';
       const flowerTypes = ['🌸', '🌻', '🌹', '🌺', '🌷'];
       const picked = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
       flowerEl.textContent = picked;
-      flowerEl.style.transform = 'scale(1.5)';
-      statusEl.textContent = '🎉 HOA NỞ RỒI! QUA CÂU TIẾP NHÉ!';
+      flowerEl.style.transform = 'scale(1.45)';
 
-      // Add to visual basket
+      const badgeEl = document.getElementById('practiceCountBadge');
+      if (badgeEl) {
+        badgeEl.textContent = count >= 3
+          ? `🏆 Đã thuộc lòng (${count} lần)!`
+          : `⭐ Đã tập đọc: ${count}/3 lần`;
+      }
+      renderChunkPills();
+
+      statusEl.textContent = count < 3
+        ? `🎉 Giỏi quá (Lần ${count}/3)! Bấm "▶️ Nghe Giọng Trâm" hoặc đọc lại lần nữa cho thuộc nhé!`
+        : `🏆 Trâm đã đọc thuộc câu này ${count} lần! Bấm "Câu Tiếp Theo ➡️" ở dưới nhé!`;
+
       basketList.push(picked);
       document.getElementById('basketFlowersRow').textContent = basketList.join(' ');
       if (basketList.length >= 5) {
@@ -2237,25 +2775,21 @@
       }
 
       sfxMagicWand();
-      addStarsAndFlowers(5, 1, 'Siêu nhanh! Hoa nở rực rỡ luôn! 🌸');
-
-      // Auto-advance to next chunk quickly so game never feels stuck!
-      setTimeout(() => {
-        if (curMode === 'magic') goNextChunk();
-      }, 1150);
+      addStarsAndFlowers(5, 1, `Tuyệt vời! Trâm vừa đọc xong lần ${count}! Hãy nghe lại hoặc tập thêm nhé! 🌸`);
+      // NOTE: Does NOT auto-jump away! Child stays on current chunk to review, listen to own voice, or repeat.
     }
 
     /* =====================================================================
-       7. MODE 2: BALLOON POP ARCADE GAME (TURBO SPEED!)
+       7. MODE 2: BALLOON POP ARCADE GAME (KID-FRIENDLY PACING)
        ===================================================================== */
     let balloonTimer = null;
     let balloonHitsThisChunk = 0;
     const BALLOON_COLORS = [
-      'linear-gradient(135deg, #FF5C8A, #FF0A54)',
-      'linear-gradient(135deg, #00BBF9, #0077B6)',
-      'linear-gradient(135deg, #9B5DE5, #7209B7)',
-      'linear-gradient(135deg, #06D6A0, #04966F)',
-      'linear-gradient(135deg, #FF9F1C, #F77F00)'
+      'radial-gradient(circle at 30% 25%, #FF9EBB 0%, #FF2A6D 55%, #A30036 100%)',
+      'radial-gradient(circle at 30% 25%, #90E0EF 0%, #0096C7 55%, #023E8A 100%)',
+      'radial-gradient(circle at 30% 25%, #E0AAFF 0%, #9B5DE5 55%, #480CA8 100%)',
+      'radial-gradient(circle at 30% 25%, #80FFDB 0%, #06D6A0 55%, #047857 100%)',
+      'radial-gradient(circle at 30% 25%, #FFE066 0%, #F77F00 55%, #9A3412 100%)'
     ];
 
     function startBalloonGame() {
@@ -2264,29 +2798,26 @@
       const chunk = getCurChunk();
       document.getElementById('balloonTargetText').textContent = chunk.eng;
       document.getElementById('balloonTargetPhonics').textContent = `🗣️ Đọc: ${chunk.phonics}`;
-      speakPhrase(chunk.eng);
 
-      // Spawn multiple balloons immediately & rapidly!
       spawnOneBalloon(true);
-      setTimeout(() => spawnOneBalloon(false), 250);
+      setTimeout(() => { if (curMode === 'balloon') spawnOneBalloon(false); }, 600);
       balloonTimer = setInterval(() => {
         if (curMode !== 'balloon') return;
-        spawnOneBalloon(Math.random() > 0.3);
-      }, 650);
+        spawnOneBalloon(Math.random() > 0.28);
+      }, 1150);
     }
 
     function stopBalloonGame() {
-      if (balloonTimer) clearInterval(balloonTimer);
+      if (balloonTimer) { clearInterval(balloonTimer); balloonTimer = null; }
       const arena = document.getElementById('balloonArena');
-      arena.querySelectorAll('.floating-balloon').forEach(b => b.remove());
+      if (arena) arena.querySelectorAll('.floating-balloon').forEach(b => b.remove());
     }
 
     function spawnOneBalloon(isTarget) {
       const arena = document.getElementById('balloonArena');
-      if (arena.querySelectorAll('.floating-balloon').length >= 6) return;
+      if (arena.querySelectorAll('.floating-balloon').length >= 5) return;
       const chunk = getCurChunk();
 
-      // Distractor fun items
       const distractors = [
         { emoji: '🐸', text: 'Quạc quạc!' },
         { emoji: '🍦', text: 'Kem ngon!' },
@@ -2298,8 +2829,9 @@
       const balloon = document.createElement('div');
       balloon.className = 'floating-balloon';
       balloon.style.background = BALLOON_COLORS[Math.floor(Math.random() * BALLOON_COLORS.length)];
-      balloon.style.left = `${Math.floor(Math.random() * 74 + 5)}%`;
-      balloon.style.animationDuration = `${(Math.random() * 0.8 + 2.4).toFixed(2)}s`;
+      balloon.style.left = `${Math.floor(Math.random() * 72 + 6)}%`;
+      // Comfortable 4.8s - 5.8s float duration so a 6-year-old can read & tap without stress!
+      balloon.style.animationDuration = `${(Math.random() * 1.0 + 4.8).toFixed(2)}s`;
 
       if (isTarget) {
         balloon.innerHTML = `<div class="b-emoji">${chunk.emoji}</div><div class="b-text">${chunk.eng}</div>`;
@@ -2315,10 +2847,14 @@
           spawnParticles(e.clientX, e.clientY, 16, true);
           balloon.remove();
           balloonHitsThisChunk++;
-          speakPhrase(chunk.eng);
-          addStarsAndFlowers(5, 1, 'BÙM! Phản xạ siêu nhanh luôn Trâm ơi! 🎈⚡');
+          addStarsAndFlowers(5, 1, `BÙM! Trâm đập trúng bóng (${balloonHitsThisChunk}/2)! Cùng đọc to câu này nhé! 🎈`);
           if (balloonHitsThisChunk >= 2) {
-            setTimeout(() => { if (curMode === 'balloon') goNextChunk(); }, 600);
+            stopBalloonGame();
+            speakPhrase(chunk.eng, null, () => {
+              setTimeout(() => { if (curMode === 'balloon') goNextChunk(); }, 1600);
+            });
+          } else {
+            speakPhrase(chunk.eng);
           }
         } else {
           playNote(220, 'sawtooth', 0.12);
@@ -2331,52 +2867,66 @@
     }
 
     /* =====================================================================
-       8. MODE 3: CANDY TRAIN BUILDER (BITE-SIZED 2-5 WORDS + AUTO ADVANCE)
+       8. MODE 3: CANDY TRAIN BUILDER (WITH PHONETICS ON EVERY CANDY!)
        ===================================================================== */
     let trainPlaced = [];
 
     function renderTrainMode() {
       const chunk = getCurChunk();
       trainPlaced = [];
-      document.getElementById('trainPhonicsHint').textContent = `🗣️ ${chunk.phonics}`;
+      document.getElementById('trainPhonicsHint').textContent = `🗣️ ${chunk.phonics} (${chunk.viet})`;
 
       const track = document.getElementById('railwayTrack');
       track.style.transition = 'none';
       track.style.transform = 'translateX(0)';
-      track.innerHTML = `<div class="train-engine" id="trainEngine">🚂</div>`;
+      track.innerHTML = `<div class="train-engine" id="trainEngine" style="cursor:pointer;" title="Bấm đầu tàu để nghe câu mẫu!">🚂</div>`;
+      document.getElementById('trainEngine').onclick = () => speakPhrase(chunk.eng);
 
       const pool = document.getElementById('candyWordPool');
       pool.innerHTML = '';
 
-      const shuffled = [...chunk.words].sort(() => Math.random() - 0.5);
-      shuffled.forEach((word) => {
+      const indexedWords = chunk.words.map((w, i) => ({
+        word: w,
+        phon: (chunk.wordPhonics && chunk.wordPhonics[i]) ? chunk.wordPhonics[i] : ''
+      }));
+      const shuffled = [...indexedWords].sort(() => Math.random() - 0.5);
+
+      shuffled.forEach((item) => {
         const btn = document.createElement('button');
         btn.className = 'candy-word-btn';
-        btn.textContent = word;
+        btn.innerHTML = `<div>${item.word}</div><div style="font-size:0.78rem; color:#FEF08A; font-weight:800;">🗣️ ${item.phon}</div>`;
         btn.addEventListener('click', (e) => {
           const expected = chunk.words[trainPlaced.length];
-          if (word.toLowerCase() === expected.toLowerCase()) {
+          if (item.word.toLowerCase() === expected.toLowerCase()) {
             sfxBoing();
             spawnParticles(e.clientX, e.clientY, 14, false);
-            speakPhrase(word.replace(/[^a-zA-Z']/g, ''));
             btn.style.visibility = 'hidden';
-            trainPlaced.push(word);
+            trainPlaced.push(item.word);
 
             const wagon = document.createElement('div');
             wagon.className = 'train-wagon';
-            wagon.textContent = word;
+            wagon.style.cursor = 'pointer';
+            wagon.innerHTML = `<span>${item.word}</span>`;
+            wagon.onclick = () => speakSingleWord(item.word);
             track.appendChild(wagon);
 
             if (trainPlaced.length === chunk.words.length) {
               sfxTrainWhistle();
-              speakPhrase(chunk.eng);
-              addStarsAndFlowers(8, 1, 'Tu tu xình xịch! Tàu chạy siêu tốc qua trạm mới! 🚂⚡');
+              addStarsAndFlowers(8, 1, 'Tu tu xình xịch! Trâm ghép đúng cả đoàn tàu rồi! Cùng nghe và đọc theo nhé! 🚂🌟');
+              // Read the full completed sentence clearly, then wait 1.8s so Bé can repeat it!
               setTimeout(() => {
-                if (curMode === 'train') goNextChunk();
-              }, 1100);
+                speakPhrase(chunk.eng, null, () => {
+                  setTimeout(() => {
+                    if (curMode === 'train') goNextChunk();
+                  }, 1800);
+                });
+              }, 350);
+            } else {
+              speakSingleWord(item.word);
             }
           } else {
             playNote(240, 'sawtooth', 0.12);
+            speakSingleWord(expected);
             document.getElementById('chibiSpeech').textContent = `Toa tiếp theo là chữ "${expected}" cơ Trâm ơi! 🍬`;
           }
         });
@@ -2385,7 +2935,7 @@
     }
 
     /* =====================================================================
-       8B. MODE 4: WHACK-A-MOLE (ĐẬP CHUỘT CHŨI SIÊU TỐC)
+       8B. MODE 4: WHACK-A-MOLE (ĐẬP CHUỘT CHŨI VỪA SỨC BÉ 6 TUỔI)
        ===================================================================== */
     let whackTimer = null;
     let whackHits = 0;
@@ -2405,15 +2955,13 @@
       whackHits = 0;
       const chunk = getCurChunk();
       document.getElementById('whackTargetText').textContent = chunk.eng;
-      document.getElementById('whackTargetPhonics').textContent = `🗣️ ${chunk.phonics}`;
-      speakPhrase(chunk.eng);
+      document.getElementById('whackTargetPhonics').textContent = `🗣️ ${chunk.phonics} (${chunk.viet})`;
 
       const allChunks = ISLANDS.flatMap(isl => isl.chunks);
       const critters = Array.from(document.querySelectorAll('.mole-critter'));
       const moleFaces = ['🐹', '🐰', '🦊', '🐻', '🐼', '🐨'];
 
-      // Wire click listeners once using onclick
-      critters.forEach((critter, idx) => {
+      critters.forEach((critter) => {
         critter.onclick = (e) => {
           if (!critter.classList.contains('up')) return;
           critter.classList.remove('up');
@@ -2422,24 +2970,26 @@
             whackHits++;
             sfxBalloonPop();
             spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 18, true);
-            speakPhrase(chunk.eng);
-            addStarsAndFlowers(5, 1, `Đập trúng rồi (${whackHits}/2)! Giỏi quá Trâm ơi! 🔨🌟`);
+            addStarsAndFlowers(5, 1, `Đập trúng rồi (${whackHits}/2)! Cùng đọc to câu này nhé Trâm ơi! 🔨🌟`);
             if (whackHits >= 2) {
               stopWhackGame();
-              setTimeout(() => {
-                if (curMode === 'whack') goNextChunk();
-              }, 850);
+              speakPhrase(chunk.eng, null, () => {
+                setTimeout(() => {
+                  if (curMode === 'whack') goNextChunk();
+                }, 1700);
+              });
+            } else {
+              speakPhrase(chunk.eng);
             }
           } else {
             playNote(220, 'sawtooth', 0.12);
-            document.getElementById('chibiSpeech').textContent = `Úi! Nhầm bạn chuột rồi, tìm câu "${chunk.eng}" nhé! 🐹`;
+            document.getElementById('chibiSpeech').textContent = `Úi! Nhầm bạn thú rồi, tìm bảng chữ "${chunk.eng}" nhé! 🐹`;
           }
         };
       });
 
       function popRandomMoles() {
         critters.forEach(c => c.classList.remove('up'));
-        // Pick 2 or 3 holes to pop up
         const holeIndices = [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5).slice(0, 3);
         const targetHolePos = holeIndices[Math.floor(Math.random() * holeIndices.length)];
 
@@ -2453,18 +3003,19 @@
           critter.dataset.isTarget = isTarget ? 'true' : 'false';
           const face = moleFaces[hIdx % moleFaces.length];
           critter.innerHTML = `
-            <div class="mole-sign" style="border-color:${isTarget ? '#F77F00' : '#64748B'};">
-              ${item.eng}
-              <span class="mole-phonics">🗣️ ${item.phonics}</span>
+            <div class="critter-sign" style="background:#FFF; border:2px solid ${isTarget ? '#F77F00' : '#94A3B8'}; border-radius:10px; padding:2px 6px;">
+              <div>${item.eng}</div>
+              <div style="font-size:0.74rem; color:#7E22CE;">🗣️ ${item.phonics}</div>
             </div>
-            <div class="mole-avatar">${face}</div>
+            <div class="critter-face">${face}</div>
           `;
           requestAnimationFrame(() => critter.classList.add('up'));
         });
       }
 
       popRandomMoles();
-      whackTimer = setInterval(popRandomMoles, 2100);
+      // Give child 3.3 seconds to read the signs before moles switch holes!
+      whackTimer = setInterval(popRandomMoles, 3300);
     }
 
     /* =====================================================================
@@ -2493,9 +3044,10 @@
         card.className = 'cake-card';
         const cakeEmoji = cakeIcons[(curChunkIdx + i) % cakeIcons.length];
         card.innerHTML = `
-          <div class="cake-emoji">${cakeEmoji} ${item.emoji}</div>
-          <div class="cake-eng">${item.eng}</div>
-          <div class="cake-phonics">🗣️ ${item.phonics}</div>
+          <div style="font-size:40px; line-height:1.05;">${cakeEmoji} ${item.emoji}</div>
+          <div style="font-size:1.15rem; font-weight:900; color:#0F172A;">${item.eng}</div>
+          <div style="font-size:0.86rem; font-weight:800; color:#7E22CE; background:#F3E8FF; padding:2px 10px; border-radius:10px;">🗣️ ${item.phonics}</div>
+          <div style="font-size:0.78rem; font-weight:800; color:#0369A1;">${item.viet}</div>
         `;
         card.addEventListener('click', (e) => {
           if (item.eng === chunk.eng) {
@@ -2503,11 +3055,12 @@
             dino.textContent = '😋';
             dino.classList.add('munching');
             spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 22, true);
-            speakPhrase(chunk.eng);
-            addStarsAndFlowers(8, 1, 'Nhom nhom! Khủng Long cảm ơn chiếc bánh ngon của Trâm! 🦖🧁');
-            setTimeout(() => {
-              if (curMode === 'monster') goNextChunk();
-            }, 1050);
+            addStarsAndFlowers(8, 1, 'Nhom nhom! Khủng Long cảm ơn chiếc bánh ngon của Trâm! Cùng đọc theo nhé! 🦖🧁');
+            speakPhrase(chunk.eng, null, () => {
+              setTimeout(() => {
+                if (curMode === 'monster') goNextChunk();
+              }, 1700);
+            });
           } else {
             playNote(210, 'sawtooth', 0.15);
             dino.textContent = '🥺';
@@ -2537,7 +3090,6 @@
         const extra = ISLANDS.flatMap(isl => isl.chunks).filter(c => !poolChunks.includes(c));
         poolChunks.push(...extra.slice(0, 3 - poolChunks.length));
       }
-      // Make sure current chunk is always included in the 3 pairs
       const cur = getCurChunk();
       const others = poolChunks.filter(c => c.eng !== cur.eng).slice(0, 2);
       const selected3 = [cur, ...others];
@@ -2571,8 +3123,8 @@
         const card = document.createElement('div');
         card.className = 'mem-card';
         card.innerHTML = `
-          <div class="mem-cover">❓</div>
-          <div class="mem-content">
+          <div class="mem-cover" style="font-size:2rem;">💎❓</div>
+          <div class="mem-content" style="display:none;">
             <div style="font-size:1.55rem;">${cardData.topIcon}</div>
             <div style="font-size:1rem; font-weight:900; color:#1E293B; line-height:1.15;">${cardData.mainText}</div>
             <div style="font-size:0.78rem; font-weight:800; color:#7209B7; margin-top:2px;">${cardData.subText}</div>
@@ -2582,6 +3134,8 @@
           if (memoryLock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
           sfxBoing();
           card.classList.add('flipped');
+          card.querySelector('.mem-cover').style.display = 'none';
+          card.querySelector('.mem-content').style.display = 'block';
           speakPhrase(cardData.eng);
 
           if (!memoryFirstCard) {
@@ -2605,15 +3159,19 @@
                   addStarsAndFlowers(15, 2, 'Trí nhớ siêu đẳng! Trâm đã lật đúng cả 3 cặp thẻ! 🃏🌟');
                   setTimeout(() => {
                     if (curMode === 'memory') goNextChunk();
-                  }, 1000);
+                  }, 2200);
                 }
-              }, 320);
+              }, 380);
             } else {
               setTimeout(() => {
                 prev.el.classList.remove('flipped');
                 card.classList.remove('flipped');
+                prev.el.querySelector('.mem-cover').style.display = 'block';
+                prev.el.querySelector('.mem-content').style.display = 'none';
+                card.querySelector('.mem-cover').style.display = 'block';
+                card.querySelector('.mem-content').style.display = 'none';
                 memoryLock = false;
-              }, 850);
+              }, 1250);
             }
           }
         });
@@ -2636,12 +3194,14 @@
 
       if (stageLevel === 1) {
         box.innerHTML = `
-          <div style="color:#FFF; font-size:1.6rem;">${chunk.eng}</div>
+          <div style="color:#FFF; font-size:1.6rem; cursor:pointer;" title="Bấm để nghe đọc!">${chunk.eng} 🔊</div>
           <div style="color:#FDE047; font-size:1.05rem; margin-top:4px;">🗣️ Đọc mẹo: ${chunk.phonics}</div>
           <div style="color:#BAE6FD; font-size:0.92rem; margin-top:2px;">✨ Nghĩa: ${chunk.viet}</div>
         `;
+        box.onclick = () => speakPhrase(chunk.eng);
       } else if (stageLevel === 2) {
-        const words = chunk.eng.split(' ');
+        box.onclick = null;
+        const words = chunk.words;
         const row = document.createElement('div');
         row.style.display = 'flex';
         row.style.flexWrap = 'wrap';
@@ -2656,16 +3216,19 @@
             span.className = 'mystery-word-box';
             span.textContent = '🎁 ?';
             span.title = 'Chạm để mở hộp chữ!';
-            span.addEventListener('click', () => {
+            span.addEventListener('click', (e) => {
+              e.stopPropagation();
               sfxMagicWand();
               span.textContent = w;
               span.style.background = '#2EC4B6';
               span.style.color = '#FFF';
-              speakPhrase(w.replace(/[^a-zA-Z']/g, '') || w);
+              speakSingleWord(w);
             });
           } else {
             span.textContent = w;
             span.style.padding = '4px 8px';
+            span.style.cursor = 'pointer';
+            span.onclick = () => speakSingleWord(w);
           }
           row.appendChild(span);
         });
@@ -2677,12 +3240,13 @@
         hint.textContent = `💡 Trâm tự đọc từ trong hộp quà 🎁 rồi chạm vào hộp để kiểm tra nhé! (${chunk.viet})`;
         box.appendChild(hint);
       } else {
+        box.onclick = null;
         box.innerHTML = `
           <div id="stageCurtainWrap">
             <div style="font-size:1.05rem; color:#FDE047; margin-bottom:8px;">
               🎭 Nhìn hình <b>${chunk.emoji}</b> (${chunk.viet}) và tự thuyết trình câu này thật to nào!
             </div>
-            <button class="jelly-btn orange" id="btnRevealCurtain" style="padding:8px 18px; font-size:0.98rem;">
+            <button class="jelly-btn yellow" id="btnRevealCurtain" style="padding:8px 18px; font-size:0.98rem;">
               👀 Bấm Mở Rèm Kiểm Tra Đáp Án
             </button>
           </div>
@@ -2690,7 +3254,8 @@
         setTimeout(() => {
           const btnRev = document.getElementById('btnRevealCurtain');
           if (btnRev) {
-            btnRev.onclick = () => {
+            btnRev.onclick = (e) => {
+              e.stopPropagation();
               sfxMagicWand();
               speakPhrase(chunk.eng);
               document.getElementById('stageCurtainWrap').innerHTML = `
@@ -2730,7 +3295,7 @@
               document.getElementById('chibiSpeech').textContent = `Oa! Trâm có "${item.name}" mới đẹp quá! 👑`;
             } else {
               playNote(240, 'sawtooth', 0.18);
-              document.getElementById('chibiSpeech').textContent = `Cần thêm ${item.price - stars} ⭐ nữa! Cùng chơi nối tàu hoặc nở hoa nhé!`;
+              document.getElementById('chibiSpeech').textContent = `Cần thêm ${item.price - stars} ⭐ nữa! Cùng luyện đọc để nhận sao nhé!`;
             }
           } else {
             equipItem(item);
@@ -2763,13 +3328,14 @@
     }
 
     /* =====================================================================
-       10. NAVIGATION & MASTER RENDER
+       10. NAVIGATION & MASTER RENDER (SINGLE UNIFIED AUDIO TRIGGER)
        ===================================================================== */
-    function renderAll() {
-      renderIslandsTrack();
-      renderChunkPills();
+    function renderAll(shouldSpeak = false) {
+      stopKaraokeSession();
       stopBalloonGame();
       stopWhackGame();
+      renderIslandsTrack();
+      renderChunkPills();
 
       if (curMode === 'magic') {
         renderMagicMode();
@@ -2788,6 +3354,10 @@
       } else if (curMode === 'shop') {
         renderShopMode();
       }
+
+      if (shouldSpeak && curMode !== 'shop') {
+        speakCurrentChunk();
+      }
     }
 
     function goNextChunk() {
@@ -2795,16 +3365,14 @@
       const island = getCurIsland();
       if (curChunkIdx < island.chunks.length - 1) {
         curChunkIdx++;
-        renderAll();
-        speakCurrentChunk();
+        renderAll(true);
       } else {
-        // Completed the whole island!
         completedIslands.add(curIslandIdx);
         sfxVictoryFanfare();
         showCelebrationPopup(
           island.icon,
           `HOÀN THÀNH ${island.name.toUpperCase()}!`,
-          `Bé Trâm xuất sắc quá! Thưởng cho bé +15 ⭐ và 1 bó hoa tươi thắm!`
+          `Bé Trâm xuất sắc quá! Thưởng cho bé +15 ⭐ và 2 bông hoa tươi thắm!`
         );
         addStarsAndFlowers(15, 2, `Tuyệt vời! Trâm đã chinh phục xong ${island.name}! 🏆`);
 
@@ -2815,7 +3383,7 @@
           curIslandIdx = 0;
           curChunkIdx = 0;
         }
-        renderAll();
+        renderAll(false);
       }
     }
 
@@ -2827,8 +3395,7 @@
         curIslandIdx--;
         curChunkIdx = ISLANDS[curIslandIdx].chunks.length - 1;
       }
-      renderAll();
-      speakCurrentChunk();
+      renderAll(true);
     }
 
     function showCelebrationPopup(emoji, title, desc) {
@@ -2854,17 +3421,30 @@
         document.getElementById('modeMemory').style.display = curMode === 'memory' ? 'flex' : 'none';
         document.getElementById('modeStage').style.display = curMode === 'stage' ? 'flex' : 'none';
         document.getElementById('modeShop').style.display = curMode === 'shop' ? 'flex' : 'none';
-        renderAll();
+        renderAll(true);
       });
     });
 
-    // Wire up listeners for the 4 new mini-games
+    // Wire up listeners for all interactive elements so clicking ANY text/picture speaks immediately!
+    document.getElementById('slidePicFrame').addEventListener('click', speakCurrentChunk);
+    document.getElementById('chunkEmoji').addEventListener('click', speakCurrentChunk);
+    document.getElementById('chunkPhonics').addEventListener('click', speakCurrentChunk);
+    document.getElementById('chunkViet').addEventListener('click', speakCurrentChunk);
+    document.getElementById('gestureBannerBox').addEventListener('click', speakCurrentChunk);
+
+    document.getElementById('btnHearSample').addEventListener('click', speakCurrentChunk);
+    document.getElementById('btnSlowWordByWord').addEventListener('click', playSlowWordByWord);
+    document.getElementById('btnMagicSpeak').addEventListener('click', startMagicVoiceGame);
+    document.getElementById('btnInstantBloom').addEventListener('click', bloomFlowerSuccess);
+
     document.getElementById('whackPromptBanner').addEventListener('click', () => speakPhrase(getCurChunk().eng));
     document.getElementById('btnDinoHear').addEventListener('click', () => speakPhrase(getCurChunk().eng));
     document.getElementById('dinoAvatar').addEventListener('click', () => speakPhrase(getCurChunk().eng));
+    document.getElementById('dinoStageBox').addEventListener('click', () => speakPhrase(getCurChunk().eng));
     document.getElementById('btnResetMemory').addEventListener('click', () => {
       sfxBoing();
       renderMemoryMode();
+      speakPhrase(getCurChunk().eng);
     });
     document.querySelectorAll('.stage-lvl-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -2873,6 +3453,7 @@
         btn.classList.add('active');
         stageLevel = parseInt(btn.dataset.stglvl, 10);
         renderStageMode();
+        if (stageLevel !== 3) speakPhrase(getCurChunk().eng);
       });
     });
     document.getElementById('btnStageListen').addEventListener('click', () => speakPhrase(getCurChunk().eng));
@@ -2895,23 +3476,22 @@
     document.getElementById('chibiBox').addEventListener('click', () => {
       sfxMagicWand();
       const cheers = [
-        'Trâm là siêu anh hùng nhí lớp 1/2! 🦸‍♀️',
+        'Trâm là siêu anh hùng nhí lớp 1/2! Cùng đọc to câu này nhé! 🦸‍♀️',
         'Cô giáo yêu giọng đọc của Trâm lắm đó! 💖',
-        'Cố lên Trâm ơi! Sắp mua được Kỳ Lân Cầu Vồng rồi! 🦄',
+        'Bấm vào từng thẻ chữ để nghe đọc rõ từng từ nhé! 🌟',
         'Hello everyone! My name is Trâm! 🌟'
       ];
       document.getElementById('chibiSpeech').textContent = cheers[Math.floor(Math.random() * cheers.length)];
       speakCurrentChunk();
     });
 
-    document.getElementById('chunkEmoji').addEventListener('click', speakCurrentChunk);
-    document.getElementById('btnHearSample').addEventListener('click', speakCurrentChunk);
-    document.getElementById('btnMagicSpeak').addEventListener('click', startMagicVoiceGame);
-    document.getElementById('btnInstantBloom').addEventListener('click', bloomFlowerSuccess);
     document.getElementById('btnPlayMyVoice').addEventListener('click', () => {
       if (lastVoiceUrl) {
+        stopAllSpeech();
         sfxBoing();
         const audio = new Audio(lastVoiceUrl);
+        setChibiLipSync(true);
+        audio.onended = () => setChibiLipSync(false);
         audio.play();
       }
     });
@@ -2925,6 +3505,7 @@
     });
     document.getElementById('balloonPromptBanner').addEventListener('click', () => speakPhrase(getCurChunk().eng));
     document.getElementById('btnTrainHear').addEventListener('click', () => speakPhrase(getCurChunk().eng));
+    document.getElementById('trainPhonicsHint').addEventListener('click', () => speakPhrase(getCurChunk().eng));
 
     document.getElementById('btnNextChunk').addEventListener('click', goNextChunk);
     document.getElementById('btnPrevChunk').addEventListener('click', goPrevChunk);
@@ -2935,61 +3516,74 @@
       speakCurrentChunk();
     });
 
-    // Speed toggle
+    // 3-Mode Kid-Friendly Speed Toggle
     document.getElementById('btnSpeedToggle').addEventListener('click', () => {
       sfxBoing();
-      if (speechRate === 1.05) {
-        speechRate = 1.25;
-        document.getElementById('btnSpeedToggle').textContent = '⚡ Tốc Độ: Siêu Nhanh (1.25x)';
-      } else if (speechRate === 1.25) {
-        speechRate = 0.88;
-        document.getElementById('btnSpeedToggle').textContent = '🐢 Tốc Độ: Vừa (0.88x)';
+      if (!useSlowMp3 && speechRate === 0.85) {
+        useSlowMp3 = true;
+        speechRate = 0.65;
+        document.getElementById('btnSpeedToggle').textContent = '🐌 Tốc Độ: Siêu Chậm Tập Đọc';
+      } else if (useSlowMp3) {
+        useSlowMp3 = false;
+        speechRate = 1.0;
+        document.getElementById('btnSpeedToggle').textContent = '🐰 Tốc Độ: Thuyết Trình Tự Nhiên';
       } else {
-        speechRate = 1.05;
-        document.getElementById('btnSpeedToggle').textContent = '🐰 Tốc Độ: Chuẩn (1.05x)';
+        useSlowMp3 = false;
+        speechRate = 0.85;
+        document.getElementById('btnSpeedToggle').textContent = '🐢 Tốc Độ: Rõ Từng Từ (Chuẩn 6 Tuổi)';
       }
       speakCurrentChunk();
     });
 
-    // Auto play full speech
+    // Auto play full speech with comfortable pause between sentences
     document.getElementById('btnAutoPlayAll').addEventListener('click', () => {
       sfxMagicWand();
       curMode = 'magic';
-      document.querySelector('.mode-card-btn[data-mode="magic"]').click();
+      document.querySelectorAll('.mode-card-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.mode-card-btn[data-mode="magic"]').classList.add('active');
+      document.getElementById('modeMagic').style.display = 'flex';
+      ['modeBalloon','modeTrain','modeWhack','modeMonster','modeMemory','modeStage','modeShop'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
       curIslandIdx = 0;
       curChunkIdx = 0;
 
       function stepPlay() {
-        renderAll();
+        renderAll(false);
         speakPhrase(getCurChunk().eng, (wIdx) => {
+          document.querySelectorAll('.word-token').forEach(el => el.classList.remove('active-word'));
           const el = document.getElementById(`magic-word-${wIdx}`);
           if (el) el.classList.add('active-word');
         }, () => {
+          document.querySelectorAll('.word-token').forEach(el => el.classList.remove('active-word'));
           const isl = getCurIsland();
           if (curChunkIdx < isl.chunks.length - 1) {
             curChunkIdx++;
-            setTimeout(stepPlay, 220);
+            setTimeout(stepPlay, 650);
           } else if (curIslandIdx < ISLANDS.length - 1) {
             curIslandIdx++;
             curChunkIdx = 0;
-            setTimeout(stepPlay, 350);
+            setTimeout(stepPlay, 900);
           } else {
             sfxVictoryFanfare();
-            showCelebrationPopup('👑💐🎉', 'TRÂM ĐÃ NGHE TRỌN VẸN CẢ BÀI!', 'Bây giờ Trâm hãy cùng đập bóng và thổi nở hoa nhé!');
+            showCelebrationPopup('👑💐🎉', 'TRÂM ĐÃ NGHE TRỌN VẸN CẢ BÀI!', 'Bây giờ Trâm hãy bấm vào từng câu để đọc luyện cùng cô nhé!');
           }
         });
       }
       stepPlay();
     });
 
-    // Unlock Web Audio & Speech on first iPad/Tablet touch
-    window.addEventListener('touchstart', function unlockOnFirstTouch() {
+    // Unlock Web Audio & Speech on first iPad/Tablet/Laptop touch or click
+    function unlockAudioOnce() {
       try {
         if (audioCtx.state === 'suspended') audioCtx.resume();
         if ('speechSynthesis' in window) initVoices();
       } catch(e) {}
-      window.removeEventListener('touchstart', unlockOnFirstTouch);
-    }, { passive: true });
+      window.removeEventListener('touchstart', unlockAudioOnce);
+      window.removeEventListener('pointerdown', unlockAudioOnce);
+    }
+    window.addEventListener('touchstart', unlockAudioOnce, { passive: true });
+    window.addEventListener('pointerdown', unlockAudioOnce, { passive: true });
 
     // Fullscreen toggle for Laptop & Tablet (Supports standard + WebKit iPad)
     document.getElementById('btnFullscreen').addEventListener('click', () => {
@@ -3006,7 +3600,7 @@
     });
 
     // Initialize Game
-    renderAll();
+    renderAll(false);
   </script>
 </body>
 </html>
