@@ -207,9 +207,10 @@
       justify-content: center;
     }
 
-    .chibi-character-wrap svg {
-      width: 110px;
-      height: 115px;
+    .chibi-character-wrap > svg {
+      width: 112px;
+      height: 118px;
+      overflow: visible;
     }
 
     .chibi-character-wrap.jumping {
@@ -223,9 +224,21 @@
 
     .chibi-pet {
       position: absolute;
-      bottom: 2px;
-      right: -4px;
-      font-size: 32px;
+      bottom: -2px;
+      right: -10px;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 3px 5px rgba(15, 23, 42, 0.22));
+      pointer-events: none;
+    }
+
+    .chibi-pet svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
     .btn-dressup-mini {
@@ -1033,65 +1046,330 @@
     }
 
     /* =====================================================
-       MODE 8: DRESS-UP & TEACHER'S BOUQUET SHOP
+       MODE 8: ROYAL DRESS-UP & PET BOUTIQUE STUDIO (PRO UI)
        ===================================================== */
     #modeShop {
       flex: 1;
       min-height: 0;
-      overflow-y: auto;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .boutique-layout {
+      display: grid;
+      grid-template-columns: 275px 1fr;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    /* Left: Full-Body Royal Stage Mirror */
+    .boutique-mirror-card {
+      background: radial-gradient(circle at 50% 28%, #FFFBEB 0%, #FCE7F3 58%, #EDE9FE 100%);
+      border: 4px solid #F59E0B;
+      box-shadow: inset 0 0 24px rgba(255,255,255,0.9), 0 8px 0 #B45309;
+      border-radius: 26px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .boutique-curtain-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 26px;
+      background: repeating-linear-gradient(90deg, #E11D48 0px, #E11D48 28px, #BE123C 28px, #BE123C 56px);
+      border-bottom: 3px solid #FACC15;
+      z-index: 2;
+    }
+
+    .boutique-mirror-title {
+      margin-top: 22px;
+      background: linear-gradient(135deg, #9333EA, #DB2777);
+      color: #FFF;
+      font-weight: 900;
+      font-size: 0.84rem;
+      padding: 3px 14px;
+      border-radius: 16px;
+      border: 2px solid #FEF08A;
+      z-index: 3;
+      text-align: center;
+    }
+
+    .boutique-stage-figure {
+      position: relative;
+      width: 230px;
+      height: 215px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    .boutique-pet-pedestal {
+      position: absolute;
+      bottom: 6px;
+      right: 2px;
+      width: 82px;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: petBobbing 2.2s infinite ease-in-out;
+    }
+
+    @keyframes petBobbing {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-5px) scale(1.04); }
+    }
+
+    .chibi-pet {
+      position: absolute;
+      bottom: -2px;
+      right: -8px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: petBobbing 2.2s infinite ease-in-out;
+    }
+
+    .preview-tryon-tag {
+      position: absolute;
+      top: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #F59E0B;
+      color: #FFF;
+      font-size: 0.75rem;
+      font-weight: 900;
+      padding: 2px 10px;
+      border-radius: 12px;
+      border: 2px solid #FFF;
+      z-index: 10;
+      display: none;
+      white-space: nowrap;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    .boutique-equipped-summary {
+      background: rgba(255,255,255,0.92);
+      border: 2px solid #F472B6;
+      border-radius: 16px;
+      padding: 6px 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #831843;
+      line-height: 1.25;
+      z-index: 3;
+    }
+
+    /* Right: Categorized Wardrobe & Star Goal Motivation */
+    .boutique-wardrobe-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
+      flex: 1;
+    }
+
+    .star-goal-banner {
+      background: linear-gradient(90deg, #FEF3C7 0%, #FCE7F3 100%);
+      border: 3px solid #F59E0B;
+      border-radius: 18px;
+      padding: 7px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .star-goal-bar-bg {
+      width: 150px;
+      height: 14px;
+      background: #FFF;
+      border-radius: 10px;
+      border: 2px solid #D97706;
+      overflow: hidden;
+    }
+
+    .star-goal-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #F59E0B, #EC4899);
+      transition: width 0.3s ease;
+    }
+
+    .shop-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .shop-tab-btn {
+      background: #F1F5F9;
+      border: 2px solid #CBD5E1;
+      box-shadow: 0 4px 0 #94A3B8;
+      border-radius: 16px;
+      padding: 5px 14px;
+      font-family: inherit;
+      font-weight: 900;
+      font-size: 0.88rem;
+      color: #334155;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .shop-tab-btn.active {
+      background: linear-gradient(135deg, #EC4899, #8B5CF6);
+      color: #FFF;
+      border-color: #FFF;
+      box-shadow: 0 4px 0 #6D28D9;
+      transform: translateY(-1px);
     }
 
     .shop-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(152px, 1fr));
       gap: 10px;
       width: 100%;
+      overflow-y: auto;
+      padding: 2px 4px 8px 2px;
+      flex: 1;
+      min-height: 0;
     }
 
     .shop-item {
-      background: #FFF9F2;
-      border: 3px solid #FFD166;
-      border-radius: 18px;
-      padding: 8px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFFBEB 100%);
+      border: 3px solid #FCD34D;
+      border-radius: 20px;
+      padding: 8px 8px 10px 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-between;
       text-align: center;
-      gap: 4px;
+      gap: 5px;
       cursor: pointer;
-      box-shadow: 0 4px 0 #F4A261;
+      box-shadow: 0 5px 0 #D97706;
+      position: relative;
+      transition: transform 0.12s ease;
+    }
+
+    .shop-item:hover {
+      transform: translateY(-2px);
     }
 
     .shop-item.owned {
-      background: #E8F8F5;
-      border-color: #06D6A0;
-      box-shadow: 0 4px 0 #05B384;
+      background: linear-gradient(180deg, #FFFFFF 0%, #ECFDF5 100%);
+      border-color: #34D399;
+      box-shadow: 0 5px 0 #059669;
     }
 
     .shop-item.equipped {
-      background: #FFF0F6;
-      border-color: #FF3E80;
-      box-shadow: 0 4px 0 #D90452;
+      background: linear-gradient(180deg, #FFF1F2 0%, #FCE7F3 100%);
+      border-color: #F43F5E;
+      box-shadow: 0 5px 0 #BE123C, 0 0 14px rgba(244, 63, 94, 0.35);
     }
 
-    .shop-icon {
-      font-size: 38px;
-      line-height: 1.05;
+    .rarity-badge {
+      font-size: 0.68rem;
+      font-weight: 900;
+      padding: 1px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .rarity-default { background: #E2E8F0; color: #475569; }
+    .rarity-rare { background: #DBEAFE; color: #1D4ED8; border: 1px solid #93C5FD; }
+    .rarity-epic { background: #F3E8FF; color: #7E22CE; border: 1px solid #D8B4FE; }
+    .rarity-legend { background: linear-gradient(90deg, #FEF08A, #FDBA74); color: #9A3412; border: 1px solid #F59E0B; }
+
+    .shop-svg-thumb {
+      width: 78px;
+      height: 78px;
+      background: radial-gradient(circle, #FFFFFF 0%, #F8FAFC 100%);
+      border-radius: 16px;
+      border: 2px dashed #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
     }
 
     .shop-name {
-      font-weight: 800;
-      font-size: 0.88rem;
-      color: #2B2D42;
+      font-weight: 900;
+      font-size: 0.86rem;
+      color: #0F172A;
+      line-height: 1.15;
+    }
+
+    .shop-item-actions {
+      display: flex;
+      gap: 4px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .shop-btn-try {
+      background: #E0F2FE;
+      color: #0369A1;
+      border: 1.5px solid #38BDF8;
+      border-radius: 10px;
+      padding: 3px 7px;
+      font-family: inherit;
+      font-size: 0.74rem;
+      font-weight: 900;
+      cursor: pointer;
     }
 
     .shop-price {
-      background: #FFD600;
-      color: #5C3300;
-      padding: 2px 10px;
-      border-radius: 12px;
+      flex: 1;
+      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      color: #451A03;
+      padding: 3px 8px;
+      border-radius: 10px;
       font-weight: 900;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
+      border: 1.5px solid #FFF;
+      box-shadow: 0 2px 0 #B45309;
+    }
+
+    .shop-item.owned .shop-price {
+      background: #10B981;
+      color: #FFF;
+      box-shadow: 0 2px 0 #047857;
+    }
+
+    .shop-item.equipped .shop-price {
+      background: #F43F5E;
+      color: #FFF;
+      box-shadow: 0 2px 0 #9F1239;
+    }
+
+    @media (max-width: 900px) {
+      .boutique-layout {
+        grid-template-columns: 1fr;
+      }
+      #modeShop {
+        overflow-y: auto;
+      }
     }
 
     /* Bottom Navigation Bar inside Playground */
@@ -1244,12 +1522,14 @@
       0%, 100% { transform: scaleY(0.35); }
       50% { transform: scaleY(1.15); }
     }
-    .chibi-character-wrap.speaking #svgMouthOpen {
+    .chibi-character-wrap.speaking .svg-mouth-open,
+    #boutiqueStageAvatar.speaking .svg-mouth-open {
       display: block !important;
       transform-origin: 70px 69px;
       animation: mouthTalk 0.22s infinite ease-in-out;
     }
-    .chibi-character-wrap.speaking #svgMouthSmile {
+    .chibi-character-wrap.speaking .svg-mouth-smile,
+    #boutiqueStageAvatar.speaking .svg-mouth-smile {
       display: none !important;
     }
 
@@ -1809,14 +2089,66 @@
       </div>
 
       <!-- =========================================
-           GAME 8: DRESS-UP & GIFT SHOP
+           GAME 8: ROYAL DRESS-UP & PET BOUTIQUE STUDIO
            ========================================= -->
-      <div id="modeShop" style="display:none; flex-direction:column; gap:14px;">
-        <div style="text-align:center; font-size:1.15rem; font-weight:900; color:#7209B7;">
-          👑 Tiệm Quà Phép Thuật Của Bé Trâm (Dùng ⭐ mở khóa đồ xinh!)
-        </div>
-        <div class="shop-grid" id="shopGrid">
-          <!-- Populated by JS -->
+      <div id="modeShop" style="display:none; flex-direction:column; gap:10px;">
+        <div class="boutique-layout">
+          <!-- Left: Live Full-Body Royal Dressing Room Mirror & Pet Stage -->
+          <div class="boutique-mirror-card" id="boutiqueMirrorCard">
+            <div class="boutique-curtain-top"></div>
+            <div class="boutique-mirror-title">🪞 PHÒNG THỬ ĐỒ & THÚ CƯNG</div>
+            <div class="preview-tryon-tag" id="tryonPreviewTag">✨ Đang Mặc Thử!</div>
+
+            <div class="boutique-stage-figure">
+              <div id="boutiqueStageAvatar" style="width:185px; height:205px; display:flex; align-items:center; justify-content:center;">
+                <!-- High-Definition Full-Body SVG Avatar injected by JS -->
+              </div>
+              <div class="boutique-pet-pedestal" id="boutiqueStagePet" title="Thú cưng đồng hành của Bé Trâm">
+                <!-- High-Definition Vector Pet SVG injected by JS -->
+              </div>
+            </div>
+
+            <div class="boutique-equipped-summary" id="boutiqueEquippedSummary">
+              👗 Áo Bộ Đội Sao Vàng • 🪖 Mũ Ca-lô • 🐱 Mèo Mimi
+            </div>
+
+            <button class="jelly-btn pink" id="btnBoutiquePhoto" style="padding:6px 14px; font-size:0.86rem; width:100%; justify-content:center; z-index:3;">
+              📸 Chụp Ảnh Kỷ Niệm Công Chúa Trâm
+            </button>
+          </div>
+
+          <!-- Right: Star Motivation Goal + Category Tabs + Custom SVG Wardrobe Grid -->
+          <div class="boutique-wardrobe-card">
+            <div class="star-goal-banner">
+              <div style="flex:1; min-width:180px;">
+                <div style="font-size:0.88rem; font-weight:900; color:#B45309;" id="starGoalTitle">
+                  🎯 Mục tiêu phấn đấu tiếp theo:
+                </div>
+                <div style="font-size:0.8rem; font-weight:800; color:#475569;" id="starGoalSubtitle">
+                  Hãy đọc thêm câu tiếng Anh để mở khóa váy công chúa và thú cưng mới nhé!
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div class="star-goal-bar-bg">
+                  <div class="star-goal-bar-fill" id="starGoalFill" style="width:50%;"></div>
+                </div>
+                <button class="btn-speed-pill" id="btnGoEarnStars" style="background:#DCFCE7; border-color:#16A34A; color:#15803D; font-size:0.8rem;">
+                  🎤 Đọc Bài Kiếm ⭐
+                </button>
+              </div>
+            </div>
+
+            <div class="shop-tabs" id="shopCategoryTabs">
+              <button class="shop-tab-btn active" data-shopcat="all">🌟 Tất Cả</button>
+              <button class="shop-tab-btn" data-shopcat="dress">👗 Váy & Trang Phục</button>
+              <button class="shop-tab-btn" data-shopcat="head_wings">👑 Mũ, Vương Miện & Cánh</button>
+              <button class="shop-tab-btn" data-shopcat="pet">🐾 Thú Cưng 3D</button>
+            </div>
+
+            <div class="shop-grid" id="shopGrid">
+              <!-- Populated by JS with Custom Vector SVG Item Cards -->
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2137,17 +2469,33 @@
       }
     ];
 
-    /* Dress-up & Gift Shop Items */
+    /* Studio Dress-up & Pet Boutique Catalog (18 Bespoke Vector Items) */
     const SHOP_ITEMS = [
-      { id: 'hat_soldier', name: 'Mũ Bộ Đội Sao Vàng', icon: '🪖', price: 0, type: 'hat', owned: true, equipped: true },
-      { id: 'hat_crown', name: 'Vương Miện Công Chúa', icon: '👑', price: 15, type: 'hat', owned: false, equipped: false },
-      { id: 'dress_pink', name: 'Váy Hồng Công Chúa', icon: '👗', price: 20, type: 'dress', color: '#FF4D88', owned: false, equipped: false },
-      { id: 'dress_Elsa', name: 'Váy Băng Giá Elsa', icon: '❄️', price: 25, type: 'dress', color: '#00BBF9', owned: false, equipped: false },
-      { id: 'wings_fairy', name: 'Cánh Tiên Phát Sáng', icon: '🧚‍♀️', price: 30, type: 'wings', owned: false, equipped: false },
-      { id: 'pet_cat', name: 'Mèo Con Dễ Thương', icon: '🐱', price: 0, type: 'pet', owned: true, equipped: true },
-      { id: 'pet_bunny', name: 'Thỏ Trắng Nhảy Múa', icon: '🐰', price: 15, type: 'pet', owned: false, equipped: false },
-      { id: 'pet_unicorn', name: 'Kỳ Lân Cầu Vồng', icon: '🦄', price: 35, type: 'pet', owned: false, equipped: false },
-      { id: 'pet_puppy', name: 'Cún Con Tinh Nghịch', icon: '🐶', price: 20, type: 'pet', owned: false, equipped: false }
+      // 1. OUTFITS & DRESSES (type: 'dress', cat: 'dress')
+      { id: 'dress_soldier', name: 'Áo Bộ Đội Sao Vàng', price: 0, type: 'dress', cat: 'dress', rarity: 'default', rarityLabel: 'Mặc Định', owned: true, equipped: true },
+      { id: 'dress_aodai', name: 'Áo Dài Đỏ 20/11', price: 15, type: 'dress', cat: 'dress', rarity: 'rare', rarityLabel: 'Hiếm', owned: false, equipped: false },
+      { id: 'dress_princess', name: 'Đầm Công Chúa Hồng', price: 25, type: 'dress', cat: 'dress', rarity: 'epic', rarityLabel: 'Sử Thi', owned: false, equipped: false },
+      { id: 'dress_elsa', name: 'Váy Nữ Hoàng Băng', price: 35, type: 'dress', cat: 'dress', rarity: 'epic', rarityLabel: 'Sử Thi', owned: false, equipped: false },
+      { id: 'dress_galaxy', name: 'Đầm Tiên Tử Cầu Vồng', price: 50, type: 'dress', cat: 'dress', rarity: 'legend', rarityLabel: 'Huyền Thoại', owned: false, equipped: false },
+
+      // 2. HEADGEAR & CROWNS (type: 'hat', cat: 'head_wings')
+      { id: 'hat_soldier', name: 'Mũ Ca-lô Bộ Đội', price: 0, type: 'hat', cat: 'head_wings', rarity: 'default', rarityLabel: 'Mặc Định', owned: true, equipped: true },
+      { id: 'hat_bow', name: 'Nơ Lụa Dâu Tây', price: 10, type: 'hat', cat: 'head_wings', rarity: 'rare', rarityLabel: 'Hiếm', owned: false, equipped: false },
+      { id: 'hat_garland', name: 'Vòng Hoa Tiên Xuân', price: 20, type: 'hat', cat: 'head_wings', rarity: 'rare', rarityLabel: 'Hiếm', owned: false, equipped: false },
+      { id: 'hat_crown', name: 'Vương Miện Pha Lê', price: 35, type: 'hat', cat: 'head_wings', rarity: 'legend', rarityLabel: 'Huyền Thoại', owned: false, equipped: false },
+
+      // 3. WINGS & HAND PROPS (type: 'wings', cat: 'head_wings')
+      { id: 'wings_flag', name: 'Cờ Đỏ Sao Vàng', price: 0, type: 'wings', cat: 'head_wings', rarity: 'default', rarityLabel: 'Mặc Định', owned: true, equipped: true },
+      { id: 'wings_wand', name: 'Đũa Thần Ngôi Sao', price: 15, type: 'wings', cat: 'head_wings', rarity: 'rare', rarityLabel: 'Hiếm', owned: false, equipped: false },
+      { id: 'wings_fairy', name: 'Cánh Bướm Pha Lê', price: 30, type: 'wings', cat: 'head_wings', rarity: 'epic', rarityLabel: 'Sử Thi', owned: false, equipped: false },
+      { id: 'wings_angel', name: 'Cánh Thiên Thần', price: 45, type: 'wings', cat: 'head_wings', rarity: 'legend', rarityLabel: 'Huyền Thoại', owned: false, equipped: false },
+
+      // 4. 3D VECTOR PET COMPANIONS (type: 'pet', cat: 'pet')
+      { id: 'pet_cat', name: 'Mèo Trắng Mimi', price: 0, type: 'pet', cat: 'pet', rarity: 'default', rarityLabel: 'Mặc Định', owned: true, equipped: true },
+      { id: 'pet_corgi', name: 'Cún Corgi Vàng', price: 15, type: 'pet', cat: 'pet', rarity: 'rare', rarityLabel: 'Hiếm', owned: false, equipped: false },
+      { id: 'pet_bunny', name: 'Thỏ Ngọc Tai Dài', price: 25, type: 'pet', cat: 'pet', rarity: 'epic', rarityLabel: 'Sử Thi', owned: false, equipped: false },
+      { id: 'pet_panda', name: 'Gấu Trúc Tròn Xoe', price: 35, type: 'pet', cat: 'pet', rarity: 'epic', rarityLabel: 'Sử Thi', owned: false, equipped: false },
+      { id: 'pet_unicorn', name: 'Kỳ Lân Cầu Vồng', price: 55, type: 'pet', cat: 'pet', rarity: 'legend', rarityLabel: 'Huyền Thoại', owned: false, equipped: false }
     ];
 
     /* Game State */
@@ -2296,9 +2644,15 @@
 
     function setChibiLipSync(active) {
       const chibi = document.getElementById('chibiCharacter');
-      if (!chibi) return;
-      if (active) chibi.classList.add('speaking');
-      else chibi.classList.remove('speaking');
+      const boutiqueAvatar = document.getElementById('boutiqueStageAvatar');
+      if (chibi) {
+        if (active) chibi.classList.add('speaking');
+        else chibi.classList.remove('speaking');
+      }
+      if (boutiqueAvatar) {
+        if (active) boutiqueAvatar.classList.add('speaking');
+        else boutiqueAvatar.classList.remove('speaking');
+      }
     }
 
     function stopAllSpeech() {
@@ -2515,6 +2869,8 @@
       flowers += fCount;
       document.getElementById('starCount').textContent = stars;
       document.getElementById('flowerCount').textContent = flowers;
+      if (typeof saveProgressState === 'function') saveProgressState();
+      if (typeof updateStarGoalBanner === 'function') updateStarGoalBanner();
 
       const chibi = document.getElementById('chibiCharacter');
       chibi.classList.remove('jumping');
@@ -3269,62 +3625,697 @@
     }
 
     /* =====================================================================
-       9. MODE 8: DRESS-UP & GIFT SHOP FOR CHIBI BÉ TRÂM
+       9. MODE 8: ROYAL DRESS-UP & PET BOUTIQUE STUDIO ENGINE
+       Bespoke Multi-Layered Vector Outfits, Crowns, Wings & 3D SVG Pets
        ===================================================================== */
+    let activeShopCat = 'all';
+    let tryonPreviewItem = null;
+    const STORAGE_KEY_TRAM = 'minhtram_english_game_v2';
+
+    function saveProgressState() {
+      try {
+        const data = {
+          stars,
+          flowers,
+          completedIslands: Array.from(completedIslands),
+          chunkPracticeCounts,
+          shopItems: SHOP_ITEMS.map(i => ({ id: i.id, owned: i.owned, equipped: i.equipped }))
+        };
+        localStorage.setItem(STORAGE_KEY_TRAM, JSON.stringify(data));
+      } catch (e) {}
+    }
+
+    function loadProgressState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_TRAM);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (typeof data.stars === 'number') stars = Math.max(20, data.stars);
+        if (typeof data.flowers === 'number') flowers = data.flowers;
+        if (Array.isArray(data.completedIslands)) {
+          completedIslands = new Set(data.completedIslands);
+        }
+        if (data.chunkPracticeCounts && typeof data.chunkPracticeCounts === 'object') {
+          chunkPracticeCounts = data.chunkPracticeCounts;
+        }
+        if (Array.isArray(data.shopItems)) {
+          data.shopItems.forEach(saved => {
+            const found = SHOP_ITEMS.find(i => i.id === saved.id);
+            if (found) {
+              found.owned = !!saved.owned;
+              found.equipped = !!saved.equipped;
+            }
+          });
+        }
+        document.getElementById('starCount').textContent = stars;
+        document.getElementById('flowerCount').textContent = flowers;
+      } catch (e) {}
+    }
+
+    function getEquippedState(overrideItem = null) {
+      const dressItem = (overrideItem && overrideItem.type === 'dress')
+        ? overrideItem
+        : (SHOP_ITEMS.find(i => i.type === 'dress' && i.equipped) || SHOP_ITEMS[0]);
+      const hatItem = (overrideItem && overrideItem.type === 'hat')
+        ? overrideItem
+        : (SHOP_ITEMS.find(i => i.type === 'hat' && i.equipped) || SHOP_ITEMS.find(i => i.id === 'hat_soldier'));
+      const wingsItem = (overrideItem && overrideItem.type === 'wings')
+        ? overrideItem
+        : (SHOP_ITEMS.find(i => i.type === 'wings' && i.equipped) || SHOP_ITEMS.find(i => i.id === 'wings_flag'));
+      const petItem = (overrideItem && overrideItem.type === 'pet')
+        ? overrideItem
+        : (SHOP_ITEMS.find(i => i.type === 'pet' && i.equipped) || SHOP_ITEMS.find(i => i.id === 'pet_cat'));
+
+      return {
+        dress: dressItem,
+        hat: hatItem,
+        wings: wingsItem,
+        pet: petItem
+      };
+    }
+
+    // Generate Bespoke Vector Pet SVG (Mèo Mimi, Cún Corgi, Thỏ Ngọc, Gấu Trúc, Kỳ Lân Cầu Vồng)
+    function getPetSvgMarkup(petId) {
+      if (petId === 'pet_corgi') {
+        return `
+          <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="45" cy="82" rx="28" ry="5" fill="rgba(15,23,42,0.16)"/>
+            <!-- Wagging Tail -->
+            <path d="M68 62 Q82 52 78 68 Q74 74 66 70 Z" fill="#F59E0B" stroke="#92400E" stroke-width="2.2"/>
+            <!-- Corgi Ears -->
+            <path d="M20 38 L14 14 L36 26 Z" fill="#F59E0B" stroke="#92400E" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M21 34 L18 19 L32 27 Z" fill="#FDA4AF"/>
+            <path d="M70 38 L76 14 L54 26 Z" fill="#F59E0B" stroke="#92400E" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M69 34 L72 19 L58 27 Z" fill="#FDA4AF"/>
+            <!-- Plump Body -->
+            <rect x="24" y="52" width="42" height="27" rx="13" fill="#F59E0B" stroke="#92400E" stroke-width="2.5"/>
+            <path d="M33 54 Q45 76 57 54 Z" fill="#FFFFFF"/>
+            <!-- Paws -->
+            <ellipse cx="32" cy="79" rx="6" ry="4" fill="#FFFFFF" stroke="#92400E" stroke-width="2"/>
+            <ellipse cx="58" cy="79" rx="6" ry="4" fill="#FFFFFF" stroke="#92400E" stroke-width="2"/>
+            <!-- Red Kerchief Collar -->
+            <path d="M27 54 Q45 64 63 54 L45 69 Z" fill="#EF4444" stroke="#991B1B" stroke-width="2"/>
+            <circle cx="45" cy="61" r="3.5" fill="#FACC15"/>
+            <!-- Cute Head -->
+            <ellipse cx="45" cy="39" rx="24" ry="19" fill="#F59E0B" stroke="#92400E" stroke-width="2.5"/>
+            <!-- White Blaze & Muzzle -->
+            <path d="M45 21 L39 38 Q30 42 32 51 Q45 57 58 51 Q60 42 51 38 Z" fill="#FFFFFF"/>
+            <!-- Eyes & Blush -->
+            <circle cx="34" cy="38" r="4.2" fill="#1E293B"/>
+            <circle cx="32.8" cy="36.5" r="1.5" fill="#FFFFFF"/>
+            <circle cx="56" cy="38" r="4.2" fill="#1E293B"/>
+            <circle cx="54.8" cy="36.5" r="1.5" fill="#FFFFFF"/>
+            <ellipse cx="27" cy="43" rx="4.5" ry="2.5" fill="#FB7185" opacity="0.7"/>
+            <ellipse cx="63" cy="43" rx="4.5" ry="2.5" fill="#FB7185" opacity="0.7"/>
+            <!-- Nose & Happy Tongue -->
+            <ellipse cx="45" cy="43" rx="4" ry="2.8" fill="#1E293B"/>
+            <path d="M41 48 Q45 55 49 48 Z" fill="#FB7185" stroke="#991B1B" stroke-width="1.5"/>
+            <path d="M39 46 Q45 50 51 46" stroke="#1E293B" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          </svg>
+        `;
+      }
+      if (petId === 'pet_bunny') {
+        return `
+          <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="45" cy="82" rx="26" ry="5" fill="rgba(15,23,42,0.16)"/>
+            <!-- Long Bunny Ears -->
+            <ellipse cx="34" cy="22" rx="7.5" ry="18" transform="rotate(-10 34 22)" fill="#FFF1F2" stroke="#F43F5E" stroke-width="2.4"/>
+            <ellipse cx="34" cy="23" rx="4" ry="12" transform="rotate(-10 34 23)" fill="#FDA4AF"/>
+            <ellipse cx="56" cy="22" rx="7.5" ry="18" transform="rotate(10 56 22)" fill="#FFF1F2" stroke="#F43F5E" stroke-width="2.4"/>
+            <ellipse cx="56" cy="23" rx="4" ry="12" transform="rotate(10 56 23)" fill="#FDA4AF"/>
+            <!-- Cute Flower Bow on Ear -->
+            <circle cx="62" cy="18" r="5" fill="#FF2A6D"/>
+            <circle cx="62" cy="18" r="2.2" fill="#FEF08A"/>
+            <!-- Fluffy Body -->
+            <ellipse cx="45" cy="65" rx="19" ry="16" fill="#FFF1F2" stroke="#F43F5E" stroke-width="2.4"/>
+            <ellipse cx="45" cy="66" rx="11" ry="10" fill="#FFFFFF"/>
+            <!-- Bunny Head -->
+            <ellipse cx="45" cy="43" rx="21" ry="17" fill="#FFF1F2" stroke="#F43F5E" stroke-width="2.4"/>
+            <!-- Ruby Anime Eyes -->
+            <circle cx="36" cy="42" r="4.2" fill="#881337"/>
+            <circle cx="34.8" cy="40.5" r="1.6" fill="#FFFFFF"/>
+            <circle cx="54" cy="42" r="4.2" fill="#881337"/>
+            <circle cx="52.8" cy="40.5" r="1.6" fill="#FFFFFF"/>
+            <ellipse cx="29" cy="46" rx="4.5" ry="2.5" fill="#FB7185" opacity="0.65"/>
+            <ellipse cx="61" cy="46" rx="4.5" ry="2.5" fill="#FB7185" opacity="0.65"/>
+            <!-- Pink Nose & Smile -->
+            <polygon points="45,47 42,44 48,44" fill="#F43F5E"/>
+            <path d="M41 48 Q45 52 49 48" stroke="#881337" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- Holding Sweet Carrot -->
+            <g transform="rotate(-25 48 66)">
+              <path d="M44 54 L52 54 L48 74 Z" fill="#F97316" stroke="#C2410C" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M46 54 Q43 47 48 48 Q53 47 50 54" fill="#22C55E" stroke="#15803D" stroke-width="1.8"/>
+            </g>
+          </svg>
+        `;
+      }
+      if (petId === 'pet_panda') {
+        return `
+          <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="45" cy="82" rx="28" ry="5" fill="rgba(15,23,42,0.16)"/>
+            <!-- Round Black Ears -->
+            <circle cx="25" cy="24" r="9" fill="#1E293B"/>
+            <circle cx="65" cy="24" r="9" fill="#1E293B"/>
+            <!-- Chubby Body -->
+            <ellipse cx="45" cy="64" rx="21" ry="17" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+            <path d="M26 56 Q45 64 64 56" stroke="#1E293B" stroke-width="6" stroke-linecap="round"/>
+            <!-- Black Paws -->
+            <ellipse cx="32" cy="77" rx="7" ry="5" fill="#1E293B"/>
+            <ellipse cx="58" cy="77" rx="7" ry="5" fill="#1E293B"/>
+            <circle cx="32" cy="77" r="2.5" fill="#FDA4AF"/>
+            <circle cx="58" cy="77" r="2.5" fill="#FDA4AF"/>
+            <!-- Panda Head -->
+            <ellipse cx="45" cy="41" rx="23" ry="19" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+            <!-- Eye Patches -->
+            <ellipse cx="35" cy="41" rx="6.5" ry="5.5" transform="rotate(-12 35 41)" fill="#1E293B"/>
+            <ellipse cx="55" cy="41" rx="6.5" ry="5.5" transform="rotate(12 55 41)" fill="#1E293B"/>
+            <circle cx="35.5" cy="40" r="2.2" fill="#FFFFFF"/>
+            <circle cx="54.5" cy="40" r="2.2" fill="#FFFFFF"/>
+            <!-- Rosy Cheeks & Smile -->
+            <ellipse cx="26" cy="46" rx="4.5" ry="2.5" fill="#FB7185" opacity="0.75"/>
+            <ellipse cx="64" cy="46" rx="4.5" ry="2.5" fill="#FB7185" opacity="0.75"/>
+            <ellipse cx="45" cy="45" rx="3.5" ry="2.3" fill="#1E293B"/>
+            <path d="M40 49 Q45 53 50 49" stroke="#1E293B" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <!-- Green Bamboo Branch -->
+            <line x1="62" y1="74" x2="74" y2="46" stroke="#16A34A" stroke-width="4" stroke-linecap="round"/>
+            <ellipse cx="77" cy="52" rx="6" ry="2.8" transform="rotate(-25 77 52)" fill="#22C55E"/>
+            <ellipse cx="67" cy="49" rx="5.5" ry="2.5" transform="rotate(20 67 49)" fill="#4ADE80"/>
+          </svg>
+        `;
+      }
+      if (petId === 'pet_unicorn') {
+        return `
+          <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="45" cy="82" rx="28" ry="5" fill="rgba(15,23,42,0.16)"/>
+            <!-- Rainbow Tail -->
+            <path d="M64 62 Q84 55 79 72 Q72 79 62 72" fill="#F43F5E"/>
+            <path d="M65 65 Q82 62 76 75" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+            <path d="M64 63 Q80 58 77 70" stroke="#FACC15" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- Mini Pegasus Wings -->
+            <ellipse cx="24" cy="58" rx="11" ry="6" transform="rotate(-25 24 58)" fill="#E0F2FE" stroke="#38BDF8" stroke-width="2"/>
+            <ellipse cx="66" cy="58" rx="11" ry="6" transform="rotate(25 66 58)" fill="#E0F2FE" stroke="#38BDF8" stroke-width="2"/>
+            <!-- Body -->
+            <ellipse cx="45" cy="65" rx="19" ry="15" fill="#FFFFFF" stroke="#C084FC" stroke-width="2.5"/>
+            <!-- Golden Hooves -->
+            <ellipse cx="33" cy="79" rx="5.5" ry="3.8" fill="#FACC15" stroke="#CA8A04" stroke-width="1.8"/>
+            <ellipse cx="57" cy="79" rx="5.5" ry="3.8" fill="#FACC15" stroke="#CA8A04" stroke-width="1.8"/>
+            <!-- Star Collar -->
+            <path d="M29 55 Q45 63 61 55" stroke="#F43F5E" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="45" cy="59" r="4" fill="#FACC15" stroke="#CA8A04" stroke-width="1.5"/>
+            <!-- Rainbow Mane -->
+            <circle cx="28" cy="31" r="7" fill="#FF4D88"/>
+            <circle cx="62" cy="31" r="7" fill="#38BDF8"/>
+            <circle cx="45" cy="23" r="8" fill="#FACC15"/>
+            <!-- Head -->
+            <ellipse cx="45" cy="40" rx="21" ry="17" fill="#FFFFFF" stroke="#C084FC" stroke-width="2.5"/>
+            <!-- Ears -->
+            <path d="M27 29 L22 16 L35 24 Z" fill="#FFFFFF" stroke="#C084FC" stroke-width="2.2"/>
+            <path d="M63 29 L68 16 L55 24 Z" fill="#FFFFFF" stroke="#C084FC" stroke-width="2.2"/>
+            <!-- Magical Spiral Golden Horn -->
+            <polygon points="45,4 39,25 51,25" fill="#FACC15" stroke="#CA8A04" stroke-width="2.2" stroke-linejoin="round"/>
+            <line x1="41" y1="19" x2="49" y2="17" stroke="#FEF08A" stroke-width="2"/>
+            <line x1="42" y1="13" x2="48" y2="11" stroke="#FEF08A" stroke-width="2"/>
+            <!-- Starry Purple Eyes -->
+            <circle cx="35" cy="39" r="4.5" fill="#581C87"/>
+            <circle cx="33.5" cy="37.5" r="1.8" fill="#FFFFFF"/>
+            <circle cx="55" cy="39" r="4.5" fill="#581C87"/>
+            <circle cx="53.5" cy="37.5" r="1.8" fill="#FFFFFF"/>
+            <ellipse cx="28" cy="44" rx="4.5" ry="2.5" fill="#F472B6" opacity="0.75"/>
+            <ellipse cx="62" cy="44" rx="4.5" ry="2.5" fill="#F472B6" opacity="0.75"/>
+            <path d="M40 47 Q45 52 50 47" stroke="#BE185D" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          </svg>
+        `;
+      }
+      // Default: pet_cat (Mèo Trắng Mimi)
+      return `
+        <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="45" cy="82" rx="26" ry="5" fill="rgba(15,23,42,0.16)"/>
+          <!-- Curled Tail -->
+          <path d="M63 68 Q79 62 76 48 Q73 42 68 48" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path d="M63 68 Q79 62 76 48 Q73 42 68 48" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- Body -->
+          <ellipse cx="45" cy="65" rx="18" ry="15" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2.4"/>
+          <ellipse cx="34" cy="78" rx="5.5" ry="3.8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+          <ellipse cx="56" cy="78" rx="5.5" ry="3.8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+          <!-- Red Collar & Golden Bell -->
+          <path d="M29 54 Q45 61 61 54" stroke="#E11D48" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="45" cy="58" r="4.5" fill="#FACC15" stroke="#B45309" stroke-width="1.8"/>
+          <!-- Cat Ears -->
+          <path d="M24 34 L20 14 L38 24 Z" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="M25 31 L23 19 L34 25 Z" fill="#FDA4AF"/>
+          <path d="M66 34 L70 14 L52 24 Z" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="M65 31 L67 19 L56 25 Z" fill="#FDA4AF"/>
+          <!-- Cute Head -->
+          <ellipse cx="45" cy="40" rx="22" ry="17" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2.4"/>
+          <!-- Eyes & Whiskers -->
+          <circle cx="35" cy="39" r="4.2" fill="#0F172A"/>
+          <circle cx="33.8" cy="37.5" r="1.6" fill="#FFFFFF"/>
+          <circle cx="55" cy="39" r="4.2" fill="#0F172A"/>
+          <circle cx="53.8" cy="37.5" r="1.6" fill="#FFFFFF"/>
+          <ellipse cx="28" cy="44" rx="4.2" ry="2.4" fill="#FB7185" opacity="0.7"/>
+          <ellipse cx="62" cy="44" rx="4.2" ry="2.4" fill="#FB7185" opacity="0.7"/>
+          <polygon points="45,45 42,42 48,42" fill="#FB7185"/>
+          <path d="M40 47 Q45 51 50 47" stroke="#475569" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <line x1="16" y1="41" x2="25" y2="42" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="16" y1="46" x2="25" y2="45" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="74" y1="41" x2="65" y2="42" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="74" y1="46" x2="65" y2="45" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
+    // Generate Bespoke Multi-Layered Full-Body SVG for Chibi Bé Minh Trâm
+    function getCharacterSvgMarkup(state, uid = 'main') {
+      const dressId = state.dress ? state.dress.id : 'dress_soldier';
+      const hatId = state.hat ? state.hat.id : 'hat_soldier';
+      const wingsId = state.wings ? state.wings.id : 'wings_flag';
+
+      // 1. Back Wings Layer
+      let backWingsSvg = '';
+      if (wingsId === 'wings_fairy') {
+        backWingsSvg = `
+          <g>
+            <path d="M64 88 C22 52 4 68 14 96 C20 112 45 108 64 98 Z" fill="url(#fairyWing_${uid})" stroke="#EC4899" stroke-width="2.5"/>
+            <path d="M64 96 C26 98 16 122 32 132 C46 138 58 118 66 104 Z" fill="url(#fairyWing2_${uid})" stroke="#06B6D4" stroke-width="2.2"/>
+            <path d="M76 88 C118 52 136 68 126 96 C120 112 95 108 76 98 Z" fill="url(#fairyWing_${uid})" stroke="#EC4899" stroke-width="2.5"/>
+            <path d="M76 96 C114 98 124 122 108 132 C94 138 82 118 74 104 Z" fill="url(#fairyWing2_${uid})" stroke="#06B6D4" stroke-width="2.2"/>
+            <circle cx="26" cy="84" r="3" fill="#FEF08A"/>
+            <circle cx="114" cy="84" r="3" fill="#FEF08A"/>
+            <circle cx="34" cy="116" r="2.5" fill="#FFFFFF"/>
+            <circle cx="106" cy="116" r="2.5" fill="#FFFFFF"/>
+          </g>
+        `;
+      } else if (wingsId === 'wings_angel') {
+        backWingsSvg = `
+          <g>
+            <!-- Golden Halo -->
+            <ellipse cx="70" cy="8" rx="22" ry="5.5" fill="none" stroke="#FACC15" stroke-width="4"/>
+            <ellipse cx="70" cy="8" rx="22" ry="5.5" fill="none" stroke="#FEF08A" stroke-width="1.5"/>
+            <!-- Feathered Angel Wings -->
+            <path d="M62 88 C22 58 6 76 12 98 C18 114 34 122 62 110 Z" fill="#FFFFFF" stroke="#F59E0B" stroke-width="2.5"/>
+            <path d="M58 94 C28 74 18 88 22 104 C28 116 42 118 60 108 Z" fill="#FEF9C3" stroke="#FBBF24" stroke-width="1.8"/>
+            <path d="M78 88 C118 58 134 76 128 98 C122 114 106 122 78 110 Z" fill="#FFFFFF" stroke="#F59E0B" stroke-width="2.5"/>
+            <path d="M82 94 C112 74 122 88 118 104 C112 116 98 118 80 108 Z" fill="#FEF9C3" stroke="#FBBF24" stroke-width="1.8"/>
+          </g>
+        `;
+      }
+
+      // 2. Multi-layered Dress & Shoes Layer
+      let dressSvg = '';
+      if (dressId === 'dress_aodai') {
+        dressSvg = `
+          <!-- Silk White Trousers -->
+          <path d="M46 118 L42 141 L66 141 L68 122 L72 122 L74 141 L98 141 L94 118 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+          <!-- Red Festive Áo Dài Tunic -->
+          <path d="M46 84 L94 84 L106 136 C92 139 78 138 72 116 L68 116 C62 138 48 139 34 136 Z" fill="#E11D48" stroke="#9F1239" stroke-width="2.8" stroke-linejoin="round"/>
+          <!-- Golden Mandarin Collar & Trim -->
+          <path d="M54 83 Q70 92 86 83" fill="none" stroke="#FACC15" stroke-width="3.5"/>
+          <path d="M56 86 Q70 98 88 92" fill="none" stroke="#FACC15" stroke-width="2"/>
+          <!-- Golden Lotus / Star Emblem on Chest -->
+          <circle cx="70" cy="102" r="8" fill="#FACC15" opacity="0.25"/>
+          <text x="64" y="106.5" font-size="13" fill="#FACC15">❀</text>
+        `;
+      } else if (dressId === 'dress_princess') {
+        dressSvg = `
+          <!-- Puff Sleeves -->
+          <circle cx="43" cy="91" r="9" fill="#FFC2D1" stroke="#E11D48" stroke-width="2.2"/>
+          <circle cx="97" cy="91" r="9" fill="#FFC2D1" stroke="#E11D48" stroke-width="2.2"/>
+          <!-- Tier 3 Bottom Ballgown Skirt -->
+          <path d="M25 136 C25 110 115 110 115 136 C95 143 45 143 25 136 Z" fill="#FF4D88" stroke="#BE123C" stroke-width="2.6"/>
+          <!-- Tier 2 Ruffle Layer -->
+          <path d="M31 124 C34 104 106 104 109 124 C92 131 48 131 31 124 Z" fill="#FF85A1" stroke="#E11D48" stroke-width="2.2"/>
+          <!-- Royal Corset Bodice -->
+          <path d="M48 84 L92 84 L96 108 L44 108 Z" fill="#FF2A6D" stroke="#9F1239" stroke-width="2.4" stroke-linejoin="round"/>
+          <!-- White Lace & Pearl Waist Belt -->
+          <path d="M43 108 Q70 115 97 108" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="70" cy="95" r="5" fill="#FEF08A" stroke="#BE123C" stroke-width="1.8"/>
+          <text x="66.5" y="98.5" font-size="9" fill="#E11D48">♥</text>
+        `;
+      } else if (dressId === 'dress_elsa') {
+        dressSvg = `
+          <!-- Translucent Crystal Ice Cape -->
+          <path d="M36 86 L18 137 L122 137 L104 86 Z" fill="#BAE6FD" opacity="0.65" stroke="#38BDF8" stroke-width="1.8"/>
+          <!-- Shimmering Ice Gown Skirt -->
+          <path d="M30 137 L46 84 L94 84 L110 137 C90 142 50 142 30 137 Z" fill="url(#elsaGrad_${uid})" stroke="#0284C7" stroke-width="2.6"/>
+          <!-- Crystal V-Neck Corset -->
+          <path d="M50 84 L70 96 L90 84 L88 106 L70 112 L52 106 Z" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+          <!-- Silver Snowflakes on Skirt -->
+          <text x="45" y="128" font-size="12" fill="#FFFFFF">❄</text>
+          <text x="65" y="122" font-size="14" fill="#FFFFFF">❄</text>
+          <text x="84" y="128" font-size="12" fill="#FFFFFF">❄</text>
+        `;
+      } else if (dressId === 'dress_galaxy') {
+        dressSvg = `
+          <!-- Starlight Puff Sleeves -->
+          <circle cx="42" cy="90" r="9.5" fill="#F5D0FE" stroke="#9333EA" stroke-width="2.2"/>
+          <circle cx="98" cy="90" r="9.5" fill="#F5D0FE" stroke="#9333EA" stroke-width="2.2"/>
+          <!-- Rainbow Galaxy Gown -->
+          <path d="M24 137 C28 104 112 104 116 137 C94 143 46 143 24 137 Z" fill="url(#galaxyGrad_${uid})" stroke="#6B21A8" stroke-width="2.8"/>
+          <!-- Bodice -->
+          <path d="M48 84 L92 84 L96 108 L44 108 Z" fill="#9333EA" stroke="#581C87" stroke-width="2.4"/>
+          <!-- Golden Ribbon Waist & Constellations -->
+          <path d="M43 108 Q70 116 97 108" fill="none" stroke="#FACC15" stroke-width="4" stroke-linecap="round"/>
+          <polygon points="70,88 73,95 80,95 74,99 76,106 70,102 64,106 66,99 60,95 67,95" fill="#FACC15"/>
+          <text x="44" y="130" font-size="11" fill="#FEF08A">✦</text>
+          <text x="67" y="133" font-size="13" fill="#FEF08A">★</text>
+          <text x="88" y="130" font-size="11" fill="#FEF08A">✦</text>
+        `;
+      } else {
+        // Default: dress_soldier (Áo Bộ Đội Sao Vàng)
+        dressSvg = `
+          <path d="M44 84 L96 84 L109 136 C109 140 31 140 31 136 Z" fill="#4F772D" stroke="#2D4A1E" stroke-width="3"/>
+          <!-- Military Belt & Golden Buckle -->
+          <rect x="39" y="110" width="62" height="7" rx="2" fill="#5C3A21" stroke="#3B2313" stroke-width="1.5"/>
+          <rect x="64" y="109" width="12" height="9" rx="2" fill="#FACC15" stroke="#B45309" stroke-width="1.5"/>
+          <!-- Crisp White Collar & Golden Buttons -->
+          <path d="M53 84 L70 96 L87 84 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.8"/>
+          <circle cx="70" cy="101" r="2.2" fill="#FACC15"/>
+          <circle cx="70" cy="106" r="2.2" fill="#FACC15"/>
+          <!-- Soldier Red Star Badge -->
+          <rect x="77" y="95" width="15" height="10" rx="2" fill="#D90429" stroke="#FFFFFF" stroke-width="1"/>
+          <text x="81" y="103" font-size="8.5" fill="#FFD600">★</text>
+        `;
+      }
+
+      // 3. Headgear Layer
+      let hatSvg = '';
+      if (hatId === 'hat_bow') {
+        hatSvg = `
+          <g>
+            <!-- Giant 3D Strawberry Satin Ribbon Bow -->
+            <path d="M70 25 C52 6 36 16 42 32 C48 40 62 32 70 25 Z" fill="#FF2A6D" stroke="#9F1239" stroke-width="2.5"/>
+            <path d="M70 25 C88 6 104 16 98 32 C92 40 78 32 70 25 Z" fill="#FF2A6D" stroke="#9F1239" stroke-width="2.5"/>
+            <circle cx="70" cy="25" r="6.5" fill="#FFC2D1" stroke="#9F1239" stroke-width="2.2"/>
+            <circle cx="70" cy="25" r="3" fill="#FFFFFF"/>
+          </g>
+        `;
+      } else if (hatId === 'hat_garland') {
+        hatSvg = `
+          <g>
+            <!-- Spring Flower Garland -->
+            <path d="M38 38 Q70 24 102 38" stroke="#16A34A" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <circle cx="46" cy="35" r="6.5" fill="#FF4D88" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="46" cy="35" r="2.5" fill="#FACC15"/>
+            <circle cx="58" cy="31" r="6" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="58" cy="31" r="2.2" fill="#FEF08A"/>
+            <circle cx="70" cy="29" r="7.5" fill="#FACC15" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="70" cy="29" r="3" fill="#E11D48"/>
+            <circle cx="82" cy="31" r="6" fill="#C084FC" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="82" cy="31" r="2.2" fill="#FEF08A"/>
+            <circle cx="94" cy="35" r="6.5" fill="#FF4D88" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="94" cy="35" r="2.5" fill="#FACC15"/>
+          </g>
+        `;
+      } else if (hatId === 'hat_crown') {
+        hatSvg = `
+          <g>
+            <!-- Royal Golden Crystal Tiara -->
+            <path d="M44 34 L50 12 L62 24 L70 6 L78 24 L90 12 L96 34 Z" fill="#FFD600" stroke="#B45309" stroke-width="2.5" stroke-linejoin="round"/>
+            <rect x="44" y="31" width="52" height="5" rx="2.5" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+            <circle cx="70" cy="22" r="4.5" fill="#E11D48" stroke="#FFFFFF" stroke-width="1.2"/>
+            <circle cx="55" cy="25" r="3" fill="#0284C7" stroke="#FFFFFF" stroke-width="1"/>
+            <circle cx="85" cy="25" r="3" fill="#0284C7" stroke="#FFFFFF" stroke-width="1"/>
+            <circle cx="70" cy="6" r="2.5" fill="#FEF08A"/>
+          </g>
+        `;
+      } else {
+        // Default: hat_soldier
+        hatSvg = `
+          <g>
+            <path d="M39 36 L70 11 L101 36 Z" fill="#4F772D" stroke="#2D4A1E" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M42 35 L70 15 L98 35" stroke="#FACC15" stroke-width="1.5" fill="none"/>
+            <circle cx="70" cy="26" r="6.5" fill="#D90429" stroke="#FACC15" stroke-width="1.5"/>
+            <text x="66.2" y="29.8" font-size="10.5" fill="#FFD600">★</text>
+          </g>
+        `;
+      }
+
+      // 4. Hand Prop Layer
+      let handPropSvg = '';
+      if (wingsId === 'wings_wand' || wingsId === 'wings_fairy' || wingsId === 'wings_angel') {
+        handPropSvg = `
+          <g>
+            <line x1="24" y1="78" x2="28" y2="122" stroke="#F59E0B" stroke-width="3.8" stroke-linecap="round"/>
+            <path d="M24 82 Q10 92 14 106" stroke="#FF4D88" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <polygon points="24,65 27.5,72 35,73 29.5,78 31,85.5 24,82 17,85.5 18.5,78 13,73 20.5,72" fill="#FFD600" stroke="#D97706" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="24" cy="76" r="3" fill="#FF2A6D"/>
+          </g>
+        `;
+      } else {
+        // Default: Cờ Đỏ Sao Vàng
+        handPropSvg = `
+          <g>
+            <line x1="25" y1="72" x2="25" y2="118" stroke="#8D5524" stroke-width="3.2" stroke-linecap="round"/>
+            <rect x="3" y="69" width="24" height="16" rx="2.5" fill="#D90429" stroke="#FFFFFF" stroke-width="1.2"/>
+            <text x="11" y="81" font-size="11" fill="#FFD600">★</text>
+          </g>
+        `;
+      }
+
+      return `
+        <svg viewBox="0 0 140 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="skinGrad_${uid}" x1="70" y1="24" x2="70" y2="90" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFF0E6"/>
+              <stop offset="100%" stop-color="#FFD6BA"/>
+            </linearGradient>
+            <linearGradient id="hairGrad_${uid}" x1="70" y1="18" x2="70" y2="85" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#334155"/>
+              <stop offset="100%" stop-color="#0F172A"/>
+            </linearGradient>
+            <linearGradient id="elsaGrad_${uid}" x1="70" y1="84" x2="70" y2="140" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#38BDF8"/>
+              <stop offset="55%" stop-color="#00B4D8"/>
+              <stop offset="100%" stop-color="#0369A1"/>
+            </linearGradient>
+            <linearGradient id="galaxyGrad_${uid}" x1="30" y1="84" x2="110" y2="140" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#F43F5E"/>
+              <stop offset="50%" stop-color="#A855F7"/>
+              <stop offset="100%" stop-color="#3B82F6"/>
+            </linearGradient>
+            <linearGradient id="fairyWing_${uid}" x1="0" y1="60" x2="140" y2="110" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FBCFE8" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#F472B6" stop-opacity="0.85"/>
+            </linearGradient>
+            <linearGradient id="fairyWing2_${uid}" x1="0" y1="90" x2="140" y2="135" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#A5F3FC" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.85"/>
+            </linearGradient>
+          </defs>
+          <!-- Podium Shadow -->
+          <ellipse cx="70" cy="144" rx="46" ry="6" fill="rgba(15,23,42,0.18)"/>
+          <!-- Cute Shoes -->
+          <ellipse cx="55" cy="141" rx="8.5" ry="4.5" fill="#1E293B"/>
+          <ellipse cx="85" cy="141" rx="8.5" ry="4.5" fill="#1E293B"/>
+          <!-- Back Wings Layer -->
+          ${backWingsSvg}
+          <!-- Back Twin Pigtails -->
+          <circle cx="34" cy="62" r="12" fill="url(#hairGrad_${uid})"/>
+          <circle cx="106" cy="62" r="12" fill="url(#hairGrad_${uid})"/>
+          <circle cx="38" cy="54" r="4.2" fill="#FF3E80"/>
+          <circle cx="102" cy="54" r="4.2" fill="#FF3E80"/>
+          <!-- Multi-layered Dress -->
+          ${dressSvg}
+          <!-- Cute Head -->
+          <circle cx="70" cy="56" r="32" fill="url(#skinGrad_${uid})" stroke="#E09F67" stroke-width="2.5"/>
+          <!-- Rosy Cheeks -->
+          <ellipse cx="48" cy="63" rx="6.5" ry="3.8" fill="#FF5C8A" opacity="0.68"/>
+          <ellipse cx="92" cy="63" rx="6.5" ry="3.8" fill="#FF5C8A" opacity="0.68"/>
+          <!-- Blinking Anime Eyes -->
+          <g class="chibi-eyes-group">
+            <circle cx="56" cy="54" r="6" fill="#1E293B"/>
+            <circle cx="54" cy="51.5" r="2.3" fill="#FFFFFF"/>
+            <circle cx="58" cy="56" r="1" fill="#FFFFFF"/>
+            <circle cx="84" cy="54" r="6" fill="#1E293B"/>
+            <circle cx="82" cy="51.5" r="2.3" fill="#FFFFFF"/>
+            <circle cx="86" cy="56" r="1" fill="#FFFFFF"/>
+          </g>
+          <!-- Idle Happy Smile -->
+          <path class="svg-mouth-smile" d="M60 66 Q70 76 80 66" stroke="#D90429" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <!-- Active Lip-Sync Speaking Mouth -->
+          <ellipse class="svg-mouth-open" cx="70" cy="69" rx="7.5" ry="6" fill="#D90429" stroke="#7F1D1D" stroke-width="1.5" style="display:none;"/>
+          <!-- Glossy Hair Bangs -->
+          <path d="M37 52 C37 25 103 25 103 52 C95 36 84 42 70 37 C56 42 45 36 37 52 Z" fill="url(#hairGrad_${uid})"/>
+          <!-- Headgear Layer -->
+          ${hatSvg}
+          <!-- Hand Prop Layer -->
+          ${handPropSvg}
+        </svg>
+      `;
+    }
+
+    // Generate Crisp Focused Thumbnail SVG for Each Shop Card
+    function getShopItemThumbSvg(item) {
+      if (item.type === 'pet') {
+        return getPetSvgMarkup(item.id);
+      }
+      if (item.type === 'dress') {
+        // Render zoomed-in outfit view on mannequin/character torso
+        const mockState = {
+          dress: item,
+          hat: { id: 'hat_bow' },
+          wings: { id: 'wings_flag' }
+        };
+        return getCharacterSvgMarkup(mockState, `thumb_${item.id}`).replace('viewBox="0 0 140 152"', 'viewBox="20 76 100 70"');
+      }
+      if (item.type === 'hat') {
+        const mockState = {
+          dress: { id: 'dress_princess' },
+          hat: item,
+          wings: { id: 'wings_flag' }
+        };
+        return getCharacterSvgMarkup(mockState, `thumb_${item.id}`).replace('viewBox="0 0 140 152"', 'viewBox="28 2 84 68"');
+      }
+      // wings / props
+      const mockState = {
+        dress: { id: 'dress_princess' },
+        hat: { id: 'hat_crown' },
+        wings: item
+      };
+      return getCharacterSvgMarkup(mockState, `thumb_${item.id}`).replace('viewBox="0 0 140 152"', 'viewBox="2 45 136 96"');
+    }
+
+    // Sync both Sidebar Chibi & Boutique Live Stage Mirror
+    function syncCharacterGraphics(overrideItem = null) {
+      const state = getEquippedState(overrideItem);
+
+      // 1. Update Sidebar Chibi & Pet (Always shows truly equipped items, or preview if in shop)
+      const sidebarChibiWrap = document.getElementById('chibiCharacter');
+      if (sidebarChibiWrap) {
+        sidebarChibiWrap.innerHTML = `
+          ${getCharacterSvgMarkup(state, 'sidebar')}
+          <div class="chibi-pet" id="chibiPet">${getPetSvgMarkup(state.pet.id)}</div>
+        `;
+      }
+
+      // 2. Update Boutique Stage Mirror & Pet Pedestal
+      const stageAvatar = document.getElementById('boutiqueStageAvatar');
+      if (stageAvatar) {
+        stageAvatar.innerHTML = getCharacterSvgMarkup(state, 'stage');
+      }
+      const stagePet = document.getElementById('boutiqueStagePet');
+      if (stagePet) {
+        stagePet.innerHTML = getPetSvgMarkup(state.pet.id);
+      }
+
+      // 3. Update Equipped Summary Pill
+      const summaryEl = document.getElementById('boutiqueEquippedSummary');
+      if (summaryEl) {
+        summaryEl.textContent = `👗 ${state.dress.name} • 👑 ${state.hat.name} • 🐾 ${state.pet.name}`;
+      }
+
+      // 4. Show/hide Try-On Preview Badge
+      const tryonTag = document.getElementById('tryonPreviewTag');
+      if (tryonTag) {
+        if (overrideItem && !overrideItem.owned) {
+          tryonTag.style.display = 'block';
+          tryonTag.textContent = `✨ Đang Mặc Thử: ${overrideItem.name}`;
+        } else {
+          tryonTag.style.display = 'none';
+        }
+      }
+    }
+
+    function updateStarGoalBanner() {
+      const titleEl = document.getElementById('starGoalTitle');
+      const subEl = document.getElementById('starGoalSubtitle');
+      const fillEl = document.getElementById('starGoalFill');
+      if (!titleEl || !subEl || !fillEl) return;
+
+      const lockedItems = SHOP_ITEMS.filter(i => !i.owned).sort((a, b) => a.price - b.price);
+      if (lockedItems.length === 0) {
+        titleEl.textContent = '👑 SIÊU CẤP! Trâm đã mở khóa toàn bộ Tiệm Thời Trang & Thú Cưng!';
+        subEl.textContent = `Trâm đang có ⭐ ${stars} Sao! Hãy phối đồ thật xinh và thuyết trình thật tự tin nhé!`;
+        fillEl.style.width = '100%';
+        return;
+      }
+
+      const nextGoal = lockedItems[0];
+      const pct = Math.min(100, Math.round((stars / nextGoal.price) * 100));
+      fillEl.style.width = `${pct}%`;
+
+      if (stars >= nextGoal.price) {
+        titleEl.textContent = `🎉 ĐỦ SAO RỒI (${stars}/${nextGoal.price} ⭐)! Mở khóa ngay: "${nextGoal.name}"!`;
+        subEl.textContent = `Bấm vào thẻ "${nextGoal.name}" bên dưới để tặng ngay cho Bé Trâm nhé!`;
+      } else {
+        const need = nextGoal.price - stars;
+        titleEl.textContent = `🎯 Mục tiêu gần nhất: "${nextGoal.name}" (Đang có ${stars}/${nextGoal.price} ⭐)`;
+        subEl.textContent = `Chỉ cần tập đọc thêm ${need} ⭐ nữa là mở khóa được món quà này! Bấm vào món đồ bất kỳ để Mặc Thử trước nhé!`;
+      }
+    }
+
     function renderShopMode() {
+      updateStarGoalBanner();
+      syncCharacterGraphics(tryonPreviewItem);
+
       const grid = document.getElementById('shopGrid');
+      if (!grid) return;
       grid.innerHTML = '';
 
-      SHOP_ITEMS.forEach(item => {
+      const filtered = SHOP_ITEMS.filter(item => {
+        if (activeShopCat === 'all') return true;
+        return item.cat === activeShopCat;
+      });
+
+      filtered.forEach(item => {
+        const isPreviewing = tryonPreviewItem && tryonPreviewItem.id === item.id;
+        const canAfford = stars >= item.price;
         const card = document.createElement('div');
-        card.className = `shop-item ${item.owned ? 'owned' : ''} ${item.equipped ? 'equipped' : ''}`;
+        card.className = `shop-item ${item.owned ? 'owned' : ''} ${item.equipped ? 'equipped' : ''} ${isPreviewing ? 'previewing' : ''}`;
+
+        let actionLabel = '';
+        if (item.owned) {
+          actionLabel = item.equipped ? '💖 Đang Trang Bị' : '✅ Bấm Để Mặc';
+        } else if (canAfford) {
+          actionLabel = `🔓 Đổi Ngay (${item.price} ⭐)`;
+        } else {
+          actionLabel = `👀 Mặc Thử • ⭐ ${item.price}`;
+        }
+
         card.innerHTML = `
-          <div class="shop-icon">${item.icon}</div>
+          <span class="rarity-badge rarity-${item.rarity}">${item.rarityLabel}</span>
+          <div class="shop-svg-thumb">${getShopItemThumbSvg(item)}</div>
           <div class="shop-name">${item.name}</div>
-          <div class="shop-price">${item.owned ? (item.equipped ? '💖 Đang Mặc' : '✅ Đã Có (Bấm Mặc)') : `⭐ ${item.price} Sao`}</div>
+          <div class="shop-price">${actionLabel}</div>
         `;
+
         card.addEventListener('click', (e) => {
           if (!item.owned) {
             if (stars >= item.price) {
               stars -= item.price;
               document.getElementById('starCount').textContent = stars;
               item.owned = true;
+              tryonPreviewItem = null;
               equipItem(item);
+              saveProgressState();
               sfxVictoryFanfare();
-              spawnParticles(e.clientX, e.clientY, 30, true);
-              document.getElementById('chibiSpeech').textContent = `Oa! Trâm có "${item.name}" mới đẹp quá! 👑`;
+              spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 32, true);
+              document.getElementById('chibiSpeech').textContent = `Oa! Trâm đã sở hữu "${item.name}" tuyệt đẹp! Cảm ơn bạn nhé! 👑✨`;
             } else {
-              playNote(240, 'sawtooth', 0.18);
-              document.getElementById('chibiSpeech').textContent = `Cần thêm ${item.price - stars} ⭐ nữa! Cùng luyện đọc để nhận sao nhé!`;
+              // Let the child Try-On preview the locked item on the big mirror stage!
+              sfxMagicWand();
+              tryonPreviewItem = item;
+              const need = item.price - stars;
+              document.getElementById('chibiSpeech').textContent = `✨ Trâm đang mặc thử "${item.name}" trong gương! Tập đọc thêm ${need} ⭐ nữa để rinh luôn nhé!`;
             }
           } else {
+            tryonPreviewItem = null;
             equipItem(item);
+            saveProgressState();
             sfxBoing();
+            document.getElementById('chibiSpeech').textContent = `Trâm đã mặc "${item.name}" rồi nè, xinh quá đi! 🌸`;
           }
           renderShopMode();
         });
+
         grid.appendChild(card);
       });
     }
 
     function equipItem(targetItem) {
-      if (targetItem.type === 'hat') {
-        SHOP_ITEMS.filter(i => i.type === 'hat').forEach(i => i.equipped = false);
-        targetItem.equipped = true;
-        document.getElementById('svgSoldierHat').style.display = targetItem.id === 'hat_soldier' ? 'block' : 'none';
-        document.getElementById('svgCrown').style.display = targetItem.id === 'hat_crown' ? 'block' : 'none';
-      } else if (targetItem.type === 'dress') {
-        SHOP_ITEMS.filter(i => i.type === 'dress').forEach(i => i.equipped = false);
-        targetItem.equipped = true;
-        document.getElementById('svgDress').setAttribute('fill', targetItem.color);
-      } else if (targetItem.type === 'wings') {
-        targetItem.equipped = !targetItem.equipped;
-        document.getElementById('svgWings').style.display = targetItem.equipped ? 'block' : 'none';
-      } else if (targetItem.type === 'pet') {
-        SHOP_ITEMS.filter(i => i.type === 'pet').forEach(i => i.equipped = false);
-        targetItem.equipped = true;
-        document.getElementById('chibiPet').textContent = targetItem.icon;
-      }
+      SHOP_ITEMS.filter(i => i.type === targetItem.type).forEach(i => i.equipped = false);
+      targetItem.equipped = true;
+      syncCharacterGraphics(null);
     }
 
     /* =====================================================================
@@ -3473,6 +4464,48 @@
       document.querySelector('.mode-card-btn[data-mode="shop"]').click();
     });
 
+    // Boutique Category Tabs
+    document.querySelectorAll('#shopCategoryTabs .shop-tab-btn').forEach(tabBtn => {
+      tabBtn.addEventListener('click', () => {
+        sfxBoing();
+        document.querySelectorAll('#shopCategoryTabs .shop-tab-btn').forEach(b => b.classList.remove('active'));
+        tabBtn.classList.add('active');
+        activeShopCat = tabBtn.dataset.shopcat || 'all';
+        renderShopMode();
+      });
+    });
+
+    // Quick Jump from Boutique to Reading Mode to Earn Stars
+    document.getElementById('btnGoEarnStars').addEventListener('click', () => {
+      sfxMagicWand();
+      document.querySelector('.mode-card-btn[data-mode="magic"]').click();
+    });
+
+    // Royal Boutique Photo Shoot Button
+    document.getElementById('btnBoutiquePhoto').addEventListener('click', (e) => {
+      sfxVictoryFanfare();
+      spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 42, true);
+      const st = getEquippedState(tryonPreviewItem);
+      speakCurrentChunk();
+      showCelebrationPopup(
+        '📸👑💖',
+        'ẢNH KỶ NIỆM CÔNG CHÚA MINH TRÂM!',
+        `Trang phục: ${st.dress.name} • ${st.hat.name} • Thú cưng: ${st.pet.name}! Trâm vừa xinh đẹp vừa đọc tiếng Anh siêu giỏi!`
+      );
+    });
+
+    // Clicking the Boutique Mirror Avatar or Pet also speaks & lip-syncs!
+    document.getElementById('boutiqueStageAvatar').addEventListener('click', () => {
+      sfxMagicWand();
+      speakCurrentChunk();
+    });
+    document.getElementById('boutiqueStagePet').addEventListener('click', () => {
+      sfxBoing();
+      const st = getEquippedState(tryonPreviewItem);
+      document.getElementById('chibiSpeech').textContent = `🐾 ${st.pet.name} cổ vũ Trâm đọc to câu tiếng Anh này nhé!`;
+      speakCurrentChunk();
+    });
+
     document.getElementById('chibiBox').addEventListener('click', () => {
       sfxMagicWand();
       const cheers = [
@@ -3599,7 +4632,9 @@
       }
     });
 
-    // Initialize Game
+    // Initialize Game & Restore Saved Outfits/Pets/Stars
+    loadProgressState();
+    syncCharacterGraphics(null);
     renderAll(false);
   </script>
 </body>
