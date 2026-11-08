@@ -1046,7 +1046,7 @@
     }
 
     /* =====================================================
-       MODE 8: ROYAL DRESS-UP & PET BOUTIQUE STUDIO (PRO UI)
+       MODE 8: BROADWAY DRESSING ROOM STAGE & TOYBOX BOUTIQUE
        ===================================================== */
     #modeShop {
       flex: 1;
@@ -1054,82 +1054,166 @@
       overflow: hidden;
       display: none;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .boutique-layout {
       display: grid;
-      grid-template-columns: 275px 1fr;
-      gap: 14px;
+      grid-template-columns: 350px 1fr;
+      gap: 16px;
       flex: 1;
       min-height: 0;
       align-items: stretch;
+      padding: 4px 2px;
     }
 
-    /* Left: Full-Body Royal Stage Mirror */
+    /* LEFT: 3D BROADWAY DRESSING ROOM STAGE BOOTH */
     .boutique-mirror-card {
-      background: radial-gradient(circle at 50% 28%, #FFFBEB 0%, #FCE7F3 58%, #EDE9FE 100%);
-      border: 4px solid #F59E0B;
-      box-shadow: inset 0 0 24px rgba(255,255,255,0.9), 0 8px 0 #B45309;
-      border-radius: 26px;
-      padding: 10px 12px;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      position: relative;
+      border-radius: 30px;
+      background: linear-gradient(180deg, #3B0764 0%, #1E1B4B 68%, #451A03 100%);
+      border: 4px solid #F472B6;
+      border-bottom: 8px solid #5C2808;
+      box-shadow:
+        0 12px 28px rgba(15, 23, 42, 0.28),
+        inset 0 0 20px rgba(255, 255, 255, 0.15);
       overflow: hidden;
+      padding: 0 0 10px 0;
+    }
+
+    /* 3D Slanted Striped Awning Canopy */
+    .boutique-canopy-wrap {
+      position: relative;
+      width: 100%;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .boutique-curtain-top {
+      width: 100%;
+      height: 44px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          #E11D48 0px,
+          #E11D48 28px,
+          #FB7185 28px,
+          #FB7185 56px
+        );
+      border-bottom: 4px solid #BE123C;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .boutique-curtain-top::after {
+      content: '';
       position: absolute;
-      top: 0;
+      bottom: -10px;
       left: 0;
       right: 0;
-      height: 26px;
-      background: repeating-linear-gradient(90deg, #E11D48 0px, #E11D48 28px, #BE123C 28px, #BE123C 56px);
-      border-bottom: 3px solid #FACC15;
-      z-index: 2;
+      height: 12px;
+      background:
+        radial-gradient(circle at 14px 0, #E11D48 13px, transparent 14px) repeat-x;
+      background-size: 28px 14px;
+      filter: drop-shadow(0 3px 2px rgba(0,0,0,0.25));
     }
 
+    /* Broadway Marquee Sign with Glowing Bulbs & 3D Stars */
     .boutique-mirror-title {
-      margin-top: 22px;
-      background: linear-gradient(135deg, #9333EA, #DB2777);
-      color: #FFF;
+      position: absolute;
+      top: 5px;
+      background: linear-gradient(180deg, #9F1239 0%, #500724 100%);
+      color: #FFFFFF;
       font-weight: 900;
-      font-size: 0.84rem;
-      padding: 3px 14px;
-      border-radius: 16px;
-      border: 2px solid #FEF08A;
-      z-index: 3;
+      font-size: 0.96rem;
+      padding: 4px 22px;
+      border-radius: 20px;
+      border: 3px solid #FDA4AF;
+      box-shadow:
+        0 0 0 2px #E11D48,
+        0 5px 0 #4C0519,
+        0 0 16px rgba(251, 113, 133, 0.7),
+        inset 0 2px 6px rgba(255, 255, 255, 0.45);
+      z-index: 8;
       text-align: center;
+      text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.4px;
     }
 
+    /* Stage Viewport with Curtains, Spotlights, Wooden Floor & 2-Tier Pet Pedestal */
     .boutique-stage-figure {
       position: relative;
-      width: 230px;
-      height: 215px;
+      width: 100%;
+      flex: 1;
+      min-height: 225px;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 3;
+      overflow: hidden;
+    }
+
+    .boutique-stage-backdrop-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #boutiqueStageAvatar {
+      position: absolute;
+      left: 22px;
+      bottom: 18px;
+      width: 182px;
+      height: 205px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+      cursor: pointer;
+    }
+
+    #boutiqueStageAvatar > svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
     .boutique-pet-pedestal {
       position: absolute;
-      bottom: 6px;
-      right: 2px;
-      width: 82px;
-      height: 82px;
+      right: 18px;
+      bottom: 44px;
+      width: 104px;
+      height: 104px;
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: petBobbing 2.2s infinite ease-in-out;
+      z-index: 5;
+      cursor: pointer;
+      animation: petBobbing 2.4s infinite ease-in-out;
+    }
+
+    .boutique-pet-pedestal > svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
     @keyframes petBobbing {
       0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-5px) scale(1.04); }
+      50% { transform: translateY(-6px) scale(1.04); }
     }
 
     .chibi-pet {
@@ -1146,90 +1230,171 @@
 
     .preview-tryon-tag {
       position: absolute;
-      top: 52px;
+      top: 54px;
       left: 50%;
       transform: translateX(-50%);
-      background: #F59E0B;
+      background: linear-gradient(135deg, #FACC15, #EA580C);
       color: #FFF;
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 900;
-      padding: 2px 10px;
-      border-radius: 12px;
+      padding: 3px 12px;
+      border-radius: 14px;
       border: 2px solid #FFF;
       z-index: 10;
       display: none;
       white-space: nowrap;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .boutique-equipped-summary {
-      background: rgba(255,255,255,0.92);
-      border: 2px solid #F472B6;
-      border-radius: 16px;
-      padding: 6px 10px;
-      width: 100%;
+      background: rgba(255, 248, 231, 0.94);
+      border: 2px solid #FBBF24;
+      border-radius: 14px;
+      padding: 3px 10px;
+      width: calc(100% - 20px);
       text-align: center;
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #831843;
-      line-height: 1.25;
-      z-index: 3;
+      font-size: 0.74rem;
+      font-weight: 900;
+      color: #78350F;
+      line-height: 1.2;
+      z-index: 5;
+      margin-bottom: 4px;
     }
 
-    /* Right: Categorized Wardrobe & Star Goal Motivation */
+    /* 3 Chunky 3D Pill Action Buttons on the Wooden Stage Rim */
+    .boutique-stage-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: calc(100% - 16px);
+      z-index: 6;
+    }
+
+    .stage-pill-btn {
+      flex: 1;
+      border-radius: 20px;
+      padding: 6px 8px;
+      font-family: inherit;
+      font-weight: 900;
+      font-size: 0.78rem;
+      color: #FFFFFF;
+      border: 2.5px solid #FFFFFF;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      line-height: 1.1;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .stage-pill-btn:active {
+      transform: translateY(3px) scale(0.97);
+    }
+    .stage-pill-btn.orange {
+      background: linear-gradient(180deg, #FBBF24 0%, #EA580C 100%);
+      box-shadow: inset 0 2px 3px rgba(255,255,255,0.8), 0 4px 0 #9A3412;
+    }
+    .stage-pill-btn.purple {
+      background: linear-gradient(180deg, #C084FC 0%, #7E22CE 100%);
+      box-shadow: inset 0 2px 3px rgba(255,255,255,0.8), 0 4px 0 #4C1D95;
+    }
+    .stage-pill-btn.green {
+      background: linear-gradient(180deg, #4ADE80 0%, #16A34A 100%);
+      box-shadow: inset 0 2px 3px rgba(255,255,255,0.8), 0 4px 0 #14532D;
+    }
+
+    /* RIGHT: CREAM & CORAL-PINK "MY PETS / TỦ ĐỒ" TOYBOX */
     .boutique-wardrobe-card {
+      position: relative;
+      background: linear-gradient(180deg, #FFFDF5 0%, #FEF7E0 100%);
+      border: 6px solid #F472B6;
+      border-bottom: 10px solid #DB2777;
+      border-radius: 32px;
+      box-shadow:
+        inset 0 4px 10px rgba(255, 255, 255, 0.95),
+        inset 0 0 0 3px #FBCFE8,
+        0 12px 26px rgba(219, 39, 119, 0.2);
+      padding: 26px 14px 10px 14px;
       display: flex;
       flex-direction: column;
       gap: 8px;
       min-height: 0;
       flex: 1;
+      margin-top: 10px;
+    }
+
+    /* Top Floating Glossy Pink Capsule Header ("My Pets / Thú Cưng & Tủ Đồ") */
+    .toybox-floating-header {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #FF85A1 0%, #E11D48 100%);
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 1.02rem;
+      padding: 4px 28px;
+      border-radius: 999px;
+      border: 3px solid #FFFFFF;
+      box-shadow:
+        inset 0 3px 4px rgba(255, 255, 255, 0.85),
+        0 5px 0 #9F1239,
+        0 8px 16px rgba(225, 29, 72, 0.3);
+      text-shadow: 0 2px 2px rgba(136, 19, 55, 0.6);
+      white-space: nowrap;
+      z-index: 10;
     }
 
     .star-goal-banner {
       background: linear-gradient(90deg, #FEF3C7 0%, #FCE7F3 100%);
-      border: 3px solid #F59E0B;
-      border-radius: 18px;
-      padding: 7px 14px;
+      border: 2.5px solid #F59E0B;
+      border-radius: 16px;
+      padding: 5px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       flex-shrink: 0;
     }
 
     .star-goal-bar-bg {
       width: 150px;
-      height: 14px;
-      background: #FFF;
-      border-radius: 10px;
-      border: 2px solid #D97706;
-      overflow: hidden;
+      height: 16px;
+      background: #451A03;
+      border-radius: 999px;
+      border: 2px solid #FDE047;
+      overflow: visible;
+      padding: 2px;
     }
 
     .star-goal-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #F59E0B, #EC4899);
+      background: linear-gradient(90deg, #F59E0B, #FACC15);
       transition: width 0.3s ease;
     }
 
+    /* Tactile 3D Category Tabs (Styled like the Purple "Shop" Awning Button) */
     .shop-tabs {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       flex-shrink: 0;
+      justify-content: center;
     }
 
     .shop-tab-btn {
-      background: #F1F5F9;
-      border: 2px solid #CBD5E1;
-      box-shadow: 0 4px 0 #94A3B8;
-      border-radius: 16px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F3E8FF 100%);
+      border: 2.5px solid #C084FC;
+      box-shadow: inset 0 2px 3px #FFFFFF, 0 4px 0 #7E22CE;
+      border-radius: 18px;
       padding: 5px 14px;
       font-family: inherit;
       font-weight: 900;
-      font-size: 0.88rem;
-      color: #334155;
+      font-size: 0.84rem;
+      color: #581C87;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -1237,29 +1402,31 @@
     }
 
     .shop-tab-btn.active {
-      background: linear-gradient(135deg, #EC4899, #8B5CF6);
+      background: linear-gradient(180deg, #A855F7 0%, #6D28D9 100%);
       color: #FFF;
-      border-color: #FFF;
-      box-shadow: 0 4px 0 #6D28D9;
+      border-color: #FFFFFF;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.75), 0 4px 0 #4C1D95;
       transform: translateY(-1px);
     }
 
+    /* Collectible Card Grid (2x2 / Responsive Toybox Grid) */
     .shop-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(152px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
+      gap: 12px;
       width: 100%;
       overflow-y: auto;
-      padding: 2px 4px 8px 2px;
+      padding: 6px 6px 10px 6px;
       flex: 1;
       min-height: 0;
     }
 
+    /* Collectible Card with Numbered Rosette, Glossy Rarity Pill, Pastel Portrait & 3-Star Bar */
     .shop-item {
       background: linear-gradient(180deg, #FFFFFF 0%, #FFFBEB 100%);
       border: 3px solid #FCD34D;
-      border-radius: 20px;
-      padding: 8px 8px 10px 8px;
+      border-radius: 24px;
+      padding: 10px 10px 10px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1267,98 +1434,140 @@
       text-align: center;
       gap: 5px;
       cursor: pointer;
-      box-shadow: 0 5px 0 #D97706;
+      box-shadow: 0 6px 0 #D97706;
       position: relative;
-      transition: transform 0.12s ease;
+      transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .shop-item:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
-    .shop-item.owned {
-      background: linear-gradient(180deg, #FFFFFF 0%, #ECFDF5 100%);
-      border-color: #34D399;
-      box-shadow: 0 5px 0 #059669;
-    }
-
-    .shop-item.equipped {
-      background: linear-gradient(180deg, #FFF1F2 0%, #FCE7F3 100%);
-      border-color: #F43F5E;
-      box-shadow: 0 5px 0 #BE123C, 0 0 14px rgba(244, 63, 94, 0.35);
-    }
-
-    .rarity-badge {
-      font-size: 0.68rem;
+    /* Top-Left Numbered Rosette Badge (1, 2, 3, 4...) */
+    .card-num-rosette {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 900;
-      padding: 1px 8px;
-      border-radius: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
+      font-size: 0.78rem;
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 3px 0 rgba(15, 23, 42, 0.25);
+      z-index: 4;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     }
-    .rarity-default { background: #E2E8F0; color: #475569; }
-    .rarity-rare { background: #DBEAFE; color: #1D4ED8; border: 1px solid #93C5FD; }
-    .rarity-epic { background: #F3E8FF; color: #7E22CE; border: 1px solid #D8B4FE; }
-    .rarity-legend { background: linear-gradient(90deg, #FEF08A, #FDBA74); color: #9A3412; border: 1px solid #F59E0B; }
+    .rosette-default { background: linear-gradient(180deg, #94A3B8, #475569); }
+    .rosette-rare { background: linear-gradient(180deg, #4ADE80, #16A34A); }
+    .rosette-epic { background: linear-gradient(180deg, #38BDF8, #0284C7); }
+    .rosette-legend { background: linear-gradient(180deg, #FACC15, #D97706); }
 
+    /* Glossy Capsule Rarity Pill */
+    .rarity-badge {
+      font-size: 0.66rem;
+      font-weight: 900;
+      padding: 2px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.75), 0 2px 4px rgba(0, 0, 0, 0.15);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      z-index: 3;
+    }
+    .rarity-default { background: linear-gradient(180deg, #94A3B8 0%, #64748B 100%); }
+    .rarity-rare { background: linear-gradient(180deg, #4ADE80 0%, #16A34A 100%); }
+    .rarity-epic { background: linear-gradient(180deg, #38BDF8 0%, #0284C7 100%); }
+    .rarity-legend { background: linear-gradient(180deg, #FBBF24 0%, #EA580C 100%); }
+
+    /* Pastel Framed Portrait Window inside each Card */
     .shop-svg-thumb {
-      width: 78px;
-      height: 78px;
-      background: radial-gradient(circle, #FFFFFF 0%, #F8FAFC 100%);
-      border-radius: 16px;
-      border: 2px dashed #E2E8F0;
+      width: 100%;
+      height: 86px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 4px;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .shop-item.tier-default .shop-svg-thumb {
+      background: linear-gradient(180deg, #DBEAFE 0%, #EFF6FF 100%);
+      border: 2.5px solid #BFDBFE;
+    }
+    .shop-item.tier-rare .shop-svg-thumb {
+      background: linear-gradient(180deg, #DCFCE7 0%, #F0FDF4 100%);
+      border: 2.5px solid #BBF7D0;
+    }
+    .shop-item.tier-epic .shop-svg-thumb {
+      background: linear-gradient(180deg, #FCE7F3 0%, #FFF1F2 100%);
+      border: 2.5px solid #FBCFE8;
+    }
+    .shop-item.tier-legend .shop-svg-thumb {
+      background: linear-gradient(180deg, #FEF08A 0%, #FFFBEB 100%);
+      border: 2.5px solid #FDE047;
+    }
+
+    .shop-svg-thumb > svg {
+      width: 78px;
+      height: 78px;
+      filter: drop-shadow(0 4px 6px rgba(15, 23, 42, 0.16));
     }
 
     .shop-name {
       font-weight: 900;
-      font-size: 0.86rem;
-      color: #0F172A;
+      font-size: 0.84rem;
+      color: #1E293B;
       line-height: 1.15;
+      z-index: 2;
     }
 
-    .shop-item-actions {
+    /* 3D Star Rating Row on Each Card */
+    .card-stars-row {
       display: flex;
-      gap: 4px;
-      width: 100%;
+      align-items: center;
       justify-content: center;
+      gap: 3px;
+      font-size: 0.95rem;
+      line-height: 1;
+      z-index: 2;
     }
-
-    .shop-btn-try {
-      background: #E0F2FE;
-      color: #0369A1;
-      border: 1.5px solid #38BDF8;
-      border-radius: 10px;
-      padding: 3px 7px;
-      font-family: inherit;
-      font-size: 0.74rem;
-      font-weight: 900;
-      cursor: pointer;
+    .star-3d-on {
+      filter: drop-shadow(0 2px 1px rgba(180, 83, 9, 0.45));
+    }
+    .star-3d-off {
+      filter: grayscale(1) opacity(0.38);
     }
 
     .shop-price {
-      flex: 1;
-      background: linear-gradient(135deg, #FACC15, #F59E0B);
+      width: 100%;
+      background: linear-gradient(180deg, #FACC15, #F59E0B);
       color: #451A03;
       padding: 3px 8px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 900;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       border: 1.5px solid #FFF;
       box-shadow: 0 2px 0 #B45309;
+      z-index: 2;
     }
 
     .shop-item.owned .shop-price {
-      background: #10B981;
+      background: linear-gradient(180deg, #34D399, #059669);
       color: #FFF;
       box-shadow: 0 2px 0 #047857;
     }
 
     .shop-item.equipped .shop-price {
-      background: #F43F5E;
+      background: linear-gradient(180deg, #FF4D88, #E11D48);
       color: #FFF;
       box-shadow: 0 2px 0 #9F1239;
     }
@@ -1635,88 +1844,8 @@
     }
 
     /* =====================================================
-       ROYAL BOUTIQUE FITTING ROOM & RARITY TIER CARDS (AAA REMASTER)
+       LIQUID-GOLD PROGRESS BAR & RARITY TIER CARDS (AAA REMASTER)
        ===================================================== */
-    .boutique-mirror-card {
-      background:
-        radial-gradient(circle at 50% 35%, #FFFFFF 0%, #FFF0F6 45%, #F3E8FF 80%, #E0E7FF 100%);
-      border: 4px solid #FFFFFF;
-      border-bottom: 8px solid #D97706;
-      box-shadow:
-        inset 0 4px 12px rgba(255, 255, 255, 0.95),
-        0 0 0 3px #FBBF24,
-        0 14px 28px rgba(180, 83, 9, 0.22);
-      border-radius: 28px;
-    }
-
-    /* Cute Scalloped Awning Header */
-    .boutique-curtain-top {
-      height: 30px;
-      background:
-        repeating-linear-gradient(
-          90deg,
-          #FF3E80 0px,
-          #FF3E80 26px,
-          #FFF0F6 26px,
-          #FFF0F6 52px
-        );
-      border-bottom: 4px solid #FACC15;
-      border-radius: 0 0 14px 14px;
-      box-shadow: 0 4px 10px rgba(225, 29, 72, 0.25);
-    }
-
-    .boutique-mirror-title {
-      margin-top: 24px;
-      background: linear-gradient(180deg, #A855F7 0%, #DB2777 100%);
-      color: #FFFFFF;
-      font-weight: 900;
-      font-size: 0.88rem;
-      padding: 4px 16px;
-      border-radius: 20px;
-      border: 2.5px solid #FEF08A;
-      box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.65), 0 4px 0 #831843;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-      letter-spacing: 0.3px;
-    }
-
-    /* Magical Glowing Circular Stage Pedestal beneath Character & Pet */
-    .boutique-pedestal-base {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 210px;
-      height: 44px;
-      border-radius: 50%;
-      background:
-        radial-gradient(ellipse at center, #FEF08A 0%, #F472B6 55%, #9333EA 90%, transparent 100%);
-      border: 3px solid #FFFFFF;
-      box-shadow:
-        0 6px 0 #7E22CE,
-        0 0 26px rgba(244, 114, 182, 0.75),
-        inset 0 2px 8px rgba(255, 255, 255, 0.95);
-      z-index: 1;
-      pointer-events: none;
-    }
-    .boutique-pedestal-base::before {
-      content: '';
-      position: absolute;
-      inset: 5px 14px;
-      border-radius: 50%;
-      border: 2px dashed rgba(255, 255, 255, 0.88);
-    }
-
-    #boutiqueStageAvatar {
-      position: relative;
-      z-index: 3;
-      cursor: pointer;
-    }
-
-    .boutique-pet-pedestal {
-      z-index: 4;
-      cursor: pointer;
-      filter: drop-shadow(0 6px 8px rgba(15, 23, 42, 0.22));
-    }
 
     /* Glossy Liquid-Gold Progress Bar with Animated Stripes & Glowing Star Tip */
     .star-goal-banner {
@@ -2495,65 +2624,141 @@
       </div>
 
       <!-- =========================================
-           GAME 8: ROYAL DRESS-UP & PET BOUTIQUE STUDIO
+           GAME 8: BROADWAY DRESSING ROOM STAGE & TOYBOX BOUTIQUE
            ========================================= -->
       <div id="modeShop" style="display:none; flex-direction:column; gap:10px;">
         <div class="boutique-layout">
-          <!-- Left: Live Full-Body Royal Dressing Room Mirror & Pet Stage -->
+          <!-- Left: 3D Broadway Dressing Room Theater Stage -->
           <div class="boutique-mirror-card" id="boutiqueMirrorCard">
-            <div class="boutique-curtain-top"></div>
-            <div class="boutique-mirror-title">🪞 PHÒNG THỬ ĐỒ & THÚ CƯNG</div>
+            <div class="boutique-canopy-wrap">
+              <div class="boutique-curtain-top"></div>
+              <div class="boutique-mirror-title">⭐ Phòng Thử Đồ • Dressing Room ⭐</div>
+            </div>
             <div class="preview-tryon-tag" id="tryonPreviewTag">✨ Đang Mặc Thử!</div>
 
             <div class="boutique-stage-figure">
-              <div class="boutique-pedestal-base"></div>
-              <div id="boutiqueStageAvatar" style="width:185px; height:205px; display:flex; align-items:center; justify-content:center;">
-                <!-- High-Definition Full-Body SVG Avatar injected by JS -->
+              <!-- Full 3D Theater Backdrop SVG: Spotlights, Velvet Curtains, Fairy Lights, Wooden Stage & 2-Tier Glowing Pet Pedestal -->
+              <svg class="boutique-stage-backdrop-svg" viewBox="0 0 350 250" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="stageNightGrad" cx="50%" cy="35%" r="70%">
+                    <stop offset="0%" stop-color="#6B21A8"/>
+                    <stop offset="60%" stop-color="#3B0764"/>
+                    <stop offset="100%" stop-color="#1E1B4B"/>
+                  </radialGradient>
+                  <linearGradient id="spotlightBeam" x1="50%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.45"/>
+                    <stop offset="100%" stop-color="#FEF08A" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="curtainRed" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#9F1239"/>
+                    <stop offset="35%" stop-color="#E11D48"/>
+                    <stop offset="70%" stop-color="#BE123C"/>
+                    <stop offset="100%" stop-color="#881337"/>
+                  </linearGradient>
+                  <linearGradient id="woodFloorTop" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FBBF24"/>
+                    <stop offset="55%" stop-color="#D97706"/>
+                    <stop offset="100%" stop-color="#92400E"/>
+                  </linearGradient>
+                  <linearGradient id="woodFloorRim" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#78350F"/>
+                    <stop offset="100%" stop-color="#3E1D08"/>
+                  </linearGradient>
+                  <linearGradient id="pedestalAura" x1="0%" y1="100%" x2="0%" y2="0%">
+                    <stop offset="0%" stop-color="#FDE047" stop-opacity="0.55"/>
+                    <stop offset="100%" stop-color="#F472B6" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <!-- Starry Purple Stage Backdrop -->
+                <rect x="0" y="0" width="350" height="250" fill="url(#stageNightGrad)"/>
+                <!-- Warm Spotlight Cones -->
+                <polygon points="120,0 45,210 195,210" fill="url(#spotlightBeam)"/>
+                <polygon points="245,0 185,210 325,210" fill="url(#spotlightBeam)"/>
+                <!-- Twinkling Stage Stars -->
+                <g fill="#FEF08A" opacity="0.85">
+                  <circle cx="95" cy="52" r="2"/>
+                  <circle cx="175" cy="38" r="2.5"/>
+                  <circle cx="235" cy="64" r="2"/>
+                  <circle cx="155" cy="95" r="1.8"/>
+                  <circle cx="268" cy="42" r="2.2"/>
+                  <polygon points="205,46 207,51 212,52 208,55 209,60 205,57 201,60 202,55 198,52 203,51"/>
+                </g>
+                <!-- Hanging Golden Star String Lights Across Top -->
+                <path d="M20 12 Q95 38 175 14 Q255 38 330 12" stroke="#FDE047" stroke-width="1.5" fill="none"/>
+                <g fill="#FACC15">
+                  <polygon points="65,24 67,29 72,30 68,33 69,38 65,35 61,38 62,33 58,30 63,29"/>
+                  <polygon points="125,25 127,30 132,31 128,34 129,39 125,36 121,39 122,34 118,31 123,30"/>
+                  <polygon points="220,25 222,30 227,31 223,34 224,39 220,36 216,39 217,34 213,31 218,30"/>
+                  <polygon points="280,24 282,29 287,30 283,33 284,38 280,35 276,38 277,33 273,30 278,29"/>
+                </g>
+                <!-- Left & Right Draped Velvet Curtains with Golden Tassels -->
+                <path d="M0 0 L58 0 Q42 85 34 125 Q45 162 38 205 L0 205 Z" fill="url(#curtainRed)"/>
+                <rect x="10" y="118" width="28" height="7" rx="3.5" fill="#FACC15" stroke="#B45309" stroke-width="1.2"/>
+                <path d="M350 0 L292 0 Q308 85 316 125 Q305 162 312 205 L350 205 Z" fill="url(#curtainRed)"/>
+                <rect x="312" y="118" width="28" height="7" rx="3.5" fill="#FACC15" stroke="#B45309" stroke-width="1.2"/>
+                <!-- 3D Honey-Oak Wooden Stage Floor & Mahogany Front Rim -->
+                <ellipse cx="175" cy="215" rx="170" ry="34" fill="url(#woodFloorRim)"/>
+                <ellipse cx="175" cy="204" rx="168" ry="28" fill="url(#woodFloorTop)" stroke="#FDE68A" stroke-width="2"/>
+                <!-- 2-Tier Glowing Purple & Gold Cylinder Pedestal for 3D Pet (Right Side) -->
+                <rect x="218" y="100" width="84" height="90" fill="url(#pedestalAura)"/>
+                <ellipse cx="260" cy="198" rx="46" ry="12" fill="#6B21A8" stroke="#FACC15" stroke-width="2"/>
+                <ellipse cx="260" cy="191" rx="44" ry="10" fill="#A855F7" stroke="#FDE047" stroke-width="2"/>
+                <ellipse cx="260" cy="184" rx="38" ry="9" fill="#FEF08A" stroke="#F59E0B" stroke-width="2"/>
+              </svg>
+
+              <div id="boutiqueStageAvatar" title="Chạm vào Bé Trâm để nghe đọc mẫu!">
+                <!-- High-Definition Full-Body 3D SVG Avatar injected by JS -->
               </div>
-              <div class="boutique-pet-pedestal" id="boutiqueStagePet" title="Thú cưng đồng hành của Bé Trâm">
-                <!-- High-Definition Vector Pet SVG injected by JS -->
+              <div class="boutique-pet-pedestal" id="boutiqueStagePet" title="Thú cưng 3D đồng hành của Bé Trâm">
+                <!-- High-Definition 3D Vector Pet SVG injected by JS -->
               </div>
             </div>
 
             <div class="boutique-equipped-summary" id="boutiqueEquippedSummary">
-              👗 Áo Bộ Đội Sao Vàng • 🪖 Mũ Ca-lô • 🐱 Mèo Mimi
+              👗 Áo Bộ Đội Sao Vàng • 👑 Mũ Ca-lô • 🐾 Mèo Trắng Mimi
             </div>
 
-            <button class="jelly-btn pink" id="btnBoutiquePhoto" style="padding:6px 14px; font-size:0.86rem; width:100%; justify-content:center; z-index:3;">
-              📸 Chụp Ảnh Kỷ Niệm Công Chúa Trâm
-            </button>
+            <!-- 3 Chunky 3D Stage Action Buttons (Matching Reference Image: Change Outfit / Gallery / Play) -->
+            <div class="boutique-stage-actions">
+              <button class="stage-pill-btn orange" id="btnCycleOutfit" title="Đổi nhanh bộ trang phục khác!">
+                👕 Thay Đồ
+              </button>
+              <button class="stage-pill-btn purple" id="btnBoutiquePhoto" title="Chụp ảnh kỷ niệm trên sân khấu!">
+                🖼️ Chụp Ảnh
+              </button>
+              <button class="stage-pill-btn green" id="btnGoEarnStars" title="Quay lại luyện đọc để kiếm thêm Sao!">
+                Đọc Bài ▶️
+              </button>
+            </div>
           </div>
 
-          <!-- Right: Star Motivation Goal + Category Tabs + Custom SVG Wardrobe Grid -->
+          <!-- Right: Cream & Coral-Pink "My Pets / Tủ Đồ" Deluxe Toybox -->
           <div class="boutique-wardrobe-card">
+            <div class="toybox-floating-header" id="toyboxHeaderTitle">🐾 Thú Cưng & Tủ Đồ Của Trâm</div>
+
             <div class="star-goal-banner">
-              <div style="flex:1; min-width:180px;">
-                <div style="font-size:0.88rem; font-weight:900; color:#B45309;" id="starGoalTitle">
+              <div style="flex:1; min-width:160px;">
+                <div style="font-size:0.82rem; font-weight:900; color:#B45309;" id="starGoalTitle">
                   🎯 Mục tiêu phấn đấu tiếp theo:
                 </div>
-                <div style="font-size:0.8rem; font-weight:800; color:#475569;" id="starGoalSubtitle">
+                <div style="font-size:0.75rem; font-weight:800; color:#475569;" id="starGoalSubtitle">
                   Hãy đọc thêm câu tiếng Anh để mở khóa váy công chúa và thú cưng mới nhé!
                 </div>
               </div>
-              <div style="display:flex; align-items:center; gap:8px;">
-                <div class="star-goal-bar-bg">
-                  <div class="star-goal-bar-fill" id="starGoalFill" style="width:50%;"></div>
-                </div>
-                <button class="btn-speed-pill" id="btnGoEarnStars" style="background:#DCFCE7; border-color:#16A34A; color:#15803D; font-size:0.8rem;">
-                  🎤 Đọc Bài Kiếm ⭐
-                </button>
+              <div class="star-goal-bar-bg">
+                <div class="star-goal-bar-fill" id="starGoalFill" style="width:50%;"></div>
               </div>
             </div>
 
             <div class="shop-tabs" id="shopCategoryTabs">
-              <button class="shop-tab-btn active" data-shopcat="all">🌟 Tất Cả</button>
+              <button class="shop-tab-btn active" data-shopcat="all">🏪 Tất Cả (18)</button>
+              <button class="shop-tab-btn" data-shopcat="pet">🐾 Thú Cưng 3D</button>
               <button class="shop-tab-btn" data-shopcat="dress">👗 Váy & Trang Phục</button>
               <button class="shop-tab-btn" data-shopcat="head_wings">👑 Mũ, Vương Miện & Cánh</button>
-              <button class="shop-tab-btn" data-shopcat="pet">🐾 Thú Cưng 3D</button>
             </div>
 
             <div class="shop-grid" id="shopGrid">
-              <!-- Populated by JS with Custom Vector SVG Item Cards -->
+              <!-- Populated by JS with Numbered Rosettes, Glossy Rarity Pills & 3D SVG Cards -->
             </div>
           </div>
         </div>
@@ -4413,10 +4618,15 @@
         `;
       }
 
-      // 2. Multi-layered 3D Dress & Shoes Layer
+      // 2. Multi-layered 3D Dress, Arms & Shoes Layer
       let dressSvg = '';
       if (dressId === 'dress_aodai') {
         dressSvg = `
+          <!-- Outstretched Chibi Arms -->
+          <path d="M46 86 L25 97 L30 105 L48 96 Z" fill="url(#aodaiGrad_${uid})" stroke="#881337" stroke-width="2.2" stroke-linejoin="round"/>
+          <circle cx="25" cy="101" r="5.5" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.6"/>
+          <path d="M94 86 L115 97 L110 105 L92 96 Z" fill="url(#aodaiGrad_${uid})" stroke="#881337" stroke-width="2.2" stroke-linejoin="round"/>
+          <circle cx="115" cy="101" r="5.5" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.6"/>
           <!-- Silk White Trousers -->
           <path d="M46 118 L42 141 L66 141 L68 122 L72 122 L74 141 L98 141 L94 118 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
           <!-- Red Festive 3D Silk Áo Dài Tunic -->
@@ -4432,6 +4642,11 @@
         `;
       } else if (dressId === 'dress_princess') {
         dressSvg = `
+          <!-- Chibi Arms -->
+          <path d="M42 92 L24 102" stroke="url(#skinGrad_${uid})" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="24" cy="102" r="5.2" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.5"/>
+          <path d="M98 92 L116 102" stroke="url(#skinGrad_${uid})" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="116" cy="102" r="5.2" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.5"/>
           <!-- 3D Puff Sleeves with Specular Shine -->
           <circle cx="43" cy="91" r="9.5" fill="#FFC2D1" stroke="#BE123C" stroke-width="2.2"/>
           <circle cx="40" cy="88" r="3" fill="#FFFFFF" opacity="0.7"/>
@@ -4452,6 +4667,11 @@
         dressSvg = `
           <!-- Translucent Crystal Ice Cape -->
           <path d="M36 86 L17 137 L123 137 L104 86 Z" fill="#BAE6FD" opacity="0.68" stroke="#38BDF8" stroke-width="1.8"/>
+          <!-- Chibi Ice Sleeves & Hands -->
+          <path d="M45 88 L25 99" stroke="#7DD3FC" stroke-width="8.5" stroke-linecap="round"/>
+          <circle cx="24" cy="100" r="5.2" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.5"/>
+          <path d="M95 88 L115 99" stroke="#7DD3FC" stroke-width="8.5" stroke-linecap="round"/>
+          <circle cx="116" cy="100" r="5.2" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.5"/>
           <!-- Shimmering Ice Gown Skirt -->
           <path d="M30 137 L46 84 L94 84 L110 137 C90 142 50 142 30 137 Z" fill="url(#elsaGrad_${uid})" stroke="#0369A1" stroke-width="2.6"/>
           <!-- Crystal V-Neck Corset -->
@@ -4463,6 +4683,11 @@
         `;
       } else if (dressId === 'dress_galaxy') {
         dressSvg = `
+          <!-- Chibi Arms -->
+          <path d="M42 92 L24 102" stroke="url(#skinGrad_${uid})" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="24" cy="102" r="5.2" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.5"/>
+          <path d="M98 92 L116 102" stroke="url(#skinGrad_${uid})" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="116" cy="102" r="5.2" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.5"/>
           <!-- Starlight Puff Sleeves -->
           <circle cx="42" cy="90" r="9.5" fill="#F5D0FE" stroke="#7E22CE" stroke-width="2.2"/>
           <circle cx="98" cy="90" r="9.5" fill="#F5D0FE" stroke="#7E22CE" stroke-width="2.2"/>
@@ -4478,25 +4703,39 @@
           <text x="88" y="130" font-size="11" fill="#FEF08A">✦</text>
         `;
       } else {
-        // Default: dress_soldier (Áo Bộ Đội Sao Vàng 3D Remaster)
+        // Default: dress_soldier (Full-Body 3D Chibi Soldier Uniform matching Reference Artwork)
         dressSvg = `
-          <!-- 3D Shaded Military Uniform Skirt & Tunic -->
-          <path d="M44 84 L96 84 L109 136 C109 140 31 140 31 136 Z" fill="url(#soldierGrad_${uid})" stroke="#2D4A1E" stroke-width="2.8"/>
-          <!-- Subtle Pleated Skirt Folds -->
-          <line x1="54" y1="117" x2="48" y2="137" stroke="#2D4A1E" stroke-width="1.6" opacity="0.55" stroke-linecap="round"/>
-          <line x1="70" y1="118" x2="70" y2="138" stroke="#2D4A1E" stroke-width="1.6" opacity="0.55" stroke-linecap="round"/>
-          <line x1="86" y1="117" x2="92" y2="137" stroke="#2D4A1E" stroke-width="1.6" opacity="0.55" stroke-linecap="round"/>
-          <!-- Military Leather Belt & Gleaming Golden Star Buckle -->
-          <rect x="39" y="109" width="62" height="7.5" rx="2.5" fill="#5C3A21" stroke="#29180B" stroke-width="1.6"/>
-          <rect x="63" y="108" width="14" height="9.5" rx="2.5" fill="#FACC15" stroke="#B45309" stroke-width="1.6"/>
-          <circle cx="66" cy="110.5" r="1.2" fill="#FFFFFF" opacity="0.85"/>
-          <!-- Crisp 3D White Collar & Golden Buttons -->
-          <path d="M51 84 L70 97 L89 84 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.8"/>
-          <circle cx="70" cy="100.5" r="2.3" fill="#FACC15" stroke="#B45309" stroke-width="0.8"/>
-          <circle cx="70" cy="105.5" r="2.3" fill="#FACC15" stroke="#B45309" stroke-width="0.8"/>
-          <!-- Soldier Red Star Badge -->
-          <rect x="77" y="94.5" width="15.5" height="10.5" rx="2.5" fill="#D90429" stroke="#FACC15" stroke-width="1.2"/>
-          <text x="81" y="102.8" font-size="8.5" fill="#FFD600">★</text>
+          <!-- Full-Body Olive Military Trousers -->
+          <path d="M48 112 L46 134 L67 134 L69 118 L71 118 L73 134 L94 134 L92 112 Z" fill="url(#soldierGrad_${uid})" stroke="#2D4A1E" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- Shiny 3D Dark-Brown Combat Boots -->
+          <path d="M43 133 C43 128 67 128 67 133 L68 142 C68 145 41 145 41 142 Z" fill="#3E1F0D" stroke="#1E0E05" stroke-width="2.2"/>
+          <ellipse cx="51" cy="134.5" rx="4.5" ry="1.8" fill="#FFFFFF" opacity="0.45"/>
+          <path d="M73 133 C73 128 97 128 97 133 L99 142 C99 145 72 145 72 142 Z" fill="#3E1F0D" stroke="#1E0E05" stroke-width="2.2"/>
+          <ellipse cx="81" cy="134.5" rx="4.5" ry="1.8" fill="#FFFFFF" opacity="0.45"/>
+          <!-- Outstretched 3D Sleeves & Chibi Hands -->
+          <path d="M46 86 L25 97 L31 106 L48 97 Z" fill="url(#soldierGrad_${uid})" stroke="#2D4A1E" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="25" cy="101" r="5.8" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.8"/>
+          <path d="M94 86 L115 97 L109 106 L92 97 Z" fill="url(#soldierGrad_${uid})" stroke="#2D4A1E" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="115" cy="101" r="5.8" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.8"/>
+          <!-- 3D Shaded Olive Military Tunic Jacket -->
+          <path d="M45 84 L95 84 L98 117 C82 120 58 120 42 117 Z" fill="url(#soldierGrad_${uid})" stroke="#2D4A1E" stroke-width="2.6" stroke-linejoin="round"/>
+          <!-- Golden Shoulder Epaulettes -->
+          <rect x="42" y="82.5" width="11" height="4" rx="2" fill="#FACC15" stroke="#B45309" stroke-width="1.2"/>
+          <rect x="87" y="82.5" width="11" height="4" rx="2" fill="#FACC15" stroke="#B45309" stroke-width="1.2"/>
+          <!-- Center Placket & Two Buttoned Chest Pockets -->
+          <line x1="70" y1="92" x2="70" y2="116" stroke="#2D4A1E" stroke-width="2"/>
+          <rect x="49" y="94" width="14" height="11" rx="2" fill="#3F6212" stroke="#2D4A1E" stroke-width="1.5"/>
+          <circle cx="56" cy="97.5" r="1.8" fill="#FACC15"/>
+          <rect x="77" y="94" width="14" height="11" rx="2" fill="#3F6212" stroke="#2D4A1E" stroke-width="1.5"/>
+          <circle cx="84" cy="97.5" r="1.8" fill="#FACC15"/>
+          <!-- Crisp Collared Neck with Red Soldier Collar Tabs (Tiết Đỏ) -->
+          <path d="M55 83 L70 94 L85 83" fill="#FDE68A" stroke="#2D4A1E" stroke-width="1.8"/>
+          <polygon points="52,84 65,86 62,92 50,89" fill="#EF4444" stroke="#FACC15" stroke-width="1.2"/>
+          <polygon points="88,84 75,86 78,92 90,89" fill="#EF4444" stroke="#FACC15" stroke-width="1.2"/>
+          <!-- Military Leather Belt & Gleaming Golden Buckle -->
+          <rect x="42" y="108.5" width="56" height="7" rx="2.5" fill="#5C3A21" stroke="#29180B" stroke-width="1.6"/>
+          <rect x="63" y="107.5" width="14" height="9" rx="2.5" fill="#FACC15" stroke="#B45309" stroke-width="1.6"/>
+          <text x="66.2" y="114.8" font-size="8.5" fill="#B45309">★</text>
         `;
       }
 
@@ -4517,20 +4756,17 @@
       } else if (hatId === 'hat_garland') {
         hatSvg = `
           <g>
-            <!-- Lively 3D Floral Crown with Layered Petals & Leaves -->
-            <path d="M37 38 Q70 23 103 38" stroke="#15803D" stroke-width="6.5" stroke-linecap="round" fill="none"/>
-            <ellipse cx="41" cy="36" rx="5" ry="2.5" transform="rotate(-30 41 36)" fill="#4ADE80"/>
-            <ellipse cx="99" cy="36" rx="5" ry="2.5" transform="rotate(30 99 36)" fill="#4ADE80"/>
-            <circle cx="47" cy="35" r="6.8" fill="#FF4D88" stroke="#FFFFFF" stroke-width="1.5"/>
-            <circle cx="47" cy="35" r="2.8" fill="#FACC15"/>
-            <circle cx="58.5" cy="31" r="6.2" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.5"/>
-            <circle cx="58.5" cy="31" r="2.4" fill="#FEF08A"/>
-            <circle cx="70" cy="28.5" r="8" fill="#FACC15" stroke="#FFFFFF" stroke-width="1.6"/>
-            <circle cx="70" cy="28.5" r="3.4" fill="#E11D48"/>
-            <circle cx="81.5" cy="31" r="6.2" fill="#C084FC" stroke="#FFFFFF" stroke-width="1.5"/>
-            <circle cx="81.5" cy="31" r="2.4" fill="#FEF08A"/>
-            <circle cx="93" cy="35" r="6.8" fill="#FF4D88" stroke="#FFFFFF" stroke-width="1.5"/>
-            <circle cx="93" cy="35" r="2.8" fill="#FACC15"/>
+            <!-- Lively 7-Flower Rainbow Garland Crown -->
+            <path d="M35 37 Q70 22 105 37" stroke="#15803D" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="38" cy="36" rx="5" ry="2.5" transform="rotate(-30 38 36)" fill="#4ADE80"/>
+            <ellipse cx="102" cy="36" rx="5" ry="2.5" transform="rotate(30 102 36)" fill="#4ADE80"/>
+            <circle cx="42" cy="36" r="6" fill="#FF4D88" stroke="#FFFFFF" stroke-width="1.4"/><circle cx="42" cy="36" r="2.3" fill="#FACC15"/>
+            <circle cx="51" cy="33" r="6.2" fill="#FB923C" stroke="#FFFFFF" stroke-width="1.4"/><circle cx="51" cy="33" r="2.3" fill="#FEF08A"/>
+            <circle cx="60.5" cy="30.5" r="6.4" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.4"/><circle cx="60.5" cy="30.5" r="2.4" fill="#FACC15"/>
+            <circle cx="70" cy="29" r="7.5" fill="#FACC15" stroke="#FFFFFF" stroke-width="1.6"/><circle cx="70" cy="29" r="3" fill="#E11D48"/>
+            <circle cx="79.5" cy="30.5" r="6.4" fill="#A855F7" stroke="#FFFFFF" stroke-width="1.4"/><circle cx="79.5" cy="30.5" r="2.4" fill="#FEF08A"/>
+            <circle cx="89" cy="33" r="6.2" fill="#4ADE80" stroke="#FFFFFF" stroke-width="1.4"/><circle cx="89" cy="33" r="2.3" fill="#FFFFFF"/>
+            <circle cx="98" cy="36" r="6" fill="#FF4D88" stroke="#FFFFFF" stroke-width="1.4"/><circle cx="98" cy="36" r="2.3" fill="#FACC15"/>
           </g>
         `;
       } else if (hatId === 'hat_crown') {
@@ -4547,13 +4783,24 @@
           </g>
         `;
       } else {
-        // Default: hat_soldier (3D Military Cap)
+        // Default: hat_soldier (3D Military Cap + Festive 7-Flower Garland Rim matching Reference Artwork)
         hatSvg = `
           <g>
-            <path d="M39 36 L70 10.5 L101 36 Z" fill="url(#soldierGrad_${uid})" stroke="#2D4A1E" stroke-width="2.8" stroke-linejoin="round"/>
-            <path d="M42 35 L70 14.5 L98 35" stroke="#FACC15" stroke-width="1.6" fill="none"/>
-            <circle cx="70" cy="26" r="6.8" fill="#D90429" stroke="#FACC15" stroke-width="1.6"/>
-            <text x="66.2" y="29.8" font-size="10.5" fill="#FFD600">★</text>
+            <!-- Rounded 3D Olive Soldier Cap Dome & Peak -->
+            <path d="M37 33 C37 9 103 9 103 33 Z" fill="url(#soldierGrad_${uid})" stroke="#2D4A1E" stroke-width="2.6" stroke-linejoin="round"/>
+            <path d="M42 29 L70 11 L98 29" stroke="#84CC16" stroke-width="1.5" fill="none" opacity="0.55"/>
+            <!-- Red Circle Emblem with Golden Star on Cap Front -->
+            <circle cx="70" cy="20" r="6.8" fill="#D90429" stroke="#FACC15" stroke-width="1.8"/>
+            <text x="66.2" y="23.8" font-size="10.5" fill="#FFD600">★</text>
+            <!-- Festive 7-Flower Rainbow Garland Crown along the Cap Brim -->
+            <path d="M35 35 Q70 26 105 35" stroke="#15803D" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <circle cx="40" cy="34.5" r="5.2" fill="#FF4D88" stroke="#FFFFFF" stroke-width="1.2"/><circle cx="40" cy="34.5" r="2" fill="#FACC15"/>
+            <circle cx="50" cy="32.5" r="5.5" fill="#FB923C" stroke="#FFFFFF" stroke-width="1.2"/><circle cx="50" cy="32.5" r="2" fill="#FEF08A"/>
+            <circle cx="60" cy="31" r="5.8" fill="#FACC15" stroke="#FFFFFF" stroke-width="1.2"/><circle cx="60" cy="31" r="2.2" fill="#E11D48"/>
+            <circle cx="70" cy="30.5" r="6.2" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.3"/><circle cx="70" cy="30.5" r="2.3" fill="#FACC15"/>
+            <circle cx="80" cy="31" r="5.8" fill="#A855F7" stroke="#FFFFFF" stroke-width="1.2"/><circle cx="80" cy="31" r="2.2" fill="#FEF08A"/>
+            <circle cx="90" cy="32.5" r="5.5" fill="#4ADE80" stroke="#FFFFFF" stroke-width="1.2"/><circle cx="90" cy="32.5" r="2" fill="#FFFFFF"/>
+            <circle cx="100" cy="34.5" r="5.2" fill="#FF4D88" stroke="#FFFFFF" stroke-width="1.2"/><circle cx="100" cy="34.5" r="2" fill="#FACC15"/>
           </g>
         `;
       }
@@ -4563,19 +4810,20 @@
       if (wingsId === 'wings_wand' || wingsId === 'wings_fairy' || wingsId === 'wings_angel') {
         handPropSvg = `
           <g>
-            <line x1="24" y1="78" x2="28" y2="122" stroke="#F59E0B" stroke-width="3.8" stroke-linecap="round"/>
-            <path d="M24 82 Q10 92 14 106" stroke="#FF4D88" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <polygon points="24,65 27.5,72 35,73 29.5,78 31,85.5 24,82 17,85.5 18.5,78 13,73 20.5,72" fill="url(#crownGold_${uid})" stroke="#D97706" stroke-width="2" stroke-linejoin="round"/>
-            <circle cx="24" cy="76" r="3.2" fill="#FF2A6D"/>
+            <line x1="24" y1="74" x2="26" y2="118" stroke="#F59E0B" stroke-width="3.8" stroke-linecap="round"/>
+            <path d="M24 78 Q10 88 14 102" stroke="#FF4D88" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <polygon points="24,61 27.5,68 35,69 29.5,74 31,81.5 24,78 17,81.5 18.5,74 13,69 20.5,68" fill="url(#crownGold_${uid})" stroke="#D97706" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="24" cy="72" r="3.2" fill="#FF2A6D"/>
           </g>
         `;
       } else {
-        // Default: Cờ Đỏ Sao Vàng
+        // Default: Waving 3D Cờ Đỏ Sao Vàng with Golden Finial
         handPropSvg = `
           <g>
-            <line x1="25" y1="72" x2="25" y2="118" stroke="#8D5524" stroke-width="3.2" stroke-linecap="round"/>
-            <rect x="3" y="69" width="24" height="16" rx="2.5" fill="#D90429" stroke="#FFFFFF" stroke-width="1.2"/>
-            <text x="11" y="81" font-size="11" fill="#FFD600">★</text>
+            <line x1="25" y1="62" x2="25" y2="118" stroke="#B45309" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="25" cy="61" r="2.8" fill="#FACC15" stroke="#B45309" stroke-width="1"/>
+            <path d="M2 64 Q13 60 25 64 L25 82 Q13 78 2 82 Z" fill="#D90429" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round"/>
+            <text x="8.5" y="77" font-size="11.5" fill="#FFD600">★</text>
           </g>
         `;
       }
@@ -4594,14 +4842,14 @@
               <stop offset="100%" stop-color="#FF3E80" stop-opacity="0"/>
             </radialGradient>
             <linearGradient id="hairGrad_${uid}" x1="70" y1="18" x2="70" y2="85" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#334155"/>
-              <stop offset="55%" stop-color="#1E293B"/>
-              <stop offset="100%" stop-color="#090D16"/>
+              <stop offset="0%" stop-color="#4A2511"/>
+              <stop offset="55%" stop-color="#2A1205"/>
+              <stop offset="100%" stop-color="#140702"/>
             </linearGradient>
-            <linearGradient id="irisGrad_${uid}" x1="0" y1="48" x2="0" y2="61" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#0F172A"/>
-              <stop offset="60%" stop-color="#312E81"/>
-              <stop offset="100%" stop-color="#7E22CE"/>
+            <linearGradient id="irisGrad_${uid}" x1="0" y1="48" x2="0" y2="62" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#291205"/>
+              <stop offset="55%" stop-color="#6B3410"/>
+              <stop offset="100%" stop-color="#B45309"/>
             </linearGradient>
             <linearGradient id="soldierGrad_${uid}" x1="40" y1="84" x2="100" y2="140" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stop-color="#65A30D"/>
@@ -4643,8 +4891,8 @@
             </linearGradient>
           </defs>
           <!-- Soft Podium Shadow -->
-          <ellipse cx="70" cy="144" rx="46" ry="6" fill="rgba(15,23,42,0.2)"/>
-          <!-- Glossy Mary Jane Shoes -->
+          <ellipse cx="70" cy="144" rx="46" ry="6" fill="rgba(15,23,42,0.24)"/>
+          <!-- Glossy Mary Jane Shoes (shown for dresses) -->
           <ellipse cx="55" cy="141" rx="9" ry="4.8" fill="#1E293B"/>
           <ellipse cx="53" cy="139.8" rx="3" ry="1.2" fill="#FFFFFF" opacity="0.55"/>
           <ellipse cx="85" cy="141" rx="9" ry="4.8" fill="#1E293B"/>
@@ -4656,11 +4904,13 @@
           <circle cx="107" cy="62" r="13" fill="url(#hairGrad_${uid})"/>
           <circle cx="38" cy="53" r="4.8" fill="#FF2A6D" stroke="#FFFFFF" stroke-width="1"/>
           <circle cx="102" cy="53" r="4.8" fill="#FF2A6D" stroke="#FFFFFF" stroke-width="1"/>
-          <!-- Multi-layered 3D Dress -->
+          <!-- Multi-layered 3D Dress / Uniform -->
           ${dressSvg}
-          <!-- Cute Ears -->
-          <circle cx="38" cy="58" r="5.5" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.8"/>
-          <circle cx="102" cy="58" r="5.5" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.8"/>
+          <!-- Cute Ears with Golden Pearl Earrings -->
+          <circle cx="37.5" cy="58" r="5.5" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.8"/>
+          <circle cx="36.5" cy="63" r="2.3" fill="#FEF08A" stroke="#D97706" stroke-width="0.9"/>
+          <circle cx="102.5" cy="58" r="5.5" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="1.8"/>
+          <circle cx="103.5" cy="63" r="2.3" fill="#FEF08A" stroke="#D97706" stroke-width="0.9"/>
           <!-- 3D Pop-Mart Chibi Head -->
           <circle cx="70" cy="56" r="32.5" fill="url(#skinGrad_${uid})" stroke="#D98A5C" stroke-width="2.4"/>
           <!-- Soft Radial Glowing Rosy Cheeks -->
@@ -4669,27 +4919,30 @@
           <!-- Expressive Anime/Chibi Eyes with Dual Specular Highlights & Eyelashes -->
           <g class="chibi-eyes-group">
             <!-- Left Eye -->
-            <path d="M48 50 Q56 45 63 50" stroke="#0F172A" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-            <circle cx="56" cy="54.5" r="6.8" fill="url(#irisGrad_${uid})"/>
-            <circle cx="53.8" cy="51.8" r="2.7" fill="#FFFFFF"/>
-            <circle cx="58.5" cy="57.2" r="1.3" fill="#FFFFFF"/>
-            <path d="M53 58.5 Q56 60 59 58.5" stroke="#F472B6" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <path d="M47 49.5 Q56 44 63.5 50" stroke="#1E0E05" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+            <circle cx="56" cy="54.8" r="7.2" fill="url(#irisGrad_${uid})"/>
+            <circle cx="56" cy="54.8" r="3.4" fill="#140702"/>
+            <circle cx="53.6" cy="51.8" r="2.8" fill="#FFFFFF"/>
+            <circle cx="58.6" cy="57.4" r="1.4" fill="#FFFFFF"/>
             <!-- Right Eye -->
-            <path d="M77 50 Q84 45 92 50" stroke="#0F172A" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-            <circle cx="84" cy="54.5" r="6.8" fill="url(#irisGrad_${uid})"/>
-            <circle cx="81.8" cy="51.8" r="2.7" fill="#FFFFFF"/>
-            <circle cx="86.5" cy="57.2" r="1.3" fill="#FFFFFF"/>
-            <path d="M81 58.5 Q84 60 87 58.5" stroke="#F472B6" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <path d="M76.5 50 Q84 44 93 49.5" stroke="#1E0E05" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+            <circle cx="84" cy="54.8" r="7.2" fill="url(#irisGrad_${uid})"/>
+            <circle cx="84" cy="54.8" r="3.4" fill="#140702"/>
+            <circle cx="81.6" cy="51.8" r="2.8" fill="#FFFFFF"/>
+            <circle cx="86.6" cy="57.4" r="1.4" fill="#FFFFFF"/>
           </g>
           <!-- Little Button Nose -->
           <ellipse cx="70" cy="59.5" rx="1.8" ry="1.2" fill="#E09F67"/>
-          <!-- Idle Happy Smile -->
-          <path class="svg-mouth-smile" d="M60 66 Q70 76 80 66" stroke="#D90429" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <!-- Idle Happy Open Chibi Smile with Rosy Tongue -->
+          <g class="svg-mouth-smile">
+            <path d="M62 65 Q70 66.5 78 65 C78 73.5 62 73.5 62 65 Z" fill="#991B1B" stroke="#7F1D1D" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M65 69.5 Q70 67.5 75 69.5 C74 72.5 66 72.5 65 69.5 Z" fill="#FB7185"/>
+          </g>
           <!-- Active Lip-Sync Speaking Mouth -->
           <ellipse class="svg-mouth-open" cx="70" cy="69" rx="7.5" ry="6" fill="#D90429" stroke="#7F1D1D" stroke-width="1.5" style="display:none;"/>
           <!-- Glossy Hair Bangs with Specular Halo Shine -->
           <path d="M36.5 52 C36.5 24 103.5 24 103.5 52 C95 35 84 42 70 36.5 C56 42 45 35 36.5 52 Z" fill="url(#hairGrad_${uid})"/>
-          <path d="M47 36 Q70 28 93 36" stroke="#64748B" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.55"/>
+          <path d="M47 36 Q70 28 93 36" stroke="#A16207" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
           <!-- Headgear Layer -->
           ${hatSvg}
           <!-- Hand Prop Layer -->
@@ -4812,6 +5065,17 @@
       updateStarGoalBanner();
       syncCharacterGraphics(tryonPreviewItem);
 
+      const headerTitleEl = document.getElementById('toyboxHeaderTitle');
+      if (headerTitleEl) {
+        const catTitles = {
+          all: '🐾 Thú Cưng & Tủ Đồ Của Trâm',
+          pet: '🐾 Bộ Sưu Tập Thú Cưng 3D',
+          dress: '👗 Tủ Váy Áo Công Chúa 3D',
+          accessory: '👑 Vươngiện, Nơ & Cánh Tiên'
+        };
+        headerTitleEl.textContent = catTitles[activeShopCat] || '🐾 Thú Cưng & Tủ Đồ Của Trâm';
+      }
+
       const grid = document.getElementById('shopGrid');
       if (!grid) return;
       grid.innerHTML = '';
@@ -4821,7 +5085,7 @@
         return item.cat === activeShopCat;
       });
 
-      filtered.forEach(item => {
+      filtered.forEach((item, idx) => {
         const isPreviewing = tryonPreviewItem && tryonPreviewItem.id === item.id;
         const canAfford = stars >= item.price;
         const card = document.createElement('div');
@@ -4836,10 +5100,16 @@
           actionLabel = `👀 Mặc Thử • ⭐ ${item.price}`;
         }
 
+        const starCountByRarity = { default: 3, rare: 3, epic: 4, legend: 5 };
+        const numStars = starCountByRarity[item.rarity] || 3;
+        const starsMarkup = Array.from({ length: numStars }, () => '<span class="card-star-icon">★</span>').join('');
+
         card.innerHTML = `
+          <div class="card-num-rosette rosette-${item.rarity}">${idx + 1}</div>
           <span class="rarity-badge rarity-${item.rarity}">${item.rarityLabel}</span>
           <div class="shop-svg-thumb">${getShopItemThumbSvg(item)}</div>
           <div class="shop-name">${item.name}</div>
+          <div class="card-stars-row">${starsMarkup}</div>
           <div class="shop-price">${actionLabel}</div>
         `;
 
@@ -5043,6 +5313,28 @@
         renderShopMode();
       });
     });
+
+    // Stage "Thay Đồ" Button -> Cycles Outfits on the Broadway Stage with Sparkles & Bounce
+    const btnCycleOutfitEl = document.getElementById('btnCycleOutfit');
+    if (btnCycleOutfitEl) {
+      btnCycleOutfitEl.addEventListener('click', (e) => {
+        sfxMagicWand();
+        const dresses = SHOP_ITEMS.filter(i => i.type === 'dress');
+        const curState = getEquippedState(tryonPreviewItem);
+        const curIdx = dresses.findIndex(d => d.id === curState.dress.id);
+        const nextDress = dresses[(curIdx + 1) % dresses.length];
+        if (nextDress.owned) {
+          tryonPreviewItem = null;
+          equipItem(nextDress);
+          saveProgressState();
+        } else {
+          tryonPreviewItem = nextDress;
+        }
+        spawnParticles(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 22, true);
+        renderShopMode();
+        triggerBoutiqueStageBounce();
+      });
+    }
 
     // Quick Jump from Boutique to Reading Mode to Earn Stars
     document.getElementById('btnGoEarnStars').addEventListener('click', () => {
