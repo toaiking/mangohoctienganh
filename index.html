@@ -3203,22 +3203,33 @@
     /* =====================================================================
        2. SOUND EFFECTS SYNTHESIZER (CUTE CARTOON SOUNDS)
        ===================================================================== */
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (Ctx) audioCtx = new Ctx();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      return audioCtx;
+    }
 
     function playNote(freq, type = 'sine', dur = 0.15, delay = 0, vol = 0.16) {
       setTimeout(() => {
         try {
-          if (audioCtx.state === 'suspended') audioCtx.resume();
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
+          const ctx = getAudioCtx();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
           osc.type = type;
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-          gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(vol, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
           osc.connect(gain);
-          gain.connect(audioCtx.destination);
+          gain.connect(ctx.destination);
           osc.start();
-          osc.stop(audioCtx.currentTime + dur);
+          osc.stop(ctx.currentTime + dur);
         } catch(e) {}
       }, delay * 1000);
     }
@@ -3313,24 +3324,57 @@
 
     /* =====================================================================
        4. 100% RELIABLE DUAL-ENGINE STUDIO AUDIO (PRE-GENERATED MP3 + WEB SPEECH)
-       Eliminates Chrome/Safari speechSynthesis cancel() drop bug & lip-syncs Chibi!
+       Optimized for Vercel CDN with Preload Cache, Race-Condition Token & Watchdog!
        ===================================================================== */
     const studioAudio = new Audio();
     studioAudio.preload = 'auto';
+    let currentSpeechId = 0;
     let selectedVoice = null;
     let fallbackWordTimer = null;
     let slowSequenceTimer = null;
     let speechDebounceTimer = null;
+    let speechWatchdogTimer = null;
+    const preloadedAudioCache = new Set();
 
     function initVoices() {
       if (!('speechSynthesis' in window)) return;
-      const voices = window.speechSynthesis.getVoices();
-      selectedVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Zira') || v.name.includes('Google US')))
-                   || voices.find(v => v.lang.startsWith('en')) || null;
+      try {
+        const voices = window.speechSynthesis.getVoices();
+        if (!voices || voices.length === 0) return;
+        selectedVoice =
+          voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Aria') || v.name.includes('Jenny') || v.name.includes('Samantha') || v.name.includes('Zira') || v.name.includes('Google US')))
+          || voices.find(v => v.lang === 'en-US' || v.lang === 'en_US')
+          || voices.find(v => v.lang.startsWith('en'))
+          || null;
+      } catch (e) {}
     }
     if ('speechSynthesis' in window) {
       window.speechSynthesis.onvoiceschanged = initVoices;
       initVoices();
+    }
+
+    // Background Preloader so Vercel CDN MP3s play with 0ms latency when tapped
+    function preloadMp3Url(url) {
+      if (!url || preloadedAudioCache.has(url)) return;
+      preloadedAudioCache.add(url);
+      try {
+        const a = new Audio();
+        a.preload = 'auto';
+        a.src = url;
+      } catch (e) {}
+    }
+
+    function preloadIslandAudio(islandIdx) {
+      const isl = ISLANDS[islandIdx];
+      if (!isl) return;
+      isl.chunks.forEach(ch => {
+        preloadMp3Url(`audio/${ch.id}.mp3`);
+        preloadMp3Url(`audio/${ch.id}_slow.mp3`);
+        ch.words.forEach(w => {
+          const k = cleanWordKey(w);
+          if (k) preloadMp3Url(`audio/w_${k}.mp3`);
+        });
+      });
     }
 
     function setChibiLipSync(active) {
@@ -3347,24 +3391,32 @@
     }
 
     function stopAllSpeech() {
+      currentSpeechId++;
       if (fallbackWordTimer) { clearInterval(fallbackWordTimer); fallbackWordTimer = null; }
       if (slowSequenceTimer) { clearTimeout(slowSequenceTimer); slowSequenceTimer = null; }
       if (speechDebounceTimer) { clearTimeout(speechDebounceTimer); speechDebounceTimer = null; }
+      if (speechWatchdogTimer) { clearTimeout(speechWatchdogTimer); speechWatchdogTimer = null; }
       try {
+        studioAudio.onloadedmetadata = null;
+        studioAudio.onended = null;
+        studioAudio.onerror = null;
         studioAudio.pause();
         studioAudio.currentTime = 0;
       } catch(e) {}
       if ('speechSynthesis' in window) {
         try { window.speechSynthesis.cancel(); } catch(e) {}
       }
+      window._activeUtterance = null;
       setChibiLipSync(false);
     }
 
     // Lookup chunk object by its English text
     function findChunkByEng(text) {
+      if (!text) return null;
+      const target = text.trim().toLowerCase();
       for (const isl of ISLANDS) {
         for (const ch of isl.chunks) {
-          if (ch.eng.toLowerCase() === text.trim().toLowerCase()) return ch;
+          if (ch.eng.toLowerCase() === target) return ch;
         }
       }
       return null;
@@ -3372,6 +3424,7 @@
 
     // Convert raw word (e.g. "Trâm.", "school's", "teachers!") to MP3 filename key
     function cleanWordKey(rawWord) {
+      if (!rawWord) return '';
       return rawWord.toLowerCase()
         .replace(/trâm/g, 'tram')
         .replace(/school's/g, 'schools')
@@ -3382,6 +3435,7 @@
     // Play a single English word reliably using Studio MP3 + WebSpeech fallback
     function speakSingleWord(rawWord, onDone) {
       stopAllSpeech();
+      const token = currentSpeechId;
       const key = cleanWordKey(rawWord);
       if (!key) {
         if (onDone) onDone();
@@ -3390,23 +3444,47 @@
       const mp3Path = `audio/w_${key}.mp3`;
       setChibiLipSync(true);
 
-      studioAudio.onended = () => {
+      let finished = false;
+      function finishWord() {
+        if (finished || token !== currentSpeechId) return;
+        finished = true;
+        if (speechWatchdogTimer) { clearTimeout(speechWatchdogTimer); speechWatchdogTimer = null; }
         setChibiLipSync(false);
         if (onDone) onDone();
-      };
+      }
+
+      studioAudio.onloadedmetadata = null;
+      studioAudio.onended = finishWord;
       studioAudio.onerror = () => {
-        speakViaWebSpeechFallback(key, null, onDone);
+        if (token !== currentSpeechId || finished) return;
+        speakViaWebSpeechFallback(rawWord, null, onDone, token);
       };
-      studioAudio.src = mp3Path;
-      studioAudio.playbackRate = speechRate < 0.8 ? 0.85 : 1.0;
-      studioAudio.play().catch(() => {
-        speakViaWebSpeechFallback(key, null, onDone);
-      });
+
+      // Safety watchdog in case network or mobile audio stalls
+      speechWatchdogTimer = setTimeout(finishWord, 3500);
+
+      try {
+        studioAudio.src = mp3Path;
+        studioAudio.playbackRate = speechRate < 0.8 ? 0.85 : 1.0;
+        const playPromise = studioAudio.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch((err) => {
+            if (token !== currentSpeechId || finished) return;
+            if (err && err.name === 'AbortError') return;
+            speakViaWebSpeechFallback(rawWord, null, onDone, token);
+          });
+        }
+      } catch (err) {
+        if (token === currentSpeechId && !finished) {
+          speakViaWebSpeechFallback(rawWord, null, onDone, token);
+        }
+      }
     }
 
     // Play full phrase or chunk using Studio MP3 + synchronized word highlighting
     function speakPhrase(text, onWordIdx, onDone) {
       stopAllSpeech();
+      const token = currentSpeechId;
       if (!text) {
         if (onDone) onDone();
         return;
@@ -3425,100 +3503,157 @@
       if (matchedChunk) {
         const suffix = useSlowMp3 ? '_slow' : '';
         const mp3Path = `audio/${matchedChunk.id}${suffix}.mp3`;
+        const targetRate = useSlowMp3 ? 0.95 : (speechRate > 1.0 ? 1.08 : 0.92);
         setChibiLipSync(true);
 
-        studioAudio.onloadedmetadata = () => {
-          const totalDurMs = Math.max(900, (studioAudio.duration * 1000) / studioAudio.playbackRate);
-          if (onWordIdx) {
-            onWordIdx(0);
-            let idx = 0;
-            const stepMs = Math.max(260, Math.floor((totalDurMs * 0.88) / words.length));
-            if (fallbackWordTimer) clearInterval(fallbackWordTimer);
-            fallbackWordTimer = setInterval(() => {
-              idx++;
-              if (idx < words.length) {
-                onWordIdx(idx);
-              } else {
-                clearInterval(fallbackWordTimer);
-              }
-            }, stepMs);
-          }
-        };
+        let finished = false;
+        let highlightStarted = false;
 
-        studioAudio.onended = () => {
+        function startWordHighlightSync() {
+          if (highlightStarted || token !== currentSpeechId || !onWordIdx) return;
+          highlightStarted = true;
+          const rawDur = (studioAudio.duration && isFinite(studioAudio.duration) && studioAudio.duration > 0)
+            ? studioAudio.duration * 1000
+            : Math.max(1400, words.length * 480);
+          const totalDurMs = Math.max(900, rawDur / targetRate);
+          onWordIdx(0);
+          let idx = 0;
+          const stepMs = Math.max(250, Math.floor((totalDurMs * 0.88) / words.length));
           if (fallbackWordTimer) clearInterval(fallbackWordTimer);
+          fallbackWordTimer = setInterval(() => {
+            if (token !== currentSpeechId) {
+              clearInterval(fallbackWordTimer);
+              return;
+            }
+            idx++;
+            if (idx < words.length) {
+              onWordIdx(idx);
+            } else {
+              clearInterval(fallbackWordTimer);
+            }
+          }, stepMs);
+        }
+
+        function finishPhrase() {
+          if (finished || token !== currentSpeechId) return;
+          finished = true;
+          if (fallbackWordTimer) { clearInterval(fallbackWordTimer); fallbackWordTimer = null; }
+          if (speechWatchdogTimer) { clearTimeout(speechWatchdogTimer); speechWatchdogTimer = null; }
           setChibiLipSync(false);
           if (onDone) onDone();
-        };
+        }
 
+        studioAudio.onloadedmetadata = startWordHighlightSync;
+        studioAudio.onended = finishPhrase;
         studioAudio.onerror = () => {
-          if (fallbackWordTimer) clearInterval(fallbackWordTimer);
-          speakViaWebSpeechFallback(text, onWordIdx, onDone);
+          if (token !== currentSpeechId || finished) return;
+          if (fallbackWordTimer) { clearInterval(fallbackWordTimer); fallbackWordTimer = null; }
+          speakViaWebSpeechFallback(text, onWordIdx, onDone, token);
         };
 
-        studioAudio.src = mp3Path;
-        studioAudio.playbackRate = useSlowMp3 ? 0.95 : (speechRate > 1.0 ? 1.08 : 0.92);
-        studioAudio.play().catch(() => {
-          speakViaWebSpeechFallback(text, onWordIdx, onDone);
-        });
+        // Safety watchdog so game progression never hangs even on spotty network
+        speechWatchdogTimer = setTimeout(finishPhrase, Math.max(6500, words.length * 1400));
+
+        try {
+          studioAudio.src = mp3Path;
+          studioAudio.playbackRate = targetRate;
+          if (studioAudio.readyState >= 1) {
+            startWordHighlightSync();
+          }
+          const playPromise = studioAudio.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch((err) => {
+              if (token !== currentSpeechId || finished) return;
+              if (err && err.name === 'AbortError') return;
+              if (fallbackWordTimer) { clearInterval(fallbackWordTimer); fallbackWordTimer = null; }
+              speakViaWebSpeechFallback(text, onWordIdx, onDone, token);
+            });
+          }
+        } catch (err) {
+          if (token === currentSpeechId && !finished) {
+            speakViaWebSpeechFallback(text, onWordIdx, onDone, token);
+          }
+        }
       } else {
-        speakViaWebSpeechFallback(text, onWordIdx, onDone);
+        speakViaWebSpeechFallback(text, onWordIdx, onDone, token);
       }
     }
 
-    // Chrome/Safari bug-proof Web Speech fallback (65ms delay after cancel)
-    function speakViaWebSpeechFallback(text, onWordIdx, onDone) {
+    // Chrome/Safari/iPad/Android bug-proof Web Speech fallback (GC-safe + Watchdog)
+    function speakViaWebSpeechFallback(text, onWordIdx, onDone, callerToken) {
+      const token = (typeof callerToken === 'number') ? callerToken : currentSpeechId;
+      if (token !== currentSpeechId) return;
+
       if (!('speechSynthesis' in window)) {
         setChibiLipSync(false);
-        if (onDone) setTimeout(onDone, 600);
+        if (onDone) setTimeout(() => { if (token === currentSpeechId) onDone(); }, 500);
         return;
       }
+
+      if (speechDebounceTimer) clearTimeout(speechDebounceTimer);
       speechDebounceTimer = setTimeout(() => {
+        if (token !== currentSpeechId) return;
         try {
           if (window.speechSynthesis.paused) window.speechSynthesis.resume();
-          const cleanText = text.replace(/Trâm/g, 'Tram');
+          const cleanText = String(text).replace(/Trâm/gi, 'Tram');
           const u = new SpeechSynthesisUtterance(cleanText);
+          // Prevent Chrome/Safari Garbage Collector from collecting active utterance before onend fires
+          window._activeUtterance = u;
+
           if (!selectedVoice) initVoices();
           if (selectedVoice) u.voice = selectedVoice;
           u.lang = 'en-US';
           u.rate = speechRate;
-          u.pitch = 1.1;
+          u.pitch = 1.08;
 
-          const words = text.split(' ');
+          const words = cleanText.trim().split(/\s+/);
           setChibiLipSync(true);
+
+          let finished = false;
+          function finishFallback() {
+            if (finished || token !== currentSpeechId) return;
+            finished = true;
+            if (fallbackWordTimer) { clearInterval(fallbackWordTimer); fallbackWordTimer = null; }
+            if (speechWatchdogTimer) { clearTimeout(speechWatchdogTimer); speechWatchdogTimer = null; }
+            window._activeUtterance = null;
+            setChibiLipSync(false);
+            if (onDone) onDone();
+          }
 
           if (onWordIdx) {
             onWordIdx(0);
             let idx = 0;
-            const stepMs = Math.max(320, Math.floor(420 / speechRate));
+            const stepMs = Math.max(300, Math.floor(420 / speechRate));
+            if (fallbackWordTimer) clearInterval(fallbackWordTimer);
             fallbackWordTimer = setInterval(() => {
+              if (token !== currentSpeechId) {
+                clearInterval(fallbackWordTimer);
+                return;
+              }
               idx++;
               if (idx < words.length) onWordIdx(idx);
               else clearInterval(fallbackWordTimer);
             }, stepMs);
           }
 
-          u.onend = () => {
-            if (fallbackWordTimer) clearInterval(fallbackWordTimer);
-            setChibiLipSync(false);
-            if (onDone) onDone();
-          };
-          u.onerror = () => {
-            if (fallbackWordTimer) clearInterval(fallbackWordTimer);
-            setChibiLipSync(false);
-            if (onDone) onDone();
-          };
+          u.onend = finishFallback;
+          u.onerror = finishFallback;
+
+          if (speechWatchdogTimer) clearTimeout(speechWatchdogTimer);
+          speechWatchdogTimer = setTimeout(finishFallback, Math.max(3000, words.length * 1000));
+
           window.speechSynthesis.speak(u);
         } catch (err) {
           setChibiLipSync(false);
-          if (onDone) onDone();
+          if (onDone && token === currentSpeechId) onDone();
         }
-      }, 65);
+      }, 60);
     }
 
     // Step-by-step Slow Word-by-Word Coach (Reads each word with a 750ms pause for Bé to repeat!)
     function playSlowWordByWord() {
       stopAllSpeech();
+      const sessionToken = currentSpeechId;
       const chunk = getCurChunk();
       const tokens = chunk.words.map((_, i) => document.getElementById(`magic-word-${i}`));
       tokens.forEach(t => t && t.classList.remove('active-word'));
@@ -3539,7 +3674,11 @@
 
         speakSingleWord(wText, () => {
           wIdx++;
-          slowSequenceTimer = setTimeout(nextWordStep, 750);
+          const postWordToken = currentSpeechId;
+          slowSequenceTimer = setTimeout(() => {
+            if (currentSpeechId !== postWordToken) return;
+            nextWordStep();
+          }, 750);
         });
       }
       nextWordStep();
@@ -5245,6 +5384,7 @@
       stopKaraokeSession();
       stopBalloonGame();
       stopWhackGame();
+      preloadIslandAudio(curIslandIdx);
       renderIslandsTrack();
       renderChunkPills();
 
@@ -5556,7 +5696,7 @@
     // Unlock Web Audio & Speech on first iPad/Tablet/Laptop touch or click
     function unlockAudioOnce() {
       try {
-        if (audioCtx.state === 'suspended') audioCtx.resume();
+        getAudioCtx();
         if ('speechSynthesis' in window) initVoices();
       } catch(e) {}
       window.removeEventListener('touchstart', unlockAudioOnce);
